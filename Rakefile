@@ -2,7 +2,6 @@ require "bundler"
 Bundler.require
 
 require "sinatra/activerecord/rake"
-
 require File.expand_path('../config/environment',  __FILE__)
 
 namespace :import do

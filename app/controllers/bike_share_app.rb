@@ -6,7 +6,7 @@ class BikeShareApp < Sinatra::Base
     count = 0
     trips_hash = create_trip_hash(trips,count)
     @trips = find_correct_trip_grouping(trips_hash,params["page"])
-    erb :'trips/show'
+    erb :'trips/index'
   end
 
   def create_trip_hash(trips,count)
@@ -18,6 +18,12 @@ class BikeShareApp < Sinatra::Base
 
   def find_correct_trip_grouping(trips_hash,search_value)
     trips_hash[search_value.to_i].flatten
+  end
+
+  get '/trips/:id' do
+    @trips = Trip.find(id)
+
+    erb :'trips/show'
   end
 
 end

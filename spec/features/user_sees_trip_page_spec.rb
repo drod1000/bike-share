@@ -25,7 +25,6 @@ describe "trip/paths" do
       end
       visit("/trips")
 
-      # save_and_open_page
       expect(page).to_not have_content("Trip Id: 31")
       expect(Trip.first.start_date).to eq("8/1/2013")
       thirtieth_trip = Trip.find(30)

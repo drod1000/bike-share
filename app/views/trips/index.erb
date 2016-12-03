@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="trips/show.css">
+  <link rel="stylesheet" href="trips/application.css">
   <title></title>
 </head>
 <body>
@@ -47,10 +47,12 @@
     <li><a href="trips?page=37">37</a></li>
     <li><a href="trips?page=38">38</a></li>
     <li><a href="trips?page=39">39</a></li>
-    <li><a href="trips?page=40">40</a></li>  </ul>
-  <div  class="display" cellspacing="0" width="100%">
-    <thread>
+    <li><a href="trips?page=40">40</a></li>
+  </ul>
+    <table class="table">
+    <thead>
       <tr>
+        <th>#</th>
         <th>Trip ID</th>
         <th>Duration</th>
         <th>Start Date</th>
@@ -63,22 +65,29 @@
         <th>Subscription Type</th>
         <th>Zip Code</th>
       </tr>
+    </thead>
+    <tbody>
+      <% count = 0 %>
+      <% @trips.each do |trip| %>
       <tr>
-        <% @trips.each do |trip| %>
-        <td><%= trip.id%></td
-        <td><%= trip.duration%></td
-        <td><%= trip.start_date%></td
-        <td><%= trip.start_station_name%></td
-        <td><%= trip.start_station_id%></td
-        <td><%= trip.end_date%></td
-        <td><%= trip.end_station_name%></td
-        <td><%= trip.end_station_id%></td
-        <td><%= trip.bike_id%></td
-        <td><%= trip.subscription_type%></td
-        <td><%= trip.zip_code%></td
-        <% end %>
+        <th scope="row"><%= count +=1 %></th>
+        <td><%= trip.id %></td>
+        <td><%= trip.duration%></td>
+        <td><%= trip.start_date%></td>
+        <td><%= trip.id %></td>
+        <td><%= trip.duration%></td>
+        <td><%= trip.start_date%></td>
+        <td><%= trip.start_station_name%></td>
+        <td><%= trip.start_station_id%></td>
+        <td><%= trip.end_date%></td>
+        <td><%= trip.end_station_name%></td>
+        <td><%= trip.end_station_id%></td>
+        <td><%= trip.bike_id%></td>
+        <td><%= trip.subscription_type%></td>
+        <td><%= trip.zip_code%></td>
       </tr>
-    </thread>
+      <% end %>
+    </tbody>
   </table>
   </body>
   <!-- Latest compiled and minified JavaScript -->

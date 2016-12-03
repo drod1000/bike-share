@@ -1,6 +1,6 @@
 require_relative '../../spec_helper'
 
-describe "Conditions" do
+xdescribe "Conditions" do
   describe "When a user visits /conditions" do
     it "they see a conditions welcome message" do
       visit('/conditions')

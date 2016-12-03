@@ -1,6 +1,6 @@
 require_relative '../spec_helper'
 
-describe "Conditon" do
+xdescribe "Conditon" do
   describe "validations" do
     it "validates prescence of date" do
       invalid_condition = Condition.new(precipitation: 5,

@@ -1,6 +1,6 @@
 require_relative '../../spec_helper'
 
-describe "Conditions/id" do
+xdescribe "Conditions/id" do
   describe "when a user visits /conditions/id" do
     it "they see a welcome message with the date" do
       condition = Condition.create(date: '12/01/2000', precipitation: 5,

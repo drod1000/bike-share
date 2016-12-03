@@ -1,6 +1,6 @@
 require_relative '../../spec_helper'
 
-describe "Conditions/id/edit" do
+xdescribe "Conditions/id/edit" do
   describe "when a user visits /conditions/id/edit" do
     it "they are able to update an existing conditon record" do
       condition = Condition.create(date: '12/01/2000', precipitation: 5,

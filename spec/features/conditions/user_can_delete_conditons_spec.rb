@@ -1,6 +1,6 @@
 require_relative "../../spec_helper"
 
-describe "when a user visits /conditions" do
+xdescribe "when a user visits /conditions" do
   it "user can delete a condtion" do
     condition = Condition.create(date: '12/01/2000', precipitation: 5,
                                  max_temperature: 50, min_temperature: 20,
@@ -17,7 +17,7 @@ describe "when a user visits /conditions" do
   end
 end
 
-describe 'when a user visits /conditions/id' do
+xdescribe 'when a user visits /conditions/id' do
   it 'user can delete the conditions for that id' do
     condition = Condition.create(date: '12/01/2000', precipitation: 5,
                                  max_temperature: 50, min_temperature: 20,

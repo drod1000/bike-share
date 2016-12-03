@@ -73,7 +73,23 @@ describe "Trip" do
   end
 
   describe 'validates' do
-    it
+    it "presence of duration" do
+      invalid_trip = Trip.create(id: 4069, duration: nil, start_date: "8/29/2013 9:08", start_station_name: "2nd at South Park", start_station_id: 64, end_date: "8/29/2013 9:11", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114)
+
+      expect(invalid_trip).to_not be_valid
+    end
+
+    it "presence of start_date" do
+      invalid_trip = Trip.create(id: 4069, duration: 174, start_date: nil, start_station_name: "2nd at South Park", start_station_id: 64, end_date: "8/29/2013 9:11", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114)
+
+      expect(invalid_trip).to_not be_valid
+    end
+
+    it "presence of start_date" do
+      invalid_trip = Trip.create(id: 4069, duration: 174, start_date: nil, start_station_name: "2nd at South Park", start_station_id: 64, end_date: "8/29/2013 9:11", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114)
+
+      expect(invalid_trip).to_not be_valid
+    end
 
   end
 end

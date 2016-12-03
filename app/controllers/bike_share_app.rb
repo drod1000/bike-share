@@ -10,7 +10,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   def create_trip_hash(trips,count)
-    trips_hash = trips.group_by do |trip|
+    trips.group_by do |trip|
       trip[count]
       count += 1
     end

@@ -9,9 +9,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   post '/conditions' do
-    #this needs to be refactored into Condition.create(params[:condition])
-    condition = Condition.new(params[:condition])
-    condition.save
+    condition = Condition.create(params[:condition])
     redirect "/conditions/#{condition.id}"
   end
 

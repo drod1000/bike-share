@@ -9,6 +9,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   post '/conditions' do
+    #this needs to be refactored into Condition.create(params[:condition])
     condition = Condition.new(params[:condition])
     condition.save
     redirect "/conditions/#{condition.id}"
@@ -80,6 +81,8 @@ class BikeShareApp < Sinatra::Base
   end
 
   def create_trip_hash(trips,count)
+    #this creates a count value {1 => <#Trip Object>}
+    #for the pagination on the rendered view(buttons)
     trips.group_by do |trip|
       trip[count]
       count += 1
@@ -88,10 +91,18 @@ class BikeShareApp < Sinatra::Base
 
   def find_correct_trip_grouping(trips_hash,search_value)
     if search_value.nil?
-      trips_hash[1].flatten
+      select_first_set_of_trip_data(trips_hash)
     else
-      trips_hash[search_value.to_i].flatten
+      select_correct_set_of_trip_data(trips_hash,search_value)
     end
+  end
+
+  def select_first_set_of_trip_data(trips_hash)
+    trips_hash[1].flatten
+  end
+
+  def select_correct_set_of_trip_data(trips_hash,search_value)
+    trips_hash[search_value.to_i].flatten
   end
 
   get '/trips/new' do

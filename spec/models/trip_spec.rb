@@ -71,4 +71,9 @@ describe "Trip" do
     end
 
   end
+
+  describe 'validates' do
+    it
+
+  end
 end

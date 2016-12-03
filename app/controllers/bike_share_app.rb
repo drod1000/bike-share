@@ -37,7 +37,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/trips' do
-    trips = Trip.all.order(:start_date)
+    trips = Trip.order(:start_date)
     trips = trips.each_slice(30)
     count = 0
     trips_hash = create_trip_hash(trips,count)
@@ -75,9 +75,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/trips/:id/edit' do
-    # binding.pry
     @trip = Trip.find(params[:id])
-    # binding.pry
     erb :'trips/edit'
   end
 

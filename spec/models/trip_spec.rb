@@ -1,5 +1,5 @@
 require_relative "../spec_helper"
-require 'pry'
+
 
 describe "Trip" do
   describe ".duration" do
@@ -15,8 +15,8 @@ describe "Trip" do
       expect(trip.duration).to eq(174)
     end
 
-    xit "returns the start_date of the trip" do
-      trip = Trip.create(id: 4069, duration: 174, start_date: "8/29/2013", start_station_name: "2nd at South Park", start_station_id: 64, end_date: "8/29/2013 9:11", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114)
+    it "returns the start_date of the trip" do
+      trip = Trip.create(id: 4069, duration: 174, start_date: "8/29/2013 9:08", start_station_name: "2nd at South Park", start_station_id: 64, end_date: "8/29/2013 9:11", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114)
       # binding.pry
       expect(trip.start_date).to eq("8/29/2013 9:08")
     end
@@ -33,7 +33,7 @@ describe "Trip" do
       expect(trip.start_station_id).to eq(64)
     end
 
-    xit "returns the end_date of the trip" do
+    it "returns the end_date of the trip" do
       trip = Trip.create(id: 4069, duration: 174, start_date: "8/29/2013 9:08", start_station_name: "2nd at South Park", start_station_id: 64, end_date: "8/29/2013 9:11", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114)
 
       expect(trip.end_date).to eq("8/29/2013 9:11")

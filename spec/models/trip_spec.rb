@@ -85,8 +85,50 @@ describe "Trip" do
       expect(invalid_trip).to_not be_valid
     end
 
-    it "presence of start_date" do
-      invalid_trip = Trip.create(id: 4069, duration: 174, start_date: nil, start_station_name: "2nd at South Park", start_station_id: 64, end_date: "8/29/2013 9:11", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114)
+    it "presence of start_station_name" do
+      invalid_trip = Trip.create(id: 4069, duration: 174, start_date: "8/29/2013 9:08", start_station_name: nil, start_station_id: 64, end_date: "8/29/2013 9:11", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114)
+
+      expect(invalid_trip).to_not be_valid
+    end
+
+    it "presence of start_station_id" do
+      invalid_trip = Trip.create(id: 4069, duration: 174, start_date: "8/29/2013 9:08", start_station_name: "2nd at South Park", start_station_id: nil, end_date: "8/29/2013 9:11", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114)
+
+      expect(invalid_trip).to_not be_valid
+    end
+
+    it "presence of end_date" do
+      invalid_trip = Trip.create(id: 4069, duration: 174, start_date: "8/29/2013 9:08", start_station_name: "2nd at South Park", start_station_id: 64, end_date: nil, end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114)
+
+      expect(invalid_trip).to_not be_valid
+    end
+
+    it "presence of end_station_name" do
+      invalid_trip = Trip.create(id: 4069, duration: 174, start_date: "8/29/2013 9:08", start_station_name: "2nd at South Park", start_station_id: 64, end_date: "8/29/2013 9:11", end_station_name: nil, end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114)
+
+      expect(invalid_trip).to_not be_valid
+    end
+
+    it "presence of end_station_id" do
+      invalid_trip = Trip.create(id: 4069, duration: 174, start_date: "8/29/2013 9:08", start_station_name: "2nd at South Park", start_station_id: 64, end_date: "8/29/2013 9:11", end_station_name: "2nd at South Park", end_station_id: nil, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114)
+
+      expect(invalid_trip).to_not be_valid
+    end
+
+    it "presence of bike_id" do
+      invalid_trip = Trip.create(id: 4069, duration: 174, start_date: "8/29/2013 9:08", start_station_name: "2nd at South Park", start_station_id: 64, end_date: "8/29/2013 9:11", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: nil, subscription_type: "Subscriber", zip_code: 94114)
+
+      expect(invalid_trip).to_not be_valid
+    end
+
+    it "presence of subscription_type" do
+      invalid_trip = Trip.create(id: 4069, duration: 174, start_date: "8/29/2013 9:08", start_station_name: "2nd at South Park", start_station_id: 64, end_date: "8/29/2013 9:11", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: nil, zip_code: 94114)
+
+      expect(invalid_trip).to_not be_valid
+    end
+
+    it "presence of zip_code" do
+      invalid_trip = Trip.create(id: 4069, duration: 174, start_date: "8/29/2013 9:08", start_station_name: "2nd at South Park", start_station_id: 64, end_date: "8/29/2013 9:11", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: nil)
 
       expect(invalid_trip).to_not be_valid
     end

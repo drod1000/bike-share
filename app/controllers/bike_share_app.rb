@@ -20,7 +20,8 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/conditions/:id/edit' do
-
+    @condition = Condition.find(params[:id])
+    erb :"conditions/edit"
   end
 
 end

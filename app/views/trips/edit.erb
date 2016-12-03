@@ -22,4 +22,10 @@
   <br>Subscription Type <p><input id="subscription_type"type="text" name='trip[subscription_type]'></p>
   <br>Zip Code <p><input id="zip_code"type="text" name='trip[zip_code]'></p>
   <br><p><input id="submit_trip"type="submit" value="Submit"></p>
+  <h2>Delete Trip</h2>
+  <form action="/trips" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <input id="delete_trip" type="submit" value="Delete"/>
+  </form>
+
 </form>

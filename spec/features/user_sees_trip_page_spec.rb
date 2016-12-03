@@ -48,6 +48,14 @@ describe "trips" do
       expect(thirtieth_trip.start_date).to eq("8/30/2013")
     end
 
+    it "should also be able to delete a trip" do
+      Trip.create(id: 4069, duration: 174, start_date: "8/29/2013 9:08", start_station_name: "2nd at South Park", start_station_id: 64, end_date: "8/29/2013 9:11", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114, created_at: "2016-12-02 23:59:08", updated_at: "2016-12-02 23:59:08")
+      visit("/trips")
+      # save_and_open_page
+      fill_in("insert_id",with: 4069)
+      click_on("delete_trip")
+    end
+
     describe '/trips/:id' do
       it "should show one trip" do
 
@@ -132,6 +140,14 @@ describe "trips" do
         expect(Trip.first.zip_code).to eq(80212)
 
         expect(current_path).to eql('/trips/4069')
+      end
+
+      it "should also be able to delete a trip" do
+        Trip.create(id: 4069, duration: 174, start_date: "8/29/2013 9:08", start_station_name: "2nd at South Park", start_station_id: 64, end_date: "8/29/2013 9:11", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114, created_at: "2016-12-02 23:59:08", updated_at: "2016-12-02 23:59:08")
+
+        visit("/trips/#{Trip.first.id}/edit")
+
+        click_on("delete_trip")
       end
     end
 

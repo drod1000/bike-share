@@ -1,9 +1,9 @@
 <h1>Conditions for <%= @condition.date %></h1>
-<h3>Date:</h3>
-<h3>Max Temperature:</h3>
-<h3>Mean Temperature:</h3>
-<h3>Min Temperature:</h3>
-<h3>Mean Humidity:</h3>
-<h3>Mean Visibility (Miles):</h3>
-<h3>Mean Wind Speed (mph):</h3>
-<h3>Precipitation (inches):</h3>
+<!-- <h3>Date: <%= @condition.date %></h3> -->
+<h3>Max Temperature: <%= @condition.max_temperature %></h3>
+<h3>Mean Temperature:<%= @condition.mean_temperature %> </h3>
+<h3>Min Temperature: <%= @condition.min_temperature %></h3>
+<h3>Mean Humidity: <%= @condition.mean_humidity %> </h3>
+<h3>Mean Visibility (Miles): <%= @condition.mean_visibility %></h3>
+<h3>Mean Wind Speed (mph): <%= @condition.mean_wind_speed %></h3>
+<h3>Precipitation (inches): <%= @condition.precipitation %></h3>

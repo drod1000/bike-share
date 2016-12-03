@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20161204175652) do
     t.float    "long"
     t.integer  "dock_count"
     t.string   "city"
-    t.string   "installation_date"
+    t.datetime   "installation_date"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20161204175652) do
     t.string   "start_station_name"
     t.float    "start_station_id"
     t.string   "end_date"
+
     t.string   "end_station_name"
     t.float    "end_station_id"
     t.float    "bike_id"

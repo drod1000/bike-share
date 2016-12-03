@@ -49,7 +49,6 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
-    rake (11.3.0)
     ripl (0.7.1)
       bond (~> 0.5.1)
     ripl-multi_line (0.3.1)
@@ -105,7 +104,6 @@ DEPENDENCIES
   pg
   pry
   rack-test
-  rake
   rspec
   rspec-core
   shotgun
@@ -115,8 +113,4 @@ DEPENDENCIES
   tux
 
 BUNDLED WITH
-<<<<<<< HEAD
    1.13.6
-=======
-   1.13.1
->>>>>>> f72ee22499f51f637c3ebae555402604b565de7f

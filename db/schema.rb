@@ -10,41 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20161204175652) do
-=======
 ActiveRecord::Schema.define(version: 20161204222159) do
->>>>>>> f72ee22499f51f637c3ebae555402604b565de7f
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-<<<<<<< HEAD
-  create_table "stations", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "dock_count"
-    t.string   "city"
-    t.datetime   "installation_date"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-  end
-
-  create_table "trips", force: :cascade do |t|
-    t.float    "duration"
-    t.string   "start_date"
-    t.string   "start_station_name"
-    t.float    "start_station_id"
-    t.string   "end_date"
-    t.string   "end_station_name"
-    t.float    "end_station_id"
-    t.float    "bike_id"
-    t.string   "subscription_type"
-    t.float    "zip_code"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-=======
   create_table "conditions", force: :cascade do |t|
-    t.string   "date"
+    t.string     "date"
     t.string   "max_temperature_f"
     t.string   "mean_temperature_f"
     t.string   "min_temperature_f"
@@ -71,7 +43,32 @@ ActiveRecord::Schema.define(version: 20161204222159) do
     t.string   "wind_dir_degrees"
     t.string   "zip_code"
     t.string   "mean_visibility_miles"
->>>>>>> f72ee22499f51f637c3ebae555402604b565de7f
+  end
+
+  create_table "stations", force: :cascade do |t|
+    t.string   "name"
+    t.float    "lat"
+    t.float    "long"
+    t.integer  "dock_count"
+    t.string   "city"
+    t.string   "installation_date"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "trips", force: :cascade do |t|
+    t.float    "duration"
+    t.string   "start_date"
+    t.string   "start_station_name"
+    t.float    "start_station_id"
+    t.string   "end_date"
+    t.string   "end_station_name"
+    t.float    "end_station_id"
+    t.float    "bike_id"
+    t.string   "subscription_type"
+    t.float    "zip_code"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
 end

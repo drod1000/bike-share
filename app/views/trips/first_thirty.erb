@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>First Thirty</title>
+  </head>
+  <body>
+    <div id="first thirty"class="container">
+      <% Trip.all.order(:start_date).limit(30).each do |trip| %>
+      <br>Trip Id: <%= trip.fetch_values("id").join %>
+      <br><%= trip.fetch_values("duration").join %>
+      <br><%= trip.fetch_values("start_date").join %>
+      <br><%= trip.fetch_values("start_station_name").join %>
+      <br><%= trip.fetch_values("start_station_id").join %>
+      <br><%= trip.fetch_values("end_date").join %>
+      <br><%= trip.fetch_values("end_station_name").join %>
+      <br><%= trip.fetch_values("end_station_id").join %>
+      <br><%= trip.fetch_values("bike_id").join %>
+      <br><%= trip.fetch_values("subscription_type").join %>
+      <br><%= trip.fetch_values("zip_code").join %>
+      <% end %>
+    </div>
+  </body>
+</html>

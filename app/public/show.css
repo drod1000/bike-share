@@ -1,4 +1,4 @@
-/*h1 {
+h1 {
   background-color: #545252;
   text-align: center;
 }
@@ -50,8 +50,8 @@ li.p {
 
 button.btn.btn-primary {
   width: auto;
-}*/
-.ul.pagination {
+}
+/*.ul.pagination {
     display: inline-block;
     padding: 0;
     margin: 0;
@@ -72,4 +72,4 @@ ul.pagination li a.active {
     color: white;
 }
 
-ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+ul.pagination li a:hover:not(.active) {background-color: #ddd;}*/

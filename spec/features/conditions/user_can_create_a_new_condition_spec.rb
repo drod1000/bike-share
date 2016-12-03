@@ -13,7 +13,7 @@ describe 'When a user visits /conditions/new' do
     fill_in "condition[mean_temperature_f]", with: 40
     fill_in "condition[min_temperature_f]", with: 30
     fill_in "condition[mean_humidity]", with: 20
-    fill_in "condition[mean_visibility]", with: 10
+    fill_in "condition[mean_visibility_miles]", with: 10
     fill_in "condition[mean_wind_speed_mph]", with: 12
     fill_in "condition[precipitation_inches]", with: 0
 

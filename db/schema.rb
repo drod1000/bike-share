@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20161204222159) do
   enable_extension "plpgsql"
 
   create_table "conditions", force: :cascade do |t|
-    t.string     "date"
+    t.string   "date"
     t.string   "max_temperature_f"
     t.string   "mean_temperature_f"
     t.string   "min_temperature_f"
@@ -24,8 +24,6 @@ ActiveRecord::Schema.define(version: 20161204222159) do
     t.string   "mean_visibility"
     t.string   "mean_wind_speed_mph"
     t.string   "precipitation_inches"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
     t.string   "max_dew_point_f"
     t.string   "mean_dew_point_f"
     t.string   "min_dew_point_f"
@@ -43,6 +41,8 @@ ActiveRecord::Schema.define(version: 20161204222159) do
     t.string   "wind_dir_degrees"
     t.string   "zip_code"
     t.string   "mean_visibility_miles"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "stations", force: :cascade do |t|

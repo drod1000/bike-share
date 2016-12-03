@@ -1,12 +1,11 @@
 class BikeShareApp < Sinatra::Base
+  set :method_override, true
 
   get '/trips' do
     trips = Trip.all.order(:start_date)
     trips = trips.each_slice(30)
     count = 0
-    # binding.pry
     trips_hash = create_trip_hash(trips,count)
-    # binding.pry
     @trips = find_correct_trip_grouping(trips_hash,params["page"])
     erb :'trips/index'
   end
@@ -19,7 +18,6 @@ class BikeShareApp < Sinatra::Base
   end
 
   def find_correct_trip_grouping(trips_hash,search_value)
-    # binding.pry
     if search_value.nil?
       trips_hash[1].flatten
     else
@@ -35,12 +33,26 @@ class BikeShareApp < Sinatra::Base
     Trip.create(params[:trip])
     redirect '/trips'
   end
-  
-  get '/trips/:id' do
-    @trip = Trip.find(params["id"].to_i)
 
+  get '/trips/:id' do
+    @trip = Trip.find(params[:id].to_i)
     erb :'trips/show'
   end
+
+  get '/trips/:id/edit' do
+    # binding.pry
+    @trip = Trip.find(params[:id])
+    # binding.pry
+    erb :'trips/edit'
+  end
+
+  put '/trips/:id' do
+    trip = Trip.find(params[:id])
+    trip.update_attributes(params[:trip])
+    redirect "trips/#{trip.id}"
+  end
+
+
 
 
 end

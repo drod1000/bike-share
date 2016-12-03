@@ -27,17 +27,20 @@ class BikeShareApp < Sinatra::Base
     end
   end
 
+  get '/trips/new' do
+    erb :'trips/new'
+  end
+
+  post '/trips' do
+    Trip.create(params[:trip])
+    redirect '/trips'
+  end
+  
   get '/trips/:id' do
     @trip = Trip.find(params["id"].to_i)
 
     erb :'trips/show'
   end
 
-  get '/trips/new' do
-    Trip.create(params[:trip])
-
-    erb :'trips/new'
-    redirect '/trips'
-  end
 
 end

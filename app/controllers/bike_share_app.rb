@@ -1,10 +1,17 @@
 class BikeShareApp < Sinatra::Base
   get '/conditions' do
+    @conditions = Condition.all
     erb :"conditions/index"
   end
 
   get '/conditions/new' do
+    erb :"conditions/new"
+  end
 
+  post '/conditions' do
+    condition = Condition.new(params[:condition])
+    condition.save
+    redirect "/conditions"
   end
 
   get '/conditions/:id' do

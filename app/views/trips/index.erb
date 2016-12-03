@@ -52,7 +52,7 @@
     <table class="table">
     <thead>
       <tr>
-        <th>#</th>
+        <th>Number of Trips</th>
         <th>Trip ID</th>
         <th>Duration</th>
         <th>Start Date</th>
@@ -70,7 +70,7 @@
       <% count = 0 %>
       <% @trips.each do |trip| %>
       <tr>
-        <th scope="row"><%= count +=1 %></th>
+        <th scope="row" id="total entries"><%= count +=1 %></th>
         <td><%= trip.id %></td>
         <td><%= trip.duration%></td>
         <td><%= trip.start_date%></td>

@@ -14,6 +14,13 @@ class BikeShareApp < Sinatra::Base
     redirect "/conditions"
   end
 
+  put '/conditions/:id' do
+    # condition = Condition.find(params[:id])
+    # condition.update_attributes(params[:conditon])
+    Condition.update(params[:id], params[:condition])
+    redirect "/conditions/#{params[:id]}"
+  end
+
   get '/conditions/:id' do
     @condition = Condition.find(params[:id])
     erb :"conditions/show"

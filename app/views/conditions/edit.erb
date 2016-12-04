@@ -1,12 +1,13 @@
 <h1>Editing conditions from <%= @condition.date %></h1>
 
 <form action="/conditions/<%= @condition.id %>" method="POST">
+  <input type="hidden" name="_method" value="PUT" />
   <h3>Date: <input type="date" name="condition[date]" value="<%= @condition.date %>"></h3>
-  <h3>Max Temperature: <input type="integer" name="condition[max_temperature]" value="<%= @condition.max_temperature %>"></h3>
-  <h3>Mean Temperature: <input type="integer" name="condition[mean_temperature]" value="<%= @condition.mean_temperature%>"></h3>
-  <h3>Min Temperature: <input type="integer" name="condition[min_temperature]" value="<%= @condition.min_temperature%>"></h3>
-  <h3>Mean Humidity: <input type="integer" name="condition[mean_humidity]" value="<%= @condition.mean_humidity %>"></h3>
-  <h3>Mean Visibility (Miles): <input type="integer" name="condition[mean_visibility]" value="<%= @condition.mean_visibility %>"></h3>
-  <h3>Precipitation (inches): <input type="integer" name="condition[precipitation]" value="<%= @condition.precipitation %>"></h3>
-  <input type="submit" name="" value="Edit Conditions">
+  <h3>Max Temperature: <input type="integer" name="condition[max_temperature]" value="<%= @condition.max_temperature %>" /></h3>
+  <h3>Mean Temperature: <input type="integer" name="condition[mean_temperature]" value="<%= @condition.mean_temperature%>" /></h3>
+  <h3>Min Temperature: <input type="integer" name="condition[min_temperature]" value="<%= @condition.min_temperature%>" /></h3>
+  <h3>Mean Humidity: <input type="integer" name="condition[mean_humidity]" value="<%= @condition.mean_humidity %>" /></h3>
+  <h3>Mean Visibility (Miles): <input type="integer" name="condition[mean_visibility]" value="<%= @condition.mean_visibility %>" /></h3>
+  <h3>Precipitation (inches): <input type="integer" name="condition[precipitation]" value="<%= @condition.precipitation %>" /></h3>
+  <input type="submit" name="" value="Edit Conditions" />
 </form>

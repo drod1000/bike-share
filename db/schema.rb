@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20161204175652) do
   end
 
   create_table "trips", force: :cascade do |t|
-    t.integer  "duration"
+    t.float  "duration"
     t.string   "start_date"
     t.string   "start_station_name"
     t.integer  "start_station_id"

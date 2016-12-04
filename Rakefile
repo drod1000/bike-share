@@ -2,8 +2,6 @@ require "bundler"
 Bundler.require
 
 require "sinatra/activerecord/rake"
-require "csv"
-require 'io/console'
 require File.expand_path('../config/environment',  __FILE__)
 
 namespace :import do
@@ -23,7 +21,7 @@ def create_trips
     Trip.create(row)
   end
   puts "Imported Trips to Table."
- end
+end
 
 def create_stations
   contents = CSV.open('db/csv/station.csv', headers: true)

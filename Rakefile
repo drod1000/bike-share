@@ -2,7 +2,8 @@ require "bundler"
 Bundler.require
 
 require "sinatra/activerecord/rake"
-
+require "csv"
+require 'io/console'
 require File.expand_path('../config/environment',  __FILE__)
 
 namespace :import do
@@ -22,11 +23,11 @@ def create_trips
     Trip.create(row)
   end
   puts "Imported Trips to Table."
-end
+ end
 
 def create_stations
-  SmarterCSV.process('db/csv/station.csv').each do |row|
-    Station.create(row)
-  end
-  puts "Imported Stations to Table."
+  contents = CSV.open('db/csv/station.csv', headers: true)
+  contents.each do |row|
+    Station.create(id: row[0], name: row[1], dock_count: row[4], city: row[5], installation_date: Date.strptime(row[6], "%m/%d/%Y"))
+ end
 end

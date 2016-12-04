@@ -10,4 +10,8 @@
         Mean Wind Speed (mph): <%= c.mean_wind_speed %>,
         Precipitation (inches): <%= c.precipitation %>
       </p>
+      <form action="/conditions/<%= c.id %>" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="delete"/>
+  </form>
   <% end %>

@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161203193822) do
+ActiveRecord::Schema.define(version: 20161204191105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "conditions", force: :cascade do |t|
-    t.date     "date"
+    t.string   "date"
     t.integer  "max_temperature"
     t.integer  "mean_temperature"
     t.integer  "min_temperature"

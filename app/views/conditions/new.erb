@@ -1,13 +1,13 @@
-<h1>Create new Conditions</h1>
+<h1>Create New Conditions</h1>
 
-<form action="/conditions" method="post">
-  <h3>Date: <input type="date" name="condition[date]"></h3>
+<form action="/conditions" method="POST">
+  <h3>Date: <input type="string" name="condition[date]"></h3>
   <h3>Max Temperature:<input type="integer" name="condition[max_temperature]"></h3>
-  <h3>Mean Temperature:<input type="text" name="condition[mean_temperature]"></h3>
-  <h3>Min Temperature:<input type="text" name="condition[min_temperature]"></h3>
-  <h3>Mean Humidity:<input type="text" name="condition[mean_humidity]"></h3>
-  <h3>Mean Visibility (Miles):<input type="text" name="condition[mean_visibility]"></h3>
-  <h3>Mean Wind Speed (mph):<input type="text" name="condition[mean_wind_speed]"></h3>
-  <h3>Precipitation (inches):<input type="text" name="condition[precipitation]"></h3>
+  <h3>Mean Temperature:<input type="integer" name="condition[mean_temperature]"></h3>
+  <h3>Min Temperature:<input type="integer" name="condition[min_temperature]"></h3>
+  <h3>Mean Humidity:<input type="integer" name="condition[mean_humidity]"></h3>
+  <h3>Mean Visibility (Miles):<input type="integer" name="condition[mean_visibility]"></h3>
+  <h3>Mean Wind Speed (mph):<input type="integer" name="condition[mean_wind_speed]"></h3>
+  <h3>Precipitation (inches):<input type="integer" name="condition[precipitation]"></h3>
   <input type="submit" name="" value="Create Conditions!">
 </form>

@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(version: 20161204175652) do
 
   create_table "stations", force: :cascade do |t|
     t.string   "name"
+    t.float    "lat"
+    t.float    "long"
     t.integer  "dock_count"
     t.string   "city"
     t.datetime   "installation_date"
@@ -25,16 +27,17 @@ ActiveRecord::Schema.define(version: 20161204175652) do
   end
 
   create_table "trips", force: :cascade do |t|
-    t.integer  "duration"
-    t.datetime   "start_date"
+    t.float    "duration"
+    t.string   "start_date"
     t.string   "start_station_name"
-    t.integer  "start_station_id"
-    t.datetime   "end_date"
+    t.float    "start_station_id"
+    t.string   "end_date"
+
     t.string   "end_station_name"
-    t.integer  "end_station_id"
-    t.integer  "bike_id"
+    t.float    "end_station_id"
+    t.float    "bike_id"
     t.string   "subscription_type"
-    t.integer  "zip_code"
+    t.float    "zip_code"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end

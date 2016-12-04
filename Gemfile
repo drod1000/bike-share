@@ -5,6 +5,7 @@ gem 'pg'
 gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'pry'
+gem 'smarter_csv'
 
 group :development, :test do
   gem 'shotgun'

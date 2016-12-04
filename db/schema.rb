@@ -17,8 +17,6 @@ ActiveRecord::Schema.define(version: 20161204175652) do
 
   create_table "stations", force: :cascade do |t|
     t.string   "name"
-    t.float    "lat"
-    t.float    "long"
     t.integer  "dock_count"
     t.string   "city"
     t.datetime   "installation_date"
@@ -32,7 +30,6 @@ ActiveRecord::Schema.define(version: 20161204175652) do
     t.string   "start_station_name"
     t.float    "start_station_id"
     t.string   "end_date"
-
     t.string   "end_station_name"
     t.float    "end_station_id"
     t.float    "bike_id"

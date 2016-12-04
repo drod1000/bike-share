@@ -10,22 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161204211535) do
+ActiveRecord::Schema.define(version: 20161204222159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "conditions", force: :cascade do |t|
     t.string   "date"
-    t.string   "max_temperature"
-    t.string   "mean_temperature"
-    t.string   "min_temperature"
+    t.string   "max_temperature_f"
+    t.string   "mean_temperature_f"
+    t.string   "min_temperature_f"
     t.string   "mean_humidity"
     t.string   "mean_visibility"
-    t.string   "mean_wind_speed"
-    t.string   "precipitation"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.string   "mean_wind_speed_mph"
+    t.string   "precipitation_inches"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "max_dew_point_f"
+    t.string   "mean_dew_point_f"
+    t.string   "min_dew_point_f"
+    t.string   "max_humidity"
+    t.string   "min_humidity"
+    t.string   "max_sea_level_pressure_inches"
+    t.string   "mean_sea_level_pressure_inches"
+    t.string   "min_sea_level_pressure_inches"
+    t.string   "max_visibility_miles"
+    t.string   "min_visibility_miles"
+    t.string   "max_wind_speed_mph"
+    t.string   "max_gust_speed_mph"
+    t.string   "cloud_cover"
+    t.string   "events"
+    t.string   "wind_dir_degrees"
+    t.string   "zip_code"
+    t.string   "mean_visibility_miles"
   end
 
 end

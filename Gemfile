@@ -5,6 +5,7 @@ gem 'pg'
 gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'rake'
+gem 'smarter_csv'
 gem 'pry'
 
 group :development, :test do

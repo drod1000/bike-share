@@ -1,4 +1,5 @@
 require_relative '../../spec_helper'
+require 'pry'
 
 describe 'When a user visits /conditions/new' do
   it 'they can create a new set of conditions' do
@@ -8,7 +9,7 @@ describe 'When a user visits /conditions/new' do
       expect(page).to have_content("Create New Conditions")
     end
 
-    fill_in "condition[date]", with: "12/25/2016"
+    fill_in "condition[date]", with: "2015-08-31"
     fill_in "condition[max_temperature_f]", with: 50
     fill_in "condition[mean_temperature_f]", with: 40
     fill_in "condition[min_temperature_f]", with: 30
@@ -19,11 +20,12 @@ describe 'When a user visits /conditions/new' do
 
     click_on "Create Conditions!"
 
-    condition = Condition.find_by(date: "12/25/2016")
+    condition = Condition.find_by(date: "2015-08-31")
 
     expect(condition).to be_valid
 
     expect(current_path).to eq("/conditions/#{condition.id}")
-    expect(page).to have_content("Conditions for 12/25/2016")
+
+    expect(page).to have_content("Conditions for 2015-08-31")
   end
 end

@@ -2,7 +2,7 @@
 
   <% @conditions.each do |c|%>
     <p> ID: <%= c.id %>,
-        Date: <%= c.date %>,
+        Date: <%= c.date.to_s.split[0] %>,
         Max Temperature: <%= c.max_temperature_f%>,
         Mean Temperature: <%= c.mean_temperature_f %>,
         Min Temperature: <%= c.min_temperature_f %>,

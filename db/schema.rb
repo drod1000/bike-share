@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161204175652) do
+ActiveRecord::Schema.define(version: 20161205180917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 20161204175652) do
     t.integer  "mean_temperature_f"
     t.integer  "min_temperature_f"
     t.integer  "mean_humidity"
-    t.integer  "mean_visibility"
     t.integer  "mean_wind_speed_mph"
     t.integer  "precipitation_inches"
     t.integer  "max_dew_point_f"
@@ -45,23 +44,31 @@ ActiveRecord::Schema.define(version: 20161204175652) do
     t.datetime "updated_at",                     null: false
   end
 
+  create_table "station_trips", force: :cascade do |t|
+    t.integer  "start_station_id"
+    t.integer  "end_station_id"
+    t.integer  "trip_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   create_table "stations", force: :cascade do |t|
     t.string   "name"
     t.float    "lat"
     t.float    "long"
     t.integer  "dock_count"
     t.string   "city"
-    t.string   "installation_date"
+    t.datetime "installation_date"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
 
   create_table "trips", force: :cascade do |t|
     t.float    "duration"
-    t.string   "start_date"
+    t.datetime "start_date"
     t.string   "start_station_name"
     t.float    "start_station_id"
-    t.string   "end_date"
+    t.datetime "end_date"
     t.string   "end_station_name"
     t.float    "end_station_id"
     t.float    "bike_id"

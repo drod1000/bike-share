@@ -39,7 +39,9 @@ class BikeShareApp < Sinatra::Base
     trips = Trip.order(:start_date)
     trips = trips.each_slice(30)
     count = 0
+    # binding.pry
     trips_hash = create_trip_hash(trips,count)
+    # binding.pry
     @trips = find_correct_trip_grouping(trips_hash,params["page"])
     erb :'trips/index'
   end
@@ -54,6 +56,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   def find_correct_trip_grouping(trips_hash,search_value)
+    # binding.pry
     if search_value.nil?
       select_first_set_of_trip_data(trips_hash)
     else
@@ -62,7 +65,12 @@ class BikeShareApp < Sinatra::Base
   end
 
   def select_first_set_of_trip_data(trips_hash)
-    trips_hash[1].flatten
+    # binding.pry
+    if trips_hash.empty?
+      redirect '/trips?page=1'
+    else
+      trips_hash[1].flatten
+    end
   end
 
   def select_correct_set_of_trip_data(trips_hash,search_value)

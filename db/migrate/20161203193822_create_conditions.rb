@@ -6,7 +6,6 @@ class CreateConditions < ActiveRecord::Migration[5.0]
       t.integer :mean_temperature_f
       t.integer :min_temperature_f
       t.integer :mean_humidity
-      t.integer :mean_visibility
       t.integer :mean_wind_speed_mph
       t.integer :precipitation_inches
       t.integer :max_dew_point_f

@@ -8,7 +8,7 @@ describe "when a user visits /conditions" do
                                  mean_wind_speed_mph: 20, mean_humidity: 20)
 
     visit '/conditions'
-    expect(page).to have_content("#{condition.date}")
+    expect(page).to have_content("2000-01-01")
 
     click_on "Delete"
 

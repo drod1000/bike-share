@@ -2,10 +2,10 @@ class CreateTrips < ActiveRecord::Migration[5.0]
   def change
     create_table :trips do |t|
       t.float :duration
-      t.string :start_date
+      t.datetime :start_date
       t.string :start_station_name
       t.float :start_station_id
-      t.string :end_date
+      t.datetime :end_date
       t.string :end_station_name
       t.float :end_station_id
       t.float :bike_id

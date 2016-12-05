@@ -50,15 +50,14 @@
     <li><a href="trips?page=40">40</a></li>
     <li><a href="trips?page=41">41</a></li>
   </ul>
-    <form action="/trips" method="POST">
-      <input type="hidden" name="_method" value="DELETE">
-      <p>Insert Trip ID to delete</p> <input id="insert_id"type="text" name="id">
-      <input id="delete_trip" type="submit" value="Delete"/>
-    </form>
-    <table class="table">
+  <form action="/trips" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <p>Insert Trip ID to delete</p> <input id="insert_id"type="text" name="id">
+    <input id="delete_trip" type="submit" value="Delete"/>
+  </form>
+  <table class="table">
     <thead>
       <tr>
-        <th>Number of Trips</th>
         <th>Trip ID</th>
         <th>Duration</th>
         <th>Start Date</th>
@@ -73,10 +72,10 @@
       </tr>
     </thead>
     <tbody>
-      <% count = 0 %>
+      <!-- <% count = 0 %> -->
+      <th scope="row" id="total entries"></th>
       <% @trips.each do |trip| %>
       <tr>
-        <th scope="row" id="total entries"><%= count +=1 %></th>
         <td><%= trip.id %></td>
         <td><%= trip.duration%></td>
         <td><%= trip.start_date%></td>
@@ -95,7 +94,7 @@
       <% end %>
     </tbody>
   </table>
-  </body>
-  <!-- Latest compiled and minified JavaScript -->
-  <link src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+</body>
+<!-- Latest compiled and minified JavaScript -->
+<link src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
 </html>

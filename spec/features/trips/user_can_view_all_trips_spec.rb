@@ -15,8 +15,6 @@ describe "trips" do
       visit("/trips")
 
       expect(Trip.all.count).to eq (35)
-      expect(page).to have_content ("Number of Trips")
-      find("th",text: 'Number of Trips').should have_no_content(31)
       expect(page).to have_content ("30")
     end
 

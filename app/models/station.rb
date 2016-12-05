@@ -4,11 +4,8 @@ class Station < ActiveRecord::Base
             :city,
             :installation_date, presence: true
   validates :name, uniqueness: true
-  ##Should name be unique?
 
-  # def self.rides_started
-  #   station = Station.find("#{params[:id]}")
-  #   station.
-  #
-  # end
+  has_many :start_trips, :class_name => 'Trip', :foreign_key => :start_station_id
+  has_many :end_trips, :class_name => 'Trip', :foreign_key => :end_station_id
+
 end

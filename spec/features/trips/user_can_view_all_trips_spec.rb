@@ -8,12 +8,10 @@ describe "trips" do
       id = 0
       duration = 100
       year = 2000
-      # "#{year += 1}-09-01 00:00:00 UTC"
       35.times do |create_trips|
         Trip.create({id: count += 1, duration: duration += 10, start_date: "#{year += 1}-09-01 00:00:00 UTC", start_station_name: "San Jose", start_station_id: id += 1, end_date: "#{year += 1}-09-01 00:00:00 UTC", end_station_name: "San Jose", end_station_id: id += 1, bike_id: 1, subscription_type: "Subscriber", zip_code: 80212})
 
       end
-      # binding.pry
       visit("/trips")
 
       expect(Trip.all.count).to eq (35)
@@ -56,10 +54,12 @@ describe "trips" do
     end
 
     it "the user should also be able to delete a trip" do
-      Trip.create(id: 4069, duration: 174, start_date: "8/29/2013 9:08", start_station_name: "2nd at South Park", start_station_id: 64, end_date: "8/29/2013 9:11", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114, created_at: "2016-12-02 23:59:08", updated_at: "2016-12-02 23:59:08")
+      Trip.create(duration: 174, start_date: "2001-09-01 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date: "2001-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114, created_at: "2016-12-02 23:59:08", updated_at: "2016-12-02 23:59:08")
+
+      Trip.create(duration: 174, start_date: "2001-09-01 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date: "2001-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114, created_at: "2016-12-02 23:59:08", updated_at: "2016-12-02 23:59:08")
 
       visit("/trips")
-      fill_in("insert_id",with: 4069)
+      fill_in("insert_id",with: 2)
       click_on("delete_trip")
     end
   end

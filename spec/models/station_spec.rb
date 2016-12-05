@@ -1,4 +1,5 @@
 require_relative '../spec_helper'
+require 'date'
 
 describe "Station" do
   describe "validates" do
@@ -39,6 +40,30 @@ describe "Station" do
     end
   end
   describe "calculates" do
-    
+    Station.create(name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
+    Station.create(name: "Station 2", dock_count: 15, city: "Denver", installation_date: "1/10/2015")
+    Station.create(name: "Station 3", dock_count: 20, city: "Denver", installation_date: "8/17/2016")
+    Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: "12/31/2015")
+    it "total count of stations" do
+      expect(station.total_stations).to eq 4
+    end
+    it "average bikes available per station" do
+      expect(station.average_number_of_bikes).to eq 17.5
+    end
+    it "most bikes available at a station" do
+      expect(station.most_bikes_available).to eq 25
+    end
+    it "station where the most bikes are available" do
+      expect(station.with_fewest_bikes.id). to eq 1
+    end
+    it "fewest bikes available at a station" do
+      expect(station.fewest_bikes_available).to eq 10
+    end
+    it "station where the fewest bikes are available" do
+      expect(station.with_most_bikes.id). to eq 4
+    end
+    it "most recently installed station" do
+      expect(station.newest_station).to eq Date.parse(8/17/2016)
+    end
   end
 end

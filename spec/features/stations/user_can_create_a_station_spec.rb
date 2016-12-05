@@ -2,7 +2,7 @@ require_relative '../../spec_helper'
 
 describe "When a user visits '/stations/new'" do
   it "they can create a new station" do
-    visit 'stations/new'
+    visit '/stations/new'
 
     within "h1" do
       expect(page).to have_content("New Station")

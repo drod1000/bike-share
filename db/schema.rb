@@ -10,39 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161204222159) do
+ActiveRecord::Schema.define(version: 20161204175652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "conditions", force: :cascade do |t|
-    t.string   "date"
-    t.string   "max_temperature_f"
-    t.string   "mean_temperature_f"
-    t.string   "min_temperature_f"
-    t.string   "mean_humidity"
-    t.string   "mean_visibility"
-    t.string   "mean_wind_speed_mph"
-    t.string   "precipitation_inches"
+    t.datetime "date"
+    t.integer  "max_temperature_f"
+    t.integer  "mean_temperature_f"
+    t.integer  "min_temperature_f"
+    t.integer  "mean_humidity"
+    t.integer  "mean_visibility"
+    t.integer  "mean_wind_speed_mph"
+    t.integer  "precipitation_inches"
+    t.integer  "max_dew_point_f"
+    t.integer  "mean_dew_point_f"
+    t.integer  "min_dew_point_f"
+    t.integer  "max_humidity"
+    t.integer  "min_humidity"
+    t.integer  "max_sea_level_pressure_inches"
+    t.integer  "min_sea_level_pressure_inches"
+    t.integer  "mean_sea_level_pressure_inches"
+    t.integer  "max_visibility_miles"
+    t.integer  "min_visibility_miles"
+    t.integer  "max_gust_speed_mph"
+    t.integer  "max_wind_speed_mph"
+    t.integer  "cloud_cover"
+    t.integer  "wind_dir_degrees"
+    t.integer  "zip_code"
+    t.integer  "mean_visibility_miles"
+    t.string   "events"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
-    t.string   "max_dew_point_f"
-    t.string   "mean_dew_point_f"
-    t.string   "min_dew_point_f"
-    t.string   "max_humidity"
-    t.string   "min_humidity"
-    t.string   "max_sea_level_pressure_inches"
-    t.string   "mean_sea_level_pressure_inches"
-    t.string   "min_sea_level_pressure_inches"
-    t.string   "max_visibility_miles"
-    t.string   "min_visibility_miles"
-    t.string   "max_wind_speed_mph"
-    t.string   "max_gust_speed_mph"
-    t.string   "cloud_cover"
-    t.string   "events"
-    t.string   "wind_dir_degrees"
-    t.string   "zip_code"
-    t.string   "mean_visibility_miles"
   end
 
   create_table "stations", force: :cascade do |t|

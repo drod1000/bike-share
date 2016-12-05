@@ -1,4 +1,37 @@
 class BikeShareApp < Sinatra::Base
+  get '/conditions' do
+    @conditions = Condition.all
+    erb :"conditions/index"
+  end
+
+  get '/conditions/new' do
+    erb :"conditions/new"
+  end
+
+  post '/conditions' do
+    condition = Condition.create(params[:condition])
+    redirect "/conditions/#{condition.id}"
+  end
+
+  put '/conditions/:id' do
+    Condition.update(params[:id], params[:condition])
+    redirect "/conditions/#{params[:id]}"
+  end
+
+  get '/conditions/:id' do
+    @condition = Condition.find(params[:id])
+    erb :"conditions/show"
+  end
+
+  get '/conditions/:id/edit' do
+    @condition = Condition.find(params[:id])
+    erb :"conditions/edit"
+  end
+
+  delete '/conditions/:id' do |id|
+    Condition.destroy(params[:id])
+    redirect '/conditions'
+  end
 
   set :method_override, true
 
@@ -37,7 +70,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/trips' do
-    trips = Trip.all.order(:start_date)
+    trips = Trip.order(:start_date)
     trips = trips.each_slice(30)
     count = 0
     trips_hash = create_trip_hash(trips,count)
@@ -46,6 +79,8 @@ class BikeShareApp < Sinatra::Base
   end
 
   def create_trip_hash(trips,count)
+    #this creates a count value {1 => <#Trip Object>}
+    #for the pagination on the rendered view(buttons)
     trips.group_by do |trip|
       trip[count]
       count += 1
@@ -54,10 +89,18 @@ class BikeShareApp < Sinatra::Base
 
   def find_correct_trip_grouping(trips_hash,search_value)
     if search_value.nil?
-      trips_hash[1].flatten
+      select_first_set_of_trip_data(trips_hash)
     else
-      trips_hash[search_value.to_i].flatten
+      select_correct_set_of_trip_data(trips_hash,search_value)
     end
+  end
+
+  def select_first_set_of_trip_data(trips_hash)
+    trips_hash[1].flatten
+  end
+
+  def select_correct_set_of_trip_data(trips_hash,search_value)
+    trips_hash[search_value.to_i].flatten
   end
 
   get '/trips/new' do
@@ -75,9 +118,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/trips/:id/edit' do
-    # binding.pry
     @trip = Trip.find(params[:id])
-    # binding.pry
     erb :'trips/edit'
   end
 

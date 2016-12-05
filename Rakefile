@@ -14,6 +14,11 @@ namespace :import do
   task :stations do
     create_stations
   end
+
+  desc "Import Weather.csv to table"
+  task :conditions do
+    create_conditions
+  end
 end
 
 def create_trips
@@ -25,7 +30,17 @@ end
 
 def create_stations
   SmarterCSV.process('db/csv/station.csv').each do |row|
-      Station.create(id: row[0], name: row[1], dock_count: row[4], city: row[5], installation_date: Date.strptime(row[6], "%m/%d/%Y"))
+    Station.create(id: row[:id], name: row[:name], dock_count: row[:dock_count], city: row[:city], installation_date: Date.strptime(row[:installation_date], "%m/%d/%Y"))
   end
   puts "Imported Stations to Table."
+end
+
+def create_conditions
+  SmarterCSV.process('db/csv/weather.csv') do |row|
+    row = row.pop
+    Condition.create(date: row[:date], max_temperature_f: row[:max_temperature_f], mean_temperature_f: row[:mean_temperature_f], min_temperature_f: row[:min_temperature_f],
+              mean_humidity: row[:mean_humidity], mean_visibility_miles: row[:mean_visibility_miles], mean_wind_speed_mph: row[:mean_wind_speed_mph],
+              precipitation_inches: row[:precipitation_inches])
+  end
+  puts "Imported Weather to Table"
 end

@@ -26,7 +26,15 @@ class Trip < ActiveRecord::Base
   end
 
   def self.most_popular_starting_station
-    minimum(:duration)
+    max_station = Station.all.group_by do |station|
+      station.start_trips.count
+    end.max
+    binding.pry
+    station = max_station[1].pop
+    binding.pry
+    # self.group(:)
+    # binding.pry
+
   end
 
 end

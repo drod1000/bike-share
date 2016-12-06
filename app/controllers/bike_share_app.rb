@@ -1,6 +1,6 @@
 class BikeShareApp < Sinatra::Base
   set :method_override, true
-
+  
   get '/' do
     erb :index
   end
@@ -43,6 +43,7 @@ class BikeShareApp < Sinatra::Base
     trips = Trip.order(:start_date)
     trips = trips.each_slice(30)
     count = 0
+    # @post = Post.paginate(:page => params[:page], :per_page => 30)
     trips_hash = create_trip_hash(trips,count)
     @trips = find_correct_trip_grouping(trips_hash,params["page"])
     erb :'trips/index'
@@ -78,7 +79,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/trips-dashboard' do
-    
+
   end
 
   get '/trips/new' do

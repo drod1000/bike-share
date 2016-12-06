@@ -6,6 +6,7 @@ gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'pry'
 gem 'smarter_csv'
+gem "will_paginate"
 
 group :development, :test do
   gem 'shotgun'

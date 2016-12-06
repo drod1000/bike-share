@@ -52,9 +52,7 @@ class Station < ActiveRecord::Base
   end
 
   def most_common_origination
-    end_trips
-    #Utilize class method 5 in trip after this
-    #Station with the most rides as a starting place
+    end_trips.most_popular_starting_station
   end
 
   def date_with_most_trips_started
@@ -67,8 +65,6 @@ class Station < ActiveRecord::Base
   end
 
   def most_common_bike_id
-    start_trips
-    #Utilize class method 7 in trip after this
-    #Most ridden bike
+    start_trips.most_ridden_bike
   end
 end

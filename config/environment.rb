@@ -15,9 +15,10 @@ require File.join(APP_ROOT, 'config', 'database')
 
 # configure BikeShare settings
 class BikeShareApp < Sinatra::Base
+  require 'will_paginate'
+  require 'will_paginate/active_record'
   set :method_override, true
   set :root, APP_ROOT
   set :views, File.join(APP_ROOT, "app", "views")
   set :public_folder, File.join(APP_ROOT, "app", "public")
 end
-

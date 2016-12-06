@@ -114,8 +114,22 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/conditions' do
-    @conditions = Condition.all
+    #may want to reverse the order so most recent are first?
+    if Condition.count > 30
+      more_than_thiry_conditions
+    else
+      @conditions = Condition.all
+      @page = 1
+    end
     erb :"conditions/index"
+  end
+
+  def more_than_thiry_conditions
+    conditions = Condition.all.each_slice(30)
+    count = 0
+    conditions_hash = create_conditions_hash(conditions, count)
+    @conditions = find_correct_condition_grouping(conditions_hash, params["page"])
+    @page = params["page"].to_i
   end
 
   get '/conditions/new' do
@@ -146,5 +160,32 @@ class BikeShareApp < Sinatra::Base
     Condition.destroy(params[:id])
     redirect '/conditions'
   end
+
+    def create_conditions_hash(conditions, count)
+      conditions.group_by do |condition|
+        condition[count]
+        count += 1
+      end
+    end
+
+    def find_correct_condition_grouping(conditions_hash, search_value)
+      if search_value.nil?
+        select_first_set_of_condition_data(conditions_hash)
+      else
+        select_correct_set_of_conditon_data(conditions_hash, search_value)
+      end
+    end
+
+    def select_first_set_of_condition_data(conditions_hash)
+      if conditions_hash.empty?
+        redirect '/conditions?page=1'
+      else
+        conditions_hash[1].flatten
+      end
+    end
+
+    def select_correct_set_of_conditon_data(conditions_hash, search_value)
+      conditions_hash[search_value.to_i].flatten
+    end
 
 end

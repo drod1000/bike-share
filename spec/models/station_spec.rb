@@ -117,7 +117,6 @@ describe "Station" do
       expect(station.rides_ended).to eq 3
     end
     it "most frequent destination station(started)" do
-      skip
       station = Station.create(id: 1, name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
       Station.create(id: 2, name: "Station 2", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
       Station.create(id: 3, name: "Station 3", dock_count: 10, city: "Denver", installation_date: "11/5/2016")

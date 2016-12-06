@@ -1,4 +1,3 @@
-require 'pry'
 class Station < ActiveRecord::Base
   validates :name,
             :dock_count,
@@ -46,9 +45,7 @@ class Station < ActiveRecord::Base
   end
 
   def most_common_destination
-    start_trips
-    #Utilize class method 4 in trip after this
-    #Station with the most rides as a starting place
+    start_trips.most_popular_ending_station
   end
 
   def most_common_origination

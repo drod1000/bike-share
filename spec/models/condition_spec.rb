@@ -70,6 +70,33 @@ describe "Conditon" do
     end
   end
 
+  describe "to find rides that occur with mean visibility in 4 mile chunks" do
+    it 'finds conditions ids that have mean wind speed in 4 mile chunks' do
+    Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
+                     max_temperature_f: 40, min_temperature_f: 20,
+                     mean_temperature_f: 35, mean_visibility_miles: 3,
+                     mean_wind_speed_mph: 7, mean_humidity: 20)
+
+    Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
+                     max_temperature_f: 40, min_temperature_f: 20,
+                     mean_temperature_f: 35, mean_visibility_miles: 6,
+                     mean_wind_speed_mph: 7, mean_humidity: 20)
+
+    Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
+                     max_temperature_f: 40, min_temperature_f: 20,
+                     mean_temperature_f: 35, mean_visibility_miles: 2,
+                     mean_wind_speed_mph: 7, mean_humidity: 20)
+
+    Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
+                     max_temperature_f: 40, min_temperature_f: 20,
+                     mean_temperature_f: 35, mean_visibility_miles: 5,
+                     mean_wind_speed_mph: 7, mean_humidity: 20)
+
+    expect(Condition.visibility_in_4_mile_chunks(0)).to eq([1,3])
+    expect(Condition.visibility_in_4_mile_chunks(4)).to eq([2,4])
+    end
+  end
+
   describe "validations" do
     it "validates presence of date" do
       invalid_condition = Condition.new(precipitation_inches: 5,

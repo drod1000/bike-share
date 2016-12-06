@@ -14,4 +14,8 @@ class Condition < ActiveRecord::Base
   def self.wind_speed_in_4_mph_chunks(base_speed)
     where(mean_wind_speed_mph: base_speed...(base_speed + 4)).ids
   end
+
+  def self.visibility_in_4_mile_chunks(base_visibility)
+    where(mean_visibility_miles: base_visibility...(base_visibility + 4)).ids
+  end
 end

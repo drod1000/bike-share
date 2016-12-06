@@ -8,7 +8,7 @@ describe "When a user visits '/stations/dashboard" do
     Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: "31/12/2015")
     expect(Station.most_bikes_available).to eq 25
     visit '/stations/dashboard'
-
+    
     expect(page).to have_content("Stations Dashboard")
     expect(page).to have_content("Total number of stations: 4")
     expect(page).to have_content("Average bikes per station: 17.5")

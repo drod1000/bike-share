@@ -2,6 +2,7 @@ require_relative '../../spec_helper'
 
 describe "When a user visits '/stations-dashboard" do
   it "all of the statistics for stations are displayed" do
+    skip
     Station.create(name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
     Station.create(name: "Station 2", dock_count: 15, city: "Denver", installation_date: "1/10/2015")
     Station.create(name: "Station 3", dock_count: 20, city: "Denver", installation_date: "17/8/2016")

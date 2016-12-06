@@ -4,8 +4,11 @@ class Station < ActiveRecord::Base
             :dock_count,
             :city,
             :installation_date, presence: true
-  has_many :start_trips, :class_name => 'Trip', :foreign_key => :start_station_id
-  has_many :end_trips, :class_name => 'Trip', :foreign_key => :end_station_id
+            
+  validates :name, uniqueness: true
+
+  has_many :start_trips, class_name: :Trip, foreign_key: :start_station_id
+  has_many :end_trips, class_name: :Trip, foreign_key: :end_station_id
 
   def self.total_stations
     self.count
@@ -34,7 +37,5 @@ class Station < ActiveRecord::Base
   def self.newest_station
     self.maximum(:installation_date)
   end
-
-
 
 end

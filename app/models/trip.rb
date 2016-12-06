@@ -53,8 +53,13 @@ class Trip < ActiveRecord::Base
     highest_bike = bike_uses.max
     Struct.new("Bike", :id, :count)
     Struct::Bike.new(highest_bike[0].to_i, highest_bike[1])
-    # binding.pry
+  end
 
+  def self.least_ridden_bike
+    bike_uses = Trip.group(:bike_id).count
+    highest_bike = bike_uses.min
+    Struct.new("Bike", :id, :count)
+    Struct::Bike.new(highest_bike[0].to_i, highest_bike[1])
   end
 
 end

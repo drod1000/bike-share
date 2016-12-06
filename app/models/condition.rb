@@ -10,4 +10,8 @@ class Condition < ActiveRecord::Base
   def self.precipitation_in_half_inch_increments(precipitation)
     where(precipitation_inches: precipitation...(precipitation + 0.5)).ids
   end
+
+  def self.wind_speed_in_4_mph_chunks(base_speed)
+    where(mean_wind_speed_mph: base_speed...(base_speed + 4)).ids
+  end
 end

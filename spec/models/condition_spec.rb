@@ -1,7 +1,7 @@
 require_relative '../spec_helper'
 
 describe "Conditon" do
-  it "finds conditions that occur in max temperature 10 degree ranges" do
+  it "finds conditions that ocurr in max temperature 10 degree ranges" do
     Condition.create(date: '2000-01-01', precipitation_inches: 5,
                      max_temperature_f: 52, min_temperature_f: 20,
                      mean_temperature_f: 35, mean_visibility_miles: 10,
@@ -19,7 +19,7 @@ describe "Conditon" do
     expect(Condition.max_temperature_range(40)).to eq([3])
   end
 
-  it "find conditions that occure in half inch precipitation range" do
+  it "find conditions that ocurr in half inch precipitation range" do
     Condition.create(date: '2000-01-01', precipitation_inches: 0.0,
                      max_temperature_f: 52, min_temperature_f: 20,
                      mean_temperature_f: 35, mean_visibility_miles: 10,
@@ -42,6 +42,33 @@ describe "Conditon" do
 
   end
 
+  describe 'to find number of rides based on mean wind speed' do
+    it 'finds conditions that occur within mean wind speed chunks of 4' do
+
+    Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
+                     max_temperature_f: 40, min_temperature_f: 20,
+                     mean_temperature_f: 35, mean_visibility_miles: 10,
+                     mean_wind_speed_mph: 6, mean_humidity: 20)
+
+    Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
+                     max_temperature_f: 40, min_temperature_f: 20,
+                     mean_temperature_f: 35, mean_visibility_miles: 10,
+                     mean_wind_speed_mph: 3, mean_humidity: 20)
+
+    Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
+                     max_temperature_f: 40, min_temperature_f: 20,
+                     mean_temperature_f: 35, mean_visibility_miles: 10,
+                     mean_wind_speed_mph: 2, mean_humidity: 20)
+
+    Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
+                     max_temperature_f: 40, min_temperature_f: 20,
+                     mean_temperature_f: 35, mean_visibility_miles: 10,
+                     mean_wind_speed_mph: 7, mean_humidity: 20)
+
+    expect(Condition.wind_speed_in_4_mph_chunks(0)).to eq([2,3])
+    expect(Condition.wind_speed_in_4_mph_chunks(4)).to eq([1,4])
+    end
+  end
 
   describe "validations" do
     it "validates presence of date" do

@@ -15,9 +15,33 @@ describe "Conditon" do
                      mean_temperature_f: 35, mean_visibility_miles: 10,
                      mean_wind_speed_mph: 20, mean_humidity: 20)
 
-    expect(Condition.max_temperature_range("50s")).to eq([1,2])
-    expect(Condition.max_temperature_range("40s")).to eq([3])
+    expect(Condition.max_temperature_range(50)).to eq([1,2])
+    expect(Condition.max_temperature_range(40)).to eq([3])
   end
+
+  it "find conditions that occure in half inch precipitation range" do
+    Condition.create(date: '2000-01-01', precipitation_inches: 0.0,
+                     max_temperature_f: 52, min_temperature_f: 20,
+                     mean_temperature_f: 35, mean_visibility_miles: 10,
+                     mean_wind_speed_mph: 20, mean_humidity: 20)
+    Condition.create(date: '2000-02-02', precipitation_inches: 0.4,
+                     max_temperature_f: 59, min_temperature_f: 20,
+                     mean_temperature_f: 3, mean_visibility_miles: 10,
+                     mean_wind_speed_mph: 20, mean_humidity: 20)
+    Condition.create(date: '2000-03-03', precipitation_inches: 0.5,
+                     max_temperature_f: 40, min_temperature_f: 20,
+                     mean_temperature_f: 35, mean_visibility_miles: 10,
+                     mean_wind_speed_mph: 20, mean_humidity: 20)
+    Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
+                     max_temperature_f: 40, min_temperature_f: 20,
+                     mean_temperature_f: 35, mean_visibility_miles: 10,
+                     mean_wind_speed_mph: 20, mean_humidity: 20)
+
+    expect(Condition.precipitation_in_half_inch_increments(0.0)).to eq([1,2])
+    expect(Condition.precipitation_in_half_inch_increments(0.5)).to eq([3,4])
+
+  end
+
 
   describe "validations" do
     it "validates presence of date" do

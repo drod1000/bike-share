@@ -10,7 +10,8 @@ class Trip < ActiveRecord::Base
             :subscription_type,
             :zip_code, presence: true
 
-  belongs_to  :station, foreign_key: :id
+  belongs_to  :starting_station, class_name: :Station, foreign_key: :start_station_id
+  belongs_to  :end_station, class_name: :Station, foreign_key: :end_station_id
 
   def self.average_duration
     average(:duration)
@@ -27,6 +28,5 @@ class Trip < ActiveRecord::Base
   def self.most_popular_starting_station
     minimum(:duration)
   end
-
 
 end

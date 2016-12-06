@@ -1,6 +1,24 @@
 require_relative '../spec_helper'
 
 describe "Conditon" do
+  it "finds conditions that occur in max temperature 10 degree ranges" do
+    Condition.create(date: '2000-01-01', precipitation_inches: 5,
+                     max_temperature_f: 52, min_temperature_f: 20,
+                     mean_temperature_f: 35, mean_visibility_miles: 10,
+                     mean_wind_speed_mph: 20, mean_humidity: 20)
+    Condition.create(date: '2000-02-02', precipitation_inches: 5,
+                     max_temperature_f: 59, min_temperature_f: 20,
+                     mean_temperature_f: 3, mean_visibility_miles: 10,
+                     mean_wind_speed_mph: 20, mean_humidity: 20)
+    Condition.create(date: '2000-03-03', precipitation_inches: 5,
+                     max_temperature_f: 40, min_temperature_f: 20,
+                     mean_temperature_f: 35, mean_visibility_miles: 10,
+                     mean_wind_speed_mph: 20, mean_humidity: 20)
+
+    expect(Condition.max_temperature_range("50s")).to eq([1,2])
+    expect(Condition.max_temperature_range("40s")).to eq([3])
+  end
+
   describe "validations" do
     it "validates presence of date" do
       invalid_condition = Condition.new(precipitation_inches: 5,

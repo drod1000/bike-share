@@ -15,8 +15,8 @@ describe "Conditon" do
                      mean_temperature_f: 35, mean_visibility_miles: 10,
                      mean_wind_speed_mph: 20, mean_humidity: 20)
 
-    expect(Condition.max_temperature_range(50)).to eq([1,2])
-    expect(Condition.max_temperature_range(40)).to eq([3])
+    expect((Condition.max_temperature_range(50)).ids).to eq([1,2])
+    expect((Condition.max_temperature_range(40).ids)).to eq([3])
   end
 
   it "find conditions that ocurr in half inch precipitation range" do

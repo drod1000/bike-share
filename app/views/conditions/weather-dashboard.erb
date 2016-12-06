@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="trips/application.css">
+  <title>Weather Dashboard</title>
+</head>
+<body>
+  <h1>Weather Dashboard</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Temperature Range (F)</th>
+        <th>Avg Number of Ride</th>
+        <th>Max Number of Rides</th>
+        <th>Min Number of Rides</th>
+      </tr>
+    </thead>
+    <tbody>
+      <td>50-59</td>
+      <td><%= Trip.where(id: Condition.max_temperature_range(50)).count %></td>
+      <td></td>
+    </tbody>
+  </table>
+</body>
+  <!-- Latest compiled and minified JavaScript -->
+  <link src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+</html>

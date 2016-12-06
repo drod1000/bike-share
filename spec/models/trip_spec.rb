@@ -187,7 +187,7 @@ describe "Trip" do
 
           Station.create(id: 50, name: "test_station_2", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
 
-          expect(Trip.most_popular_starting_station).to eq("San Jose City Hall")
+          expect(Trip.most_popular_starting_station.name).to eq("test_station_1")
         end
       end
     end

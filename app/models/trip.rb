@@ -26,18 +26,10 @@ class Trip < ActiveRecord::Base
   end
 
   def self.most_popular_starting_station
-
-  # look up the most common occurence of starting_station within trips
-  #   max_station = Station.all.group_by do |station|
-  #     station.start_trips.count
-  #   end.max
-  #   binding.pry
-  #   station = max_station[1].pop
-    # binding.pry
-
-    x = Station.start_trips
-    binding.pry
-
+    trip_uses = group(:start_station_id).count
+    highest_use = group(:start_station_id).count.values.max
+    station_id = trip_uses.key(highest_use)
+    Station.find(station_id)
   end
 
 end

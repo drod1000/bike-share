@@ -1,4 +1,5 @@
 class Condition < ActiveRecord::Base
+  self.primary_key = :date
   validates :date,
             :max_temperature_f,
             :mean_temperature_f,
@@ -10,7 +11,7 @@ class Condition < ActiveRecord::Base
             presence: true
   validates :zip_code, numericality: {equal_to: 94107}
 
-  has_many :trips
+  has_many :trips, primary_key: :date, foreign_key: :start_date
 
   def self.max_temperature_range(base_temp)
     where(max_temperature_f: base_temp...(base_temp + 10)).ids

@@ -33,7 +33,6 @@ def create_trips
                 bike_id: row[:bike_id],
                 subscription_type: row[:subscription_type],
                 zip_code: row[:zip_code])
-                # weather_id: (Condition.find_by(date: (Date.strptime(row[:start_date], "%m/%d/%Y").to_s.split[0])))).id
   end
   puts "Imported Trips to Table."
 end

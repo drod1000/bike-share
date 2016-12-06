@@ -109,18 +109,22 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/conditions' do
-    #may want to reverse the order?
+    #may want to reverse the order so most recent are first?
     if Condition.count > 30
-      conditions = Condition.all.each_slice(30)
-      count = 0
-      conditions_hash = create_conditions_hash(conditions, count)
-      @conditions = find_correct_condition_grouping(conditions_hash, params["page"])
-      @page = params["page"].to_i
+      more_than_thiry_conditions
     else
       @conditions = Condition.all
       @page = 1
     end
     erb :"conditions/index"
+  end
+
+  def more_than_thiry_conditions
+    conditions = Condition.all.each_slice(30)
+    count = 0
+    conditions_hash = create_conditions_hash(conditions, count)
+    @conditions = find_correct_condition_grouping(conditions_hash, params["page"])
+    @page = params["page"].to_i
   end
 
   get '/conditions/new' do

@@ -114,6 +114,7 @@ class BikeShareApp < Sinatra::Base
     count = 0
     conditions_hash = create_conditions_hash(conditions, count)
     @conditions = find_correct_condition_grouping(conditions_hash, params["page"])
+    @page = params["page"]
     erb :"conditions/index"
   end
 

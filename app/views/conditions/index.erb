@@ -50,10 +50,14 @@
       <% end %>
     </tbody>
   </table>
-    <div class="btn-group" role="group" aria-label="...">
-      <button type="button" class="btn btn-default">Left</button>
-      <button type="button" class="btn btn-default">Right</button>
-    </div>
+  <ul class="pagination">
+    <% if @page.to_i > 1 %>
+      <li><a href="conditions?page=<%= @page.to_i - 1 %>">Previous Page</a></li>
+      <li><a href="conditions?page=<%= @page.to_i + 1 %>">Next Page</a></li>
+    <% else %>
+      <li><a href="conditions?page=<%= @page.to_i + 1 %>">Next Page</a></li>
+    <% end %>
+  </ul>
   </body>
   <!-- Latest compiled and minified JavaScript -->
   <link src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">

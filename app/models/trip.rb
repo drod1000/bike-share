@@ -32,4 +32,11 @@ class Trip < ActiveRecord::Base
     Station.find(station_id)
   end
 
+  def self.least_popular_starting_station
+    trip_uses = group(:start_station_id).count
+    lowest_use = group(:start_station_id).count.values.min
+    station_id = trip_uses.key(lowest_use)
+    Station.find(station_id)
+  end
+
 end

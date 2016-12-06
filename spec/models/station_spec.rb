@@ -1,4 +1,5 @@
 require_relative '../spec_helper'
+require 'date'
 
 describe "Station" do
   describe "validates" do
@@ -39,6 +40,54 @@ describe "Station" do
     end
   end
   describe "calculates" do
-    
+    it "total count of stations" do
+      Station.create(name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
+      Station.create(name: "Station 2", dock_count: 15, city: "Denver", installation_date: "1/10/2015")
+      Station.create(name: "Station 3", dock_count: 20, city: "Denver", installation_date: "17/8/2016")
+      Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: "31/12/2015")
+      expect(Station.total_stations).to eq 4
+    end
+    it "average bikes available per station" do
+      Station.create(name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
+      Station.create(name: "Station 2", dock_count: 15, city: "Denver", installation_date: "1/10/2015")
+      Station.create(name: "Station 3", dock_count: 20, city: "Denver", installation_date: "17/8/2016")
+      Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: "31/12/2015")
+      expect(Station.average_number_of_bikes).to eq 17.5
+    end
+    it "most bikes available at a station" do
+      Station.create(name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
+      Station.create(name: "Station 2", dock_count: 15, city: "Denver", installation_date: "1/10/2015")
+      Station.create(name: "Station 3", dock_count: 20, city: "Denver", installation_date: "17/8/2016")
+      Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: "31/12/2015")
+      expect(Station.most_bikes_available).to eq 25
+    end
+    it "station where the most bikes are available" do
+      Station.create(name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
+      Station.create(name: "Station 2", dock_count: 15, city: "Denver", installation_date: "1/10/2015")
+      Station.create(name: "Station 3", dock_count: 20, city: "Denver", installation_date: "17/8/2016")
+      Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: "31/12/2015")
+      expect(Station.with_most_bikes.id). to eq 4
+    end
+    it "fewest bikes available at a station" do
+      Station.create(name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
+      Station.create(name: "Station 2", dock_count: 15, city: "Denver", installation_date: "1/10/2015")
+      Station.create(name: "Station 3", dock_count: 20, city: "Denver", installation_date: "17/8/2016")
+      Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: "31/12/2015")
+      expect(Station.fewest_bikes_available).to eq 10
+    end
+    it "station where the fewest bikes are available" do
+      Station.create(name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
+      Station.create(name: "Station 2", dock_count: 15, city: "Denver", installation_date: "1/10/2015")
+      Station.create(name: "Station 3", dock_count: 20, city: "Denver", installation_date: "17/8/2016")
+      Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: "31/12/2015")
+      expect(Station.with_fewest_bikes.id). to eq 1
+    end
+    it "most recently installed station" do
+      Station.create(name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
+      Station.create(name: "Station 2", dock_count: 15, city: "Denver", installation_date: "1/10/2015")
+      Station.create(name: "Station 3", dock_count: 20, city: "Denver", installation_date: "17/8/2016")
+      Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: "31/12/2015")
+      expect(Station.newest_station).to eq Date.parse(8/17/2016)
+    end
   end
 end

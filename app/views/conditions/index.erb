@@ -27,7 +27,6 @@
       <% count = 0 %>
       <% @conditions.each do |condition| %>
       <tr>
-        <!-- <th scope="row" id="total entries"><%= count +=1 %></th> -->
         <th scope="row" id=""><%= condition.id %></th>
         <td><%= condition.date.to_s.split[0] %></td>
         <td><%= condition.max_temperature_f %></td>

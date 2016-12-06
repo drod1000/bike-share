@@ -11,7 +11,7 @@ describe "Conditions" do
     end
 
 
-    it "user can navigate to next page" do
+    it "user cannot navigate to previous page from page one" do
       visit('/conditions')
 
       within("h1"){expect(page).to have_content("Conditions")}

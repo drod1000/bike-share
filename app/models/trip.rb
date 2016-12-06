@@ -48,18 +48,44 @@ class Trip < ActiveRecord::Base
     # binding.pry
   end
 
+  def self.bike_uses
+    Trip.group(:bike_id).count
+  end
+
   def self.most_ridden_bike
-    bike_uses = Trip.group(:bike_id).count
     highest_bike = bike_uses.max
     Struct.new("Bike", :id, :count)
     Struct::Bike.new(highest_bike[0].to_i, highest_bike[1])
   end
 
   def self.least_ridden_bike
-    bike_uses = Trip.group(:bike_id).count
-    highest_bike = bike_uses.min
+    lowest_bike = bike_uses.min
     Struct.new("Bike", :id, :count)
-    Struct::Bike.new(highest_bike[0].to_i, highest_bike[1])
+    Struct::Bike.new(lowest_bike[0].to_i, lowest_bike[1])
+  end
+
+  def self.subscribers
+    subscriber = Trip.group(:subscription_type).count
+    total_subscribers = subscriber.values.sum
+    percentage = calculate_percentage(total_subscribers,subscriber["Subscriber"])
+    Struct.new("Subscribers", :total, :count, :percent)
+    Struct::Subscribers.new(total_subscribers, subscriber["Subscriber"],percentage)
+  end
+
+  def self.calculate_percentage(total,initial_value)
+    (initial_value.to_f / total.to_f) * 100
+  end
+
+  def self.consumers
+    consumers = Trip.group(:subscription_type).count
+    total_subscribers = subscriber.values.sum
+    #total - number = result
+    #(result / total) * 100
+    Struct.new("Subscribers", :total, :count, :percent)
+    Struct::Users.new(highest_bike[0].to_i, highest_bike[1])
+
+    Struct.new("Subscribers", :total, :count, :percent)
+    Struct::Users.new(highest_bike[0].to_i, highest_bike[1])
   end
 
 end

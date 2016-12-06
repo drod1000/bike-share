@@ -8,48 +8,14 @@
 </head>
 <body>
   <ul class="pagination">
-    <li><a href="trips?page=1">1</a></li>
-    <li><a href="trips?page=2">2</a></li>
-    <li><a href="trips?page=3<">3</a></li>
-    <li><a href="trips?page=4<">4</a></li>
-    <li><a href="trips?page=5<">5</a></li>
-    <li><a href="trips?page=6<">6</a></li>
-    <li><a href="trips?page=7<">7</a></li>
-    <li><a href="trips?page=8<">8</a></li>
-    <li><a href="trips?page=9<">9</a></li>
-    <li><a href="trips?page=10">10</a></li>
-    <li><a href="trips?page=11">11</a></li>
-    <li><a href="trips?page=12">12</a></li>
-    <li><a href="trips?page=13">13</a></li>
-    <li><a href="trips?page=14">14</a></li>
-    <li><a href="trips?page=15">15</a></li>
-    <li><a href="trips?page=16">16</a></li>
-    <li><a href="trips?page=17">17</a></li>
-    <li><a href="trips?page=18">18</a></li>
-    <li><a href="trips?page=19">19</a></li>
-    <li><a href="trips?page=20">20</a></li>
-    <li><a href="trips?page=21">21</a></li>
-    <li><a href="trips?page=22">22</a></li>
-    <li><a href="trips?page=23">23</a></li>
-    <li><a href="trips?page=24">24</a></li>
-    <li><a href="trips?page=25">25</a></li>
-    <li><a href="trips?page=26">26</a></li>
-    <li><a href="trips?page=27">27</a></li>
-    <li><a href="trips?page=28">28</a></li>
-    <li><a href="trips?page=29">29</a></li>
-    <li><a href="trips?page=30">30</a></li>
-    <li><a href="trips?page=31">31</a></li>
-    <li><a href="trips?page=32">32</a></li>
-    <li><a href="trips?page=33">33</a></li>
-    <li><a href="trips?page=34">34</a></li>
-    <li><a href="trips?page=35">35</a></li>
-    <li><a href="trips?page=36">36</a></li>
-    <li><a href="trips?page=37">37</a></li>
-    <li><a href="trips?page=38">38</a></li>
-    <li><a href="trips?page=39">39</a></li>
-    <li><a href="trips?page=40">40</a></li>
-    <li><a href="trips?page=41">41</a></li>
+    <% if @page > 1 %>
+      <li><a href="trips?page=<%= @page - 1 %>">Previous Page</a></li>
+      <li><a href="trips?page=<%= @page + 1 %>">Next Page</a></li>
+    <% elsif @page < 1 %>
+      <li><a type="submit" href="trips?page=<%= @page + 1 %>">Next Page</a></li>
+    <% end %>
   </ul>
+
   <form action="/trips" method="POST">
     <input type="hidden" name="_method" value="DELETE">
     <p>Insert Trip ID to delete</p> <input id="insert_id"type="text" name="id">

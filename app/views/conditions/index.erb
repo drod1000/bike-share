@@ -7,7 +7,11 @@
   <title></title>
 </head>
 <body>
-  <h1>Conditions:</h1>
+  <ul class="pagination">
+    <li><a href="conditions?page=1">1</a></li>
+    <li><a href="conditions?page=2">2</a></li>
+  </ul>
+  <h1>Conditions</h1>
 <table class="table">
     <thead>
       <tr>
@@ -27,7 +31,8 @@
       <% count = 0 %>
       <% @conditions.each do |condition| %>
       <tr>
-        <th scope="row" id="total entries"><%= count +=1 %></th>
+        <!-- <th scope="row" id="total entries"><%= count +=1 %></th> -->
+        <th scope="row" id=""><%= condition.id %></th>
         <td><%= condition.date.to_s.split[0] %></td>
         <td><%= condition.max_temperature_f %></td>
         <td><%= condition.mean_temperature_f %></td>
@@ -45,6 +50,10 @@
       <% end %>
     </tbody>
   </table>
+    <div class="btn-group" role="group" aria-label="...">
+      <button type="button" class="btn btn-default">Left</button>
+      <button type="button" class="btn btn-default">Right</button>
+    </div>
   </body>
   <!-- Latest compiled and minified JavaScript -->
   <link src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">

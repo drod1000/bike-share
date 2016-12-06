@@ -5,7 +5,6 @@ gem 'pg'
 gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'pry'
-# gem 'pry-state'
 gem 'smarter_csv'
 gem "will_paginate"
 

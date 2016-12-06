@@ -47,22 +47,30 @@ class Trip < ActiveRecord::Base
     group("DATE_TRUNC('month',start_date)").count
   end
 
-  def self.bike_uses
+  def self.total_bike_uses
     Trip.group(:bike_id).count
   end
 
   def self.most_ridden_bike
-    bike_hash = bike_uses
-    highest_bike = bike_hash.values.max
+    bike_hash = total_bike_uses
+    most_rides = bike_hash.values.max
     Struct.new("Bike", :id, :count)
-    Struct::Bike.new(bike_hash.key(highest_bike), highest_bike)
+    Struct::Bike.new(bike_hash.key(most_rides), most_rides)
   end
 
   def self.least_ridden_bike
-    bike_hash = bike_uses
-    lowest_bike = bike_hash.values.min
+    bike_hash = total_bike_uses
+    least_rides = bike_hash.values.min
     Struct.new("Bike", :id, :count)
-    Struct::Bike.new(bike_hash.key(lowest_bike), lowest_bike)
+    Struct::Bike.new(bike_hash.key(least_rides), least_rides)
+  end
+
+  def self.users
+    group(:subscription_type).count
+  end
+
+  def self.total_users(customers)
+    customers.values.sum
   end
 
   def self.subscribers
@@ -71,14 +79,6 @@ class Trip < ActiveRecord::Base
     percentage = calculate_percentage(total_subscribers,user["Subscriber"])
     Struct.new("Subscribers", :total, :count, :percent)
     Struct::Subscribers.new(total_subscribers, user["Subscriber"],percentage)
-  end
-
-  def self.users
-    Trip.group(:subscription_type).count
-  end
-
-  def self.total_users(customers)
-    customers.values.sum
   end
 
   def self.consumers
@@ -110,6 +110,5 @@ class Trip < ActiveRecord::Base
     Struct.new("Date", :date, :count)
     Struct::Date.new(dates_sorted_by_count.key(min_date), min_date)
   end
-
 
 end

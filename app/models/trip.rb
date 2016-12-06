@@ -93,8 +93,15 @@ class Trip < ActiveRecord::Base
     (initial_value.to_f / total.to_f) * 100
   end
 
-  def self.date_with_most_trips
+  def self.date_count
+    group(:start_date).count
+  end
 
+  def self.date_with_most_trips
+    dates_sorted_by_count = date_count
+    max_date = dates_sorted_by_count.values.max
+    Struct.new("Date", :date, :count)
+    Struct::Date.new(dates_sorted_by_count.key(max_date), max_date)
   end
 
 

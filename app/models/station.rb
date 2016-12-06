@@ -4,7 +4,7 @@ class Station < ActiveRecord::Base
             :dock_count,
             :city,
             :installation_date, presence: true
-            
+
   validates :name, uniqueness: true
 
   has_many :start_trips, class_name: :Trip, foreign_key: :start_station_id

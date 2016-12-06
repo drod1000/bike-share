@@ -44,18 +44,30 @@ class Station < ActiveRecord::Base
   end
 
   def most_common_destination
+    start_trips
+    #Utilize class method 4 in trip after this
+    #Station with the most rides as a starting place
   end
 
   def most_common_origination
+    end_trips
+    #Utilize class method 5 in trip after this
+    #Station with the most rides as a starting place
   end
 
   def date_with_most_trips_started
+    start_trips
+    #Utilize class method 10 in trip after this
+    #Single date with highest number of trips
   end
 
   def most_common_zip_code
   end
 
   def most_common_bike_id
+    start_trips
+    #Utilize class method 7 in trip after this
+    #Most ridden bike
   end
 
 

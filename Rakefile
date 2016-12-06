@@ -40,7 +40,7 @@ end
 def create_stations
   SmarterCSV.process('db/csv/station.csv').each do |row|
     Station.create(id: row[:id],
-                  name: row[:name],
+                   name: row[:name],
                    dock_count: row[:dock_count],
                    city: row[:city],
                    installation_date: Date.strptime(row[:installation_date], "%m/%d/%Y"))

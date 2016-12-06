@@ -4,8 +4,11 @@ class Station < ActiveRecord::Base
             :dock_count,
             :city,
             :installation_date, presence: true
-  has_many :start_trips, :class_name => 'Trip', :foreign_key => :start_station_id
-  has_many :end_trips, :class_name => 'Trip', :foreign_key => :end_station_id
+            
+  validates :name, uniqueness: true
+
+  has_many :start_trips, class_name: :Trip, foreign_key: :start_station_id
+  has_many :end_trips, class_name: :Trip, foreign_key: :end_station_id
 
   def self.total_stations
     count
@@ -69,6 +72,4 @@ class Station < ActiveRecord::Base
     #Utilize class method 7 in trip after this
     #Most ridden bike
   end
-
-
 end

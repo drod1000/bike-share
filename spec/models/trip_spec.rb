@@ -168,23 +168,181 @@ describe "Trip" do
 
           Trip.create(duration: 71.0, start_date: "2013-08-29 00:00:00", start_station_name: "Mountain View City Hall", start_station_id: 27.0, end_date: "2013-08-29 00:00:00", end_station_name: "Mountain View City Hall", end_station_id: 27.0, bike_id: 48.0, subscription_type: "Subscriber", zip_code: 97214.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
 
-          # binding.pry
           expect(Trip.shortest_ride).to eq(63)
         end
       end
 
-      # describe "#most_popular_starting_station" do
-      #   it "averages the duration of the a ride" do
-      #     Trip.create(duration: 63.0, start_date: "2013-08-29 00:00:00", start_station_name: "South Van Ness at Market", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "South Van Ness at Market", end_station_id: 66.0, bike_id: 520.0, subscription_type: "Subscriber", zip_code: 94127.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
-      #
-      #     Trip.create(duration: 70.0, start_date: "2013-08-29 00:00:00", start_station_name: "San Jose City Hall", start_station_id: 10.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
-      #
-      #     Trip.create(duration: 71.0, start_date: "2013-08-29 00:00:00", start_station_name: "San Jose City Hall", start_station_id: 10.0, end_date: "2013-08-29 00:00:00", end_station_name: "Mountain View City Hall", end_station_id: 27.0, bike_id: 48.0, subscription_type: "Subscriber", zip_code: 97214.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
-      #     # binding.pry
-      #     # binding.pry
-      #     expect(Trip.most_popular_starting_station).to eq("San Jose City Hall")
-      #   end
-      # end
+      describe ".most_popular_starting_station" do
+        it "returns the station with the most rides as a starting place" do
+          Trip.create(duration: 63.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "South Van Ness at Market", end_station_id: 66.0, bike_id: 520.0, subscription_type: "Subscriber", zip_code: 94127.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 70.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05
+          19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 70.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 71.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_2", start_station_id: 50, end_date: "2013-08-29 00:00:00", end_station_name: "Mountain View City Hall", end_station_id: 27.0, bike_id: 48.0, subscription_type: "Subscriber", zip_code: 97214.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Station.create(id: 66, name: "test_station_1", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
+
+          Station.create(id: 50, name: "test_station_2", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
+
+          expect(Trip.most_popular_starting_station.name).to eq("test_station_1")
+        end
+      end
+
+      describe ".most_popular_ending_station" do
+        it "returns the station with the most rides as a starting place" do
+          Trip.create(duration: 63.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "South Van Ness at Market", end_station_id: 66.0, bike_id: 520.0, subscription_type: "Subscriber", zip_code: 94127.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 70.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05
+          19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 70.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 71.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_2", start_station_id: 50, end_date: "2013-08-29 00:00:00", end_station_name: "Mountain View City Hall", end_station_id: 27.0, bike_id: 48.0, subscription_type: "Subscriber", zip_code: 97214.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Station.create(id: 66, name: "test_station_1", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
+
+          Station.create(id: 50, name: "test_station_2", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
+
+          Station.create(id: 10, name: "test_station_2", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
+
+          expect(Trip.most_popular_ending_station.name).to eq("test_station_2")
+        end
+      end
+
+      xdescribe ".month_by_month_breakdown" do
+        it "returns a month_by_month_breakdown" do
+          Trip.create(duration: 63.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "South Van Ness at Market", end_station_id: 66.0, bike_id: 520.0, subscription_type: "Subscriber", zip_code: 94127.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 70.0, start_date: "2014-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05
+          19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 70.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 71.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_2", start_station_id: 50, end_date: "2013-08-29 00:00:00", end_station_name: "Mountain View City Hall", end_station_id: 27.0, bike_id: 48.0, subscription_type: "Subscriber", zip_code: 97214.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Station.create(id: 66, name: "test_station_1", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
+
+          Station.create(id: 50, name: "test_station_2", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
+
+          expect(Trip.month_by_month_breakdown ).to eq("test_station_2")
+        end
+      end
+      describe ".most_ridden_bike" do
+        it "returns the most ridden bike and the total rides of that bike" do
+          Trip.create(duration: 63.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "South Van Ness at Market", end_station_id: 66.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 94127.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 70.0, start_date: "2014-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05
+          19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 70.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 71.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_2", start_station_id: 50, end_date: "2013-08-29 00:00:00", end_station_name: "Mountain View City Hall", end_station_id: 27.0, bike_id: 48.0, subscription_type: "Subscriber", zip_code: 97214.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+          Trip.create(duration: 71.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_2", start_station_id: 50, end_date: "2013-08-29 00:00:00", end_station_name: "Mountain View City Hall", end_station_id: 27.0, bike_id: 5.0, subscription_type: "Subscriber", zip_code: 97214.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+          Trip.create(duration: 71.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_2", start_station_id: 50, end_date: "2013-08-29 00:00:00", end_station_name: "Mountain View City Hall", end_station_id: 27.0, bike_id: 4.0, subscription_type: "Subscriber", zip_code: 97214.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Station.create(id: 66, name: "test_station_1", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
+
+          Station.create(id: 50, name: "test_station_2", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
+
+          expect(Trip.most_ridden_bike.id).to eq(661)
+          expect(Trip.most_ridden_bike.count).to eq(3)
+        end
+      end
+
+      describe ".least_ridden_bike" do
+        it "returns the least ridden bike and the total rides of that bike" do
+          Trip.create(duration: 63.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "South Van Ness at Market", end_station_id: 66.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 94127.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 70.0, start_date: "2014-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05
+          19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 70.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 71.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_2", start_station_id: 50, end_date: "2013-08-29 00:00:00", end_station_name: "Mountain View City Hall", end_station_id: 27.0, bike_id: 48.0, subscription_type: "Subscriber", zip_code: 97214.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Station.create(id: 66, name: "test_station_1", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
+
+          Station.create(id: 50, name: "test_station_2", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
+
+          expect(Trip.least_ridden_bike.id).to eq(48)
+          expect(Trip.least_ridden_bike.count).to eq(1)
+        end
+      end
+
+      describe ".subscriber" do
+        it "returns the subscriber_type breakdown" do
+          Trip.create(duration: 63.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "South Van Ness at Market", end_station_id: 66.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 94127.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 70.0, start_date: "2014-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05
+          19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 70.0, start_date: "2014-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05
+          19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 70.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Consumer", zip_code: 95138.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 71.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_2", start_station_id: 50, end_date: "2013-08-29 00:00:00", end_station_name: "Mountain View City Hall", end_station_id: 27.0, bike_id: 48.0, subscription_type: "Consumer", zip_code: 97214.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Station.create(id: 66, name: "test_station_1", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
+
+          Station.create(id: 50, name: "test_station_2", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
+
+          expect(Trip.subscribers.total).to eq(5)
+          expect(Trip.subscribers.count).to eq(3)
+          expect(Trip.subscribers.percent).to eq(60.0)
+        end
+      end
+
+      describe ".consumers" do
+        it "returns the consumers breakdown" do
+          Trip.create(duration: 63.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "South Van Ness at Market", end_station_id: 66.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 94127.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 70.0, start_date: "2014-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05
+          19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 70.0, start_date: "2014-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05
+          19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 70.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Consumer", zip_code: 95138.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 71.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_2", start_station_id: 50, end_date: "2013-08-29 00:00:00", end_station_name: "Mountain View City Hall", end_station_id: 27.0, bike_id: 48.0, subscription_type: "Consumer", zip_code: 97214.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Station.create(id: 66, name: "test_station_1", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
+
+          Station.create(id: 50, name: "test_station_2", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
+
+          expect(Trip.consumers.total).to eq(5)
+          expect(Trip.consumers.count).to eq(2)
+          expect(Trip.consumers.percent).to eq(40.0)
+        end
+      end
+
+      describe ".consumers" do
+        it "returns the consumers breakdown" do
+          Trip.create(duration: 63.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "South Van Ness at Market", end_station_id: 66.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 94127.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 70.0, start_date: "2014-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05
+          19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 70.0, start_date: "2014-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05
+          19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 70.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Consumer", zip_code: 95138.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Trip.create(duration: 71.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_2", start_station_id: 50, end_date: "2013-08-29 00:00:00", end_station_name: "Mountain View City Hall", end_station_id: 27.0, bike_id: 48.0, subscription_type: "Consumer", zip_code: 97214.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+
+          Station.create(id: 66, name: "test_station_1", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
+
+          Station.create(id: 50, name: "test_station_2", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
+
+          expect(Trip.consumers.total).to eq(5)
+          expect(Trip.consumers.count).to eq(2)
+          expect(Trip.consumers.percent).to eq(40.0)
+        end
+      end
     end
   end
 end

@@ -56,3 +56,8 @@ div.btn-group a {
   color: #f28484;
   width: auto;
 }*/
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}

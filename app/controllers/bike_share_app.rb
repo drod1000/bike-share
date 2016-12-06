@@ -5,6 +5,10 @@ class BikeShareApp < Sinatra::Base
     erb :index
   end
 
+  get '/stations-dashboard' do
+    erb :"stations/dashboard"
+  end
+
   get '/stations' do
     @stations = Station.all
     erb :"stations/index"
@@ -40,37 +44,10 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/trips' do
-    trips = Trip.order(:start_date)
-    trips = trips.each_slice(30)
-    count = 0
-    trips_hash = create_trip_hash(trips,count)
-    @trips = find_correct_trip_grouping(trips_hash,params["page"])
+    # binding.pry
+    @trips = Trip.order(:start_date).paginate(:page => params[:page], :per_page => 30)
+    @page = params[:page].to_i
     erb :'trips/index'
-  end
-
-  def create_trip_hash(trips,count)
-    #this creates a count value {1 => <#Trip Object>}
-    #for the pagination on the rendered view(buttons)
-    trips.group_by do |trip|
-      trip[count]
-      count += 1
-    end
-  end
-
-  def find_correct_trip_grouping(trips_hash,search_value)
-    if search_value.nil?
-      select_first_set_of_trip_data(trips_hash)
-    else
-      select_correct_set_of_trip_data(trips_hash,search_value)
-    end
-  end
-
-  def select_first_set_of_trip_data(trips_hash)
-    if trips_hash.empty?
-      redirect '/trips?page=1'
-    else
-      trips_hash[1].flatten
-    end
   end
 
   def select_correct_set_of_trip_data(trips_hash,search_value)

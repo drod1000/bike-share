@@ -6,6 +6,7 @@ gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'pry'
 gem 'smarter_csv'
+gem "will_paginate"
 
 group :development, :test do
   gem 'shotgun'
@@ -13,7 +14,6 @@ group :development, :test do
   gem 'rspec-core'
   gem 'database_cleaner'
   gem 'tux'
-  gem 'pry'
   gem 'capybara'
   gem 'launchy'
   gem 'rack-test'

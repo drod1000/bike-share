@@ -45,7 +45,6 @@ class Trip < ActiveRecord::Base
     c.year_2014 = where('extract(year FROM start_date) = ?', 2014)
     c.year_2015 = where('extract(year FROM start_date) = ?', 2015)
     group("DATE_TRUNC('month',start_date)").count
-    # binding.pry
   end
 
   def self.bike_uses
@@ -65,27 +64,32 @@ class Trip < ActiveRecord::Base
   end
 
   def self.subscribers
-    subscriber = Trip.group(:subscription_type).count
-    total_subscribers = subscriber.values.sum
-    percentage = calculate_percentage(total_subscribers,subscriber["Subscriber"])
+    user = users
+    total_subscribers = total_users(user)
+    percentage = calculate_percentage(total_subscribers,user["Subscriber"])
     Struct.new("Subscribers", :total, :count, :percent)
-    Struct::Subscribers.new(total_subscribers, subscriber["Subscriber"],percentage)
+    Struct::Subscribers.new(total_subscribers, user["Subscriber"],percentage)
+  end
+
+  def self.users
+    Trip.group(:subscription_type).count
+  end
+
+  def self.total_users(customers)
+    customers.values.sum
+  end
+
+  def self.consumers
+    user = users
+    total_consumers = total_users(user)
+    percentage = calculate_percentage(total_consumers,user["Consumer"])
+    Struct.new("Consumers", :total, :count, :percent)
+    Struct::Consumers.new(total_consumers, user["Consumer"],percentage)
   end
 
   def self.calculate_percentage(total,initial_value)
     (initial_value.to_f / total.to_f) * 100
   end
 
-  def self.consumers
-    consumers = Trip.group(:subscription_type).count
-    total_subscribers = subscriber.values.sum
-    #total - number = result
-    #(result / total) * 100
-    Struct.new("Subscribers", :total, :count, :percent)
-    Struct::Users.new(highest_bike[0].to_i, highest_bike[1])
-
-    Struct.new("Subscribers", :total, :count, :percent)
-    Struct::Users.new(highest_bike[0].to_i, highest_bike[1])
-  end
 
 end

@@ -82,13 +82,21 @@ describe "Station" do
       Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: "31/12/2015")
       expect(Station.with_fewest_bikes.id). to eq 1
     end
-    it "most recently installed station" do
-      skip
-      Station.create(name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
-      Station.create(name: "Station 2", dock_count: 15, city: "Denver", installation_date: "1/10/2015")
-      Station.create(name: "Station 3", dock_count: 20, city: "Denver", installation_date: "17/8/2016")
-      Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: "31/12/2015")
-      expect(Station.newest_station).to eq Date.parse(8/17/2016)
+    it "oldest station" do
+      Station.create(name: "Station 1", dock_count: 10, city: "Denver", installation_date: Date.strptime("11/5/2016", "%m/%d/%Y"))
+      Station.create(name: "Station 2", dock_count: 15, city: "Denver", installation_date: Date.strptime("1/10/2015", "%m/%d/%Y"))
+      Station.create(name: "Station 3", dock_count: 20, city: "Denver", installation_date: Date.strptime("8/17/2016", "%m/%d/%Y"))
+      Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: Date.strptime("12/31/2015", "%m/%d/%Y"))
+
+      expect(Station.oldest_station.name).to eq "Station 2"
+    end
+    it "newest station" do
+      Station.create(name: "Station 1", dock_count: 10, city: "Denver", installation_date: Date.strptime("11/5/2016", "%m/%d/%Y"))
+      Station.create(name: "Station 2", dock_count: 15, city: "Denver", installation_date: Date.strptime("1/10/2015", "%m/%d/%Y"))
+      Station.create(name: "Station 3", dock_count: 20, city: "Denver", installation_date: Date.strptime("8/17/2016", "%m/%d/%Y"))
+      Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: Date.strptime("12/31/2015", "%m/%d/%Y"))
+
+      expect(Station.newest_station.name).to eq "Station 1"
     end
   end
   describe "calculates(instance_methods)" do

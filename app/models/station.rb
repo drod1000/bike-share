@@ -33,7 +33,11 @@ class Station < ActiveRecord::Base
   end
 
   def self.newest_station
-    maximum(:installation_date)
+    find_by(installation_date: maximum(:installation_date))
+  end
+
+  def self.oldest_station
+    find_by(installation_date: minimum(:installation_date))
   end
 
   def rides_started

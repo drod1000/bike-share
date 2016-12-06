@@ -39,4 +39,22 @@ class Trip < ActiveRecord::Base
     Station.find(station_id)
   end
 
+  def self.month_by_month_breakdown
+    c = Calendar.new
+    c.year_2013 = where('extract(year FROM start_date) = ?', 2013)
+    c.year_2014 = where('extract(year FROM start_date) = ?', 2014)
+    c.year_2015 = where('extract(year FROM start_date) = ?', 2015)
+    group("DATE_TRUNC('month',start_date)").count
+    # binding.pry
+  end
+
+  def self.most_ridden_bike
+    bike_uses = Trip.group(:bike_id).count
+    highest_bike = bike_uses.max
+    Struct.new("Bike", :id, :count)
+    Struct::Bike.new(highest_bike[0].to_i, highest_bike[1])
+    # binding.pry
+
+  end
+
 end

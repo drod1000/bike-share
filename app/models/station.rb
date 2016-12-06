@@ -65,6 +65,6 @@ class Station < ActiveRecord::Base
   end
 
   def most_common_bike_id
-    start_trips.most_ridden_bike
+    start_trips.most_ridden_bike.id
   end
 end

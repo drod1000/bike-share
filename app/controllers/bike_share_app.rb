@@ -77,6 +77,10 @@ class BikeShareApp < Sinatra::Base
     trips_hash[search_value.to_i].flatten
   end
 
+  get '/trips-dashboard' do
+    
+  end
+
   get '/trips/new' do
     erb :'trips/new'
   end

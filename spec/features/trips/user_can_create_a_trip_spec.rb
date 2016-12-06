@@ -13,7 +13,7 @@ describe "when a user visits '/trips/new'" do
     fill_in("bike_id", with: "12")
     fill_in("subscription_type", with: "Subscriber")
     fill_in("zip_code", with: "80212")
-    # save_and_open_page
+
     click_on("submit_trip")
     expect(Trip.first.id).to eq(1)
     expect(Trip.first.duration).to eq(100)

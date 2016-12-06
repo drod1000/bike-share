@@ -44,6 +44,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/trips' do
+    # binding.pry
     @trips = Trip.order(:start_date).paginate(:page => params[:page], :per_page => 30)
     @page = params[:page].to_i
     erb :'trips/index'

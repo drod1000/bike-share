@@ -85,24 +85,22 @@ class Trip < ActiveRecord::Base
     group(:subscription_type).count
   end
 
-  def self.total_users(customers)
-    customers.values.sum
+  def self.total_users
+    users.values.sum
   end
 
   def self.subscribers
-    user = users
-    total_subscribers = total_users(user)
-    percentage = calculate_percentage(total_subscribers,user["Subscriber"])
+    total_subscribers = total_users
+    percentage = calculate_percentage(total_subscribers,users["Subscriber"])
     Struct.new("Subscribers", :total, :count, :percent)
-    Struct::Subscribers.new(total_subscribers, user["Subscriber"],percentage)
+    Struct::Subscribers.new(total_subscribers, users["Subscriber"],percentage)
   end
 
-  def self.consumers
-    user = users
-    total_consumers = total_users(user)
-    percentage = calculate_percentage(total_consumers,user["Consumer"])
+  def self.customers
+    total_consumers = total_users
+    percentage = calculate_percentage(total_consumers,users["Customer"])
     Struct.new("Consumers", :total, :count, :percent)
-    Struct::Consumers.new(total_consumers, user["Consumer"],percentage)
+    Struct::Consumers.new(total_consumers, users["Customer"],percentage)
   end
 
   def self.calculate_percentage(total,initial_value)

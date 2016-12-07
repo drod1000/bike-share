@@ -13,45 +13,86 @@ class Condition < ActiveRecord::Base
 
   has_many :trips, primary_key: :date, foreign_key: :start_date
 
+  attr_reader :average_temperature,
+              :max_temperature,
+              :min_temperature,
+              :average_precipitation,
+              :max_precipitation,
+              :min_precipitation,
+              :average_wind,
+              :max_wind,
+              :min_wind,
+              :average_visibility,
+              :max_visibilit,
+              :min_visibility
+
+  def self.trips_per_day
+    Trip.group(:start_date).count
+  end
+
   def self.max_temperature_range(base_temp)
     where(max_temperature_f: base_temp...(base_temp + 10))
   end
 
-  def self.average_max_temp_trips(base_temp)
-    # dates = Condition.max_temperature_range(base_temp).map {|c| c.date}
-    # trip_dates = dates.map {|d| Trip.where(start_date: d)}
-    # trip_count = trip_dates.map {|c| c.count}
-    # avg = (trip_count.reduce(:+) / trip_count.count)
-    # avg
+  def self.trips_in_temperature_range(base_temp)
     found = []
     Condition.max_temperature_range(base_temp).find_each do |trip|
-      found << Trip.where(start_date: trip.date)
+      found << Trip.where(start_date: trip.date).count
     end
-    found
+    average = found.reduce(:+) / found.count
+    max = found.max
+    min = found.min
+    Struct.new("Temperature", :average, :max, :min)
+    Struct::Temperature.new(average, max, min)
   end
 
-  def self.highest_max_temp_trips(base_temp)
-    dates = Condition.max_temperature_range(base_temp).map {|c| c.date}
-    trip_dates = dates.map {|d| Trip.where(start_date: d)}
-    trip_count = trip_dates.map {|c| c.count}
-    trip_count.max
-  end
-
-  def self.lowest_max_temp_trips(base_temp)
-    dates = Condition.max_temperature_range(base_temp).map {|c| c.date}
-    trip_dates = dates.map {|d| Trip.where(start_date: d)}
-    trip_count = trip_dates.map {|c| c.count}
-    trip_count.min
-  end
   def self.precipitation_in_half_inch_increments(precipitation)
-    where(precipitation_inches: precipitation...(precipitation + 0.5)).ids
+    where(precipitation_inches: precipitation...(precipitation + 0.5))
+  end
+
+  def self.trips_in_precipitation_range(base_range)
+    found = []
+    Condition.precipitation_in_half_inch_increments(base_range).find_each do |trip|
+        found << Trip.where(start_date: trip.date).count
+    end
+    average = found.reduce(:+) / found.count
+    max = found.max
+    min = found.min
+    Struct.new("Precipitaion", :average, :max, :min)
+    Struct::Precipitaion.new(average, max, min)
+
   end
 
   def self.wind_speed_in_4_mph_chunks(base_speed)
-    where(mean_wind_speed_mph: base_speed...(base_speed + 4)).ids
+    where(mean_wind_speed_mph: base_speed...(base_speed + 4))
   end
 
-  def self.visibility_in_4_mile_chunks(base_visibility)
-    where(mean_visibility_miles: base_visibility...(base_visibility + 4)).ids
+  def self.trips_in_wind_speed_range(base_speed)
+    found = []
+    Condition.wind_speed_in_4_mph_chunks(base_speed).find_each do |trip|
+        found << Trip.where(start_date: trip.date).count
+    end
+    average = found.reduce(:+) / found.count
+    max = found.max
+    min = found.min
+    Struct.new("Wind", :average, :max, :min)
+    Struct::Wind.new(average, max, min)
+
+  end
+
+  def self.visibility_in_4_mile_range(base_visibility)
+    where(mean_visibility_miles: base_visibility...(base_visibility + 4))
+  end
+
+  def trips_with_visibility_in_4_mile_range(base_visibility)
+    found = []
+    Condition.precipitation_in_half_inch_increments(base_range).find_each do |trip|
+        found << Trip.where(start_date: trip.date).count
+    end
+    @average_visibility = found.reduce(:+) / found.count
+    @max_visibility = found.max
+    @min_visibility = found.min
+    Struct.new("Visibility", :average, :max, :min)
+    Struct::Visibility.new(average, max, min)
   end
 end

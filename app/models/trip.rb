@@ -98,9 +98,9 @@ class Trip < ActiveRecord::Base
 
   def self.customers
     total_consumers = total_users
-    percentage = calculate_percentage(total_consumers,users["Customer"])
+    percentage = calculate_percentage(total_consumers,users["Consumer"])
     Struct.new("Consumers", :total, :count, :percent)
-    Struct::Consumers.new(total_consumers, users["Customer"],percentage)
+    Struct::Consumers.new(total_consumers, users["Consumer"],percentage)
   end
 
   def self.calculate_percentage(total,initial_value)

@@ -37,12 +37,18 @@
         <td><%= station.installation_date%></td>
         <td>
           <div class="btn-group" role="group">
-          <button type="button" class="btn btn-info">
+            <button type="button" class="btn btn-info">
             <a href="/stations/<%= station.id %>/edit">Edit</a>
-          </button>
-        </div>
+            </button>
+          </div>
         </td>
-
+        <td>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-info">
+            <a href="/stations/<%= station.id %>/detailed">Details</a>
+            </button>
+          </div>
+        </td>
       </tr>
       <% end %>
     </tbody>

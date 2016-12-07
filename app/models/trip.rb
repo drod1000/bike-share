@@ -42,7 +42,7 @@ class Trip < ActiveRecord::Base
   def self.month_by_month_breakdown_2013
     c = Calendar.new
     c.year_2013 = where('extract(year FROM start_date)= ?', 2013)
-    c.year_2013.order("date_trunc('month', start_date)")
+    x = c.year_2013.group("date_trunc('month', start_date)").count
     binding.pry
   end
 

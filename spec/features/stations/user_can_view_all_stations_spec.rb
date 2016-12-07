@@ -12,6 +12,6 @@ describe "When a user visits '/stations'" do
     expect(page).to have_content("Station 2")
     expect(page).to have_content("Station 3")
 
-
+    end
   end
 end

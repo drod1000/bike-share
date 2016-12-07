@@ -85,12 +85,26 @@
               <p>Single date with the highest number of trips with a count of those trips:
                 <br> Date: <%= Trip.date_with_the_most_trips.date.strftime("%m-%d-%Y")%>
                 <br> Count: <%= Trip.date_with_the_most_trips.count%>
-                <br> Weather: <%= Trip.date_with_the_most_trips.weather%>
+                <br><b>Weather:</b>
+                <p>Max temperature(f): <%= Trip.date_with_the_most_trips.weather.max_temperature_f%></p>
+                <p>Average temperature(f):<%= Trip.date_with_the_most_trips.weather.mean_temperature_f%></p>
+                <p>Min temperature(f): <%= Trip.date_with_the_most_trips.weather.min_temperature_f%></p>
+                <p>Average humidity: <%= Trip.date_with_the_most_trips.weather.mean_humidity%></p>
+                <p>Average visibility(miles): <%= Trip.date_with_the_most_trips.weather.mean_visibility_miles%></p>
+                <p>Average wind speed(mph): <%= Trip.date_with_the_most_trips.weather.mean_wind_speed_mph%></p>
+                <p>Precipitation(inches):<%= Trip.date_with_the_most_trips.weather.precipitation_inches%></p>
               </p>
               <p>Single date with the lowest number of trips with a count of those trips:
                 <br>Date: <%= Trip.date_with_the_least_trips.date.strftime("%m-%d-%Y")%>
                 <br>Count:<%= Trip.date_with_the_least_trips.count%>
-                <br>Weather: <%= Trip.date_with_the_least_trips.weather.max_temperature_f%>
+                <br><b>Weather:</b>
+                <p>Max temperature(f): <%= Trip.date_with_the_least_trips.weather.max_temperature_f%> </p>
+                <p>Average temperature(f):<%= Trip.date_with_the_least_trips.weather.mean_temperature_f%></p>
+                <p>Min temperature(f): <%= Trip.date_with_the_least_trips.weather.min_temperature_f%></p>
+                <p>Average humidity: <%= Trip.date_with_the_least_trips.weather.mean_humidity%></p>
+                <p>Average visibility(miles): <%= Trip.date_with_the_least_trips.weather.mean_visibility_miles%></p>
+                <p>Average wind speed(mph): <%= Trip.date_with_the_least_trips.weather.mean_wind_speed_mph%></p>
+                <p>Precipitation(inches):<%= Trip.date_with_the_least_trips.weather.precipitation_inches%></p>
               </p>
             </div>
             <div class="modal-footer">

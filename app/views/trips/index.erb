@@ -13,6 +13,9 @@
     <p>Insert Trip ID to delete</p> <input id="insert_id"type="text" name="id">
     <input id="delete_trip" type="submit" value="Delete"/>
   </form>
+  <form action="/trips/new" >
+    <br><input id="delete_trip" type="submit" value="Create a new trip"/></p>
+  </form>
   <div class="table-responsive">
   <table class="table table-inverse table-condensed">
     <thead>
@@ -35,7 +38,7 @@
       <th scope="row" id="total entries"></th>
       <% @trips.each do |trip| %>
       <tr>
-        <td><%= trip.id %></td>
+        <td><a href="/trips/<%= trip.id %>"><%= trip.id %></a></td>
         <td><%= trip.duration%></td>
         <td><%= trip.start_date%></td>
         <td><%= trip.start_station_name%></td>

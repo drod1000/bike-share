@@ -56,7 +56,7 @@ class Station < ActiveRecord::Base
   end
 
   def date_with_most_trips_started
-    start_trips
+    start_trips.date_with_the_most_amount_of_trips.date
     #Utilize class method 10 in trip after this
     #Single date with highest number of trips
   end

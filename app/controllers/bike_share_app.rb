@@ -168,4 +168,7 @@ class BikeShareApp < Sinatra::Base
     conditions_hash[search_value.to_i].flatten
   end
 
+  get '/weather-dashboard' do
+    erb :'conditions/weather-dashboard'
+  end
 end

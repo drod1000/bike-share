@@ -12,6 +12,7 @@ class Trip < ActiveRecord::Base
 
   belongs_to  :starting_station, class_name: :Station, foreign_key: :start_station_id
   belongs_to  :end_station, class_name: :Station, foreign_key: :end_station_id
+  has_one :condition, foreign_key: :date, primary_key: :start_date
 
   def self.average_duration
     average(:duration)
@@ -39,12 +40,27 @@ class Trip < ActiveRecord::Base
     Station.find(station_id)
   end
 
-  def self.month_by_month_breakdown
-    c = Calendar.new
-    c.year_2013 = where('extract(year FROM start_date) = ?', 2013)
-    c.year_2014 = where('extract(year FROM start_date) = ?', 2014)
-    c.year_2015 = where('extract(year FROM start_date) = ?', 2015)
-    group("DATE_TRUNC('month',start_date)").count
+  def self.month_by_month_breakdown_2013
+    year_2013 = where('extract(year FROM start_date)= ?', 2013)
+    sorted_by_month = year_2013.group("date_trunc('month', start_date)").count
+    convert_time_date_to_month(sorted_by_month)
+  end
+
+  def self.month_by_month_breakdown_2014
+    year_2014 = where('extract(year FROM start_date) = ?', 2014)
+    sorted_by_month = year_2014.group("date_trunc('month', start_date)").count
+    convert_time_date_to_month(sorted_by_month)
+  end
+
+  def self.month_by_month_breakdown_2015
+    year_2015 = Trip.where('extract(year FROM start_date) = ?', 2015)
+    sorted_by_month = year_2015.group("date_trunc('month', start_date)").count
+    convert_time_date_to_month(sorted_by_month)
+  end
+
+  def self.convert_time_date_to_month(sorted_by_month)
+    converted_keys = sorted_by_month.map {|(key)| key.strftime('%B')}
+    converted_keys.zip(sorted_by_month.values).to_h
   end
 
   def self.total_bike_uses
@@ -97,18 +113,22 @@ class Trip < ActiveRecord::Base
     group(:start_date).count
   end
 
-  def self.date_with_the_most_amount_of_trips
+  def self.date_with_the_most_trips
     dates_sorted_by_count = date_count
     max_date = dates_sorted_by_count.values.max
-    Struct.new("Date", :date, :count)
-    Struct::Date.new(dates_sorted_by_count.key(max_date), max_date)
+    date = Trip.find_by(start_date: dates_sorted_by_count.key(max_date))
+    conditions = date.condition
+    Struct.new("Date", :date, :count, :weather)
+    Struct::Date.new(dates_sorted_by_count.key(max_date), max_date, conditions)
   end
 
-  def self.date_with_the_least_amount_of_trips
+  def self.date_with_the_least_trips
     dates_sorted_by_count = date_count
     min_date = dates_sorted_by_count.values.min
-    Struct.new("Date", :date, :count)
-    Struct::Date.new(dates_sorted_by_count.key(min_date), min_date)
+    date = Trip.find_by(start_date: dates_sorted_by_count.key(min_date))
+    conditions = date.condition
+    Struct.new("Date", :date, :count, :weather)
+    Struct::Date.new(dates_sorted_by_count.key(min_date), min_date, conditions)
   end
 
 end

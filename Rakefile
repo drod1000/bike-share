@@ -58,7 +58,8 @@ def create_conditions
                      mean_humidity: row[:mean_humidity],
                      mean_visibility_miles: row[:mean_visibility_miles],
                      mean_wind_speed_mph: row[:mean_wind_speed_mph],
-                     precipitation_inches: row[:precipitation_inches])
+                     precipitation_inches: row[:precipitation_inches],
+                     zip_code: row[:zip_code])
   end
   puts "Imported Weather to Table"
 end

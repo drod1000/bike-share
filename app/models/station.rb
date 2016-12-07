@@ -1,10 +1,8 @@
-require 'pry'
 class Station < ActiveRecord::Base
   validates :name,
             :dock_count,
             :city,
             :installation_date, presence: true
-
 
   has_many :start_trips, class_name: :Trip, foreign_key: :start_station_id
   has_many :end_trips, class_name: :Trip, foreign_key: :end_station_id
@@ -34,7 +32,11 @@ class Station < ActiveRecord::Base
   end
 
   def self.newest_station
-    maximum(:installation_date)
+    find_by(installation_date: maximum(:installation_date))
+  end
+
+  def self.oldest_station
+    find_by(installation_date: minimum(:installation_date))
   end
 
   def rides_started
@@ -46,29 +48,23 @@ class Station < ActiveRecord::Base
   end
 
   def most_common_destination
-    start_trips
-    #Utilize class method 4 in trip after this
-    #Station with the most rides as a starting place
+    start_trips.most_popular_ending_station
   end
 
   def most_common_origination
-    end_trips
-    #Utilize class method 5 in trip after this
-    #Station with the most rides as a starting place
+    end_trips.most_popular_starting_station
   end
 
   def date_with_most_trips_started
-    start_trips
-    #Utilize class method 10 in trip after this
-    #Single date with highest number of trips
+    start_trips.date_with_the_most_trips.date
   end
 
   def most_common_zip_code
+    zip_hash = start_trips.group(:zip_code).order(:zip_code).limit(1).count
+    zip_hash.max[0]
   end
 
   def most_common_bike_id
-    start_trips
-    #Utilize class method 7 in trip after this
-    #Most ridden bike
+    start_trips.most_ridden_bike.id
   end
 end

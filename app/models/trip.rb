@@ -12,6 +12,7 @@ class Trip < ActiveRecord::Base
 
   belongs_to  :starting_station, class_name: :Station, foreign_key: :start_station_id
   belongs_to  :end_station, class_name: :Station, foreign_key: :end_station_id
+  has_one :condition, foreign_key: :date, primary_key: :start_date
 
   def self.average_duration
     average(:duration)
@@ -39,30 +40,53 @@ class Trip < ActiveRecord::Base
     Station.find(station_id)
   end
 
-  def self.month_by_month_breakdown
-    c = Calendar.new
-    c.year_2013 = where('extract(year FROM start_date) = ?', 2013)
-    c.year_2014 = where('extract(year FROM start_date) = ?', 2014)
-    c.year_2015 = where('extract(year FROM start_date) = ?', 2015)
-    group("DATE_TRUNC('month',start_date)").count
+  def self.month_by_month_breakdown_2013
+    year_2013 = where('extract(year FROM start_date)= ?', 2013)
+    sorted_by_month = year_2013.group("date_trunc('month', start_date)").count
+    convert_time_date_to_month(sorted_by_month)
   end
 
-  def self.bike_uses
+  def self.month_by_month_breakdown_2014
+    year_2014 = where('extract(year FROM start_date) = ?', 2014)
+    sorted_by_month = year_2014.group("date_trunc('month', start_date)").count
+    convert_time_date_to_month(sorted_by_month)
+  end
+
+  def self.month_by_month_breakdown_2015
+    year_2015 = Trip.where('extract(year FROM start_date) = ?', 2015)
+    sorted_by_month = year_2015.group("date_trunc('month', start_date)").count
+    convert_time_date_to_month(sorted_by_month)
+  end
+
+  def self.convert_time_date_to_month(sorted_by_month)
+    converted_keys = sorted_by_month.map {|(key)| key.strftime('%B')}
+    converted_keys.zip(sorted_by_month.values).to_h
+  end
+
+  def self.total_bike_uses
     Trip.group(:bike_id).count
   end
 
   def self.most_ridden_bike
-    bike_hash = bike_uses
-    highest_bike = bike_hash.values.max
+    bike_hash = total_bike_uses
+    most_rides = bike_hash.values.max
     Struct.new("Bike", :id, :count)
-    Struct::Bike.new(bike_hash.key(highest_bike), highest_bike)
+    Struct::Bike.new(bike_hash.key(most_rides), most_rides)
   end
 
   def self.least_ridden_bike
-    bike_hash = bike_uses
-    lowest_bike = bike_hash.values.min
+    bike_hash = total_bike_uses
+    least_rides = bike_hash.values.min
     Struct.new("Bike", :id, :count)
-    Struct::Bike.new(bike_hash.key(lowest_bike), lowest_bike)
+    Struct::Bike.new(bike_hash.key(least_rides), least_rides)
+  end
+
+  def self.users
+    group(:subscription_type).count
+  end
+
+  def self.total_users(customers)
+    customers.values.sum
   end
 
   def self.subscribers
@@ -71,14 +95,6 @@ class Trip < ActiveRecord::Base
     percentage = calculate_percentage(total_subscribers,user["Subscriber"])
     Struct.new("Subscribers", :total, :count, :percent)
     Struct::Subscribers.new(total_subscribers, user["Subscriber"],percentage)
-  end
-
-  def self.users
-    Trip.group(:subscription_type).count
-  end
-
-  def self.total_users(customers)
-    customers.values.sum
   end
 
   def self.consumers
@@ -93,9 +109,26 @@ class Trip < ActiveRecord::Base
     (initial_value.to_f / total.to_f) * 100
   end
 
-  def self.date_with_most_trips
-
+  def self.date_count
+    group(:start_date).count
   end
 
+  def self.date_with_the_most_trips
+    dates_sorted_by_count = date_count
+    max_date = dates_sorted_by_count.values.max
+    date = Trip.find_by(start_date: dates_sorted_by_count.key(max_date))
+    conditions = date.condition
+    Struct.new("Date", :date, :count, :weather)
+    Struct::Date.new(dates_sorted_by_count.key(max_date), max_date, conditions)
+  end
+
+  def self.date_with_the_least_trips
+    dates_sorted_by_count = date_count
+    min_date = dates_sorted_by_count.values.min
+    date = Trip.find_by(start_date: dates_sorted_by_count.key(min_date))
+    conditions = date.condition
+    Struct.new("Date", :date, :count, :weather)
+    Struct::Date.new(dates_sorted_by_count.key(min_date), min_date, conditions)
+  end
 
 end

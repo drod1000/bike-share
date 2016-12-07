@@ -2,7 +2,6 @@ require_relative '../../spec_helper'
 
 describe "When a user visits '/stations-dashboard" do
   it "all of the statistics for stations are displayed" do
-    skip
     Station.create(name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
     Station.create(name: "Station 2", dock_count: 15, city: "Denver", installation_date: "1/10/2015")
     Station.create(name: "Station 3", dock_count: 20, city: "Denver", installation_date: "17/8/2016")
@@ -14,21 +13,10 @@ describe "When a user visits '/stations-dashboard" do
     expect(page).to have_content("Total number of stations: 4")
     expect(page).to have_content("Average bikes per station: 17.5")
     expect(page).to have_content("Most bikes available: 25")
-
-    ##Should have link to that station?
-    ##Within link?##
     expect(page).to have_content("Station with most bikes: Station 4")
-
     expect(page).to have_content("Fewest bikes available: 10")
-
-    ##Should have link to that station?
-    ##Within link?##
     expect(page).to have_content("Station with fewest bikes: Station 1")
-
-    ##Should have link to that station?
-    ##Within link?##
-    expect(page).to have_content("Newest Station: Station 2")
-
-
+    expect(page).to have_content("Oldest Station: Station 2")
+    expect(page).to have_content("Newest Station: ")
   end
 end

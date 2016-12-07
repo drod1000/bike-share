@@ -41,19 +41,26 @@ class Trip < ActiveRecord::Base
   end
 
   def self.month_by_month_breakdown_2013
-    c = Calendar.new
-    c.year_2013 = where('extract(year FROM start_date)= ?', 2013)
-    x = c.year_2013.group("date_trunc('month', start_date)").count
-    #can I use name so instead of the date pointing to the count it will be the month?  
-    binding.pry
+    year_2013 = where('extract(year FROM start_date)= ?', 2013)
+    sorted_by_month = year_2013.group("date_trunc('month', start_date)").count
+    convert_time_date_to_month(sorted_by_month)
   end
 
   def self.month_by_month_breakdown_2014
-    c.year_2014 = where('extract(year FROM start_date) = ?', 2014)
+    year_2014 = where('extract(year FROM start_date) = ?', 2014)
+    sorted_by_month = year_2014.group("date_trunc('month', start_date)").count
+    convert_time_date_to_month(sorted_by_month)
   end
 
   def self.month_by_month_breakdown_2015
-    c.year_2015 = where('extract(year FROM start_date) = ?', 2015)
+    year_2015 = Trip.where('extract(year FROM start_date) = ?', 2015)
+    sorted_by_month = year_2015.group("date_trunc('month', start_date)").count
+    convert_time_date_to_month(sorted_by_month)
+  end
+
+  def self.convert_time_date_to_month(sorted_by_month)
+    converted_keys = sorted_by_month.map {|(key)| key.strftime('%B')}
+    converted_keys.zip(sorted_by_month.values).to_h
   end
 
   def self.total_bike_uses
@@ -110,14 +117,14 @@ class Trip < ActiveRecord::Base
     dates_sorted_by_count = date_count
     max_date = dates_sorted_by_count.values.max
     Struct.new("Date", :date, :count)
-    Struct::Date.new(dates_sorted_by_count.key(max_date), max_date)
+    Struct::Date.new(dates_sorted_by_count.key(max_date).strftime('%m-%d-%Y'), max_date)
   end
 
   def self.date_with_the_least_amount_of_trips
     dates_sorted_by_count = date_count
     min_date = dates_sorted_by_count.values.min
     Struct.new("Date", :date, :count)
-    Struct::Date.new(dates_sorted_by_count.key(min_date), min_date)
+    Struct::Date.new(dates_sorted_by_count.key(min_date).strftime('%m-%d-%Y'), min_date)
   end
 
 end

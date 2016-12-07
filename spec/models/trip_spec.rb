@@ -229,7 +229,7 @@ describe "Trip" do
 
           Station.create(id: 50, name: "test_station_2", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
 
-          expect(Trip.month_by_month_breakdown_2013).to eq("test_station_2")
+          expect(Trip.month_by_month_breakdown_2013).to eq({"January"=>1, "March"=>2, "April"=>1})
         end
       end
 
@@ -341,7 +341,7 @@ describe "Trip" do
 
           Station.create(id: 50, name: "test_station_2", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
 
-          expect(Trip.date_with_the_most_amount_of_trips.date).to eq("2014-08-29")
+          expect(Trip.date_with_the_most_amount_of_trips.date).to eq("10-01-2015")
           expect(Trip.date_with_the_most_amount_of_trips.count).to eq(2)
         end
       end
@@ -364,7 +364,7 @@ describe "Trip" do
 
           Station.create(id: 50, name: "test_station_2", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
 
-          expect(Trip.date_with_the_least_amount_of_trips.date).to eq("2013-08-29")
+          expect(Trip.date_with_the_least_amount_of_trips.date).to eq("08-29-2013")
           expect(Trip.date_with_the_least_amount_of_trips.count).to eq(1)
         end
       end

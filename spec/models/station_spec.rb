@@ -161,7 +161,6 @@ describe "Station" do
       expect(station.date_with_most_trips_started).to eq Date.strptime("8/29/2013","%m/%d/%Y")
     end
     it "most common zip code (started)" do
-      skip
       station = Station.create(id: 1, name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
       Station.create(id: 2, name: "Station 2", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
       Station.create(id: 3, name: "Station 3", dock_count: 10, city: "Denver", installation_date: "11/5/2016")

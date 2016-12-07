@@ -1,55 +1,56 @@
 require_relative '../spec_helper'
 
 describe "Conditon" do
-  it "finds conditions that ocurr in max temperature 10 degree ranges" do
-    Condition.create(date: '2000-01-01', precipitation_inches: 5,
-                     max_temperature_f: 52, min_temperature_f: 20,
-                     mean_temperature_f: 35, mean_visibility_miles: 10,
-                     mean_wind_speed_mph: 20, mean_humidity: 20,
-                     zip_code: 94107)
-    Condition.create(date: '2000-02-02', precipitation_inches: 5,
-                     max_temperature_f: 59, min_temperature_f: 20,
-                     mean_temperature_f: 3, mean_visibility_miles: 10,
-                     mean_wind_speed_mph: 20, mean_humidity: 20,
-                     zip_code: 94107)
-    Condition.create(date: '2000-03-03', precipitation_inches: 5,
-                     max_temperature_f: 40, min_temperature_f: 20,
-                     mean_temperature_f: 35, mean_visibility_miles: 10,
-                     mean_wind_speed_mph: 20, mean_humidity: 20,
-                     zip_code: 94107)
+  describe 'it can find condition instances by weather' do
+    it "finds conditions that ocurr in max temperature 10 degree ranges" do
+      Condition.create(date: '2000-01-01', precipitation_inches: 5,
+                       max_temperature_f: 52, min_temperature_f: 20,
+                       mean_temperature_f: 35, mean_visibility_miles: 10,
+                       mean_wind_speed_mph: 20, mean_humidity: 20,
+                       zip_code: 94107)
+      Condition.create(date: '2000-02-02', precipitation_inches: 5,
+                       max_temperature_f: 59, min_temperature_f: 20,
+                       mean_temperature_f: 3, mean_visibility_miles: 10,
+                       mean_wind_speed_mph: 20, mean_humidity: 20,
+                       zip_code: 94107)
+      Condition.create(date: '2000-03-03', precipitation_inches: 5,
+                       max_temperature_f: 40, min_temperature_f: 20,
+                       mean_temperature_f: 35, mean_visibility_miles: 10,
+                       mean_wind_speed_mph: 20, mean_humidity: 20,
+                       zip_code: 94107)
 
-    expect((Condition.max_temperature_range(50)).ids).to eq([1,2])
-    expect((Condition.max_temperature_range(40).ids)).to eq([3])
-  end
+      expect((Condition.max_temperature_range(50)).ids).to eq([1,2])
+      expect((Condition.max_temperature_range(40).ids)).to eq([3])
+    end
 
-  it "find conditions that ocurr in half inch precipitation range" do
-    Condition.create(date: '2000-01-01', precipitation_inches: 0.0,
-                     max_temperature_f: 52, min_temperature_f: 20,
-                     mean_temperature_f: 35, mean_visibility_miles: 10,
-                     mean_wind_speed_mph: 20, mean_humidity: 20,
-                     zip_code: 94107)
-    Condition.create(date: '2000-02-02', precipitation_inches: 0.4,
-                     max_temperature_f: 59, min_temperature_f: 20,
-                     mean_temperature_f: 3, mean_visibility_miles: 10,
-                     mean_wind_speed_mph: 20, mean_humidity: 20,
-                     zip_code: 94107)
-    Condition.create(date: '2000-03-03', precipitation_inches: 0.5,
-                     max_temperature_f: 40, min_temperature_f: 20,
-                     mean_temperature_f: 35, mean_visibility_miles: 10,
-                     mean_wind_speed_mph: 20, mean_humidity: 20,
-                     zip_code: 94107)
-    Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
-                     max_temperature_f: 40, min_temperature_f: 20,
-                     mean_temperature_f: 35, mean_visibility_miles: 10,
-                     mean_wind_speed_mph: 20, mean_humidity: 20,
-                     zip_code: 94107)
+    it "find conditions that ocurr in half inch precipitation range" do
+      Condition.create(date: '2000-01-01', precipitation_inches: 0.0,
+                       max_temperature_f: 52, min_temperature_f: 20,
+                       mean_temperature_f: 35, mean_visibility_miles: 10,
+                       mean_wind_speed_mph: 20, mean_humidity: 20,
+                       zip_code: 94107)
+      Condition.create(date: '2000-02-02', precipitation_inches: 0.4,
+                       max_temperature_f: 59, min_temperature_f: 20,
+                       mean_temperature_f: 3, mean_visibility_miles: 10,
+                       mean_wind_speed_mph: 20, mean_humidity: 20,
+                       zip_code: 94107)
+      Condition.create(date: '2000-03-03', precipitation_inches: 0.5,
+                       max_temperature_f: 40, min_temperature_f: 20,
+                       mean_temperature_f: 35, mean_visibility_miles: 10,
+                       mean_wind_speed_mph: 20, mean_humidity: 20,
+                       zip_code: 94107)
+      Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
+                       max_temperature_f: 40, min_temperature_f: 20,
+                       mean_temperature_f: 35, mean_visibility_miles: 10,
+                       mean_wind_speed_mph: 20, mean_humidity: 20,
+                       zip_code: 94107)
+      Trip.create(id: 4070, duration: 174, start_date: "2000-02-02 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+      Trip.create(id: 4069, duration: 174, start_date: "2000-02-02 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
 
-    expect(Condition.precipitation_in_half_inch_increments(0.0)).to eq([1,2])
-    expect(Condition.precipitation_in_half_inch_increments(0.5)).to eq([3,4])
+      expect(Condition.precipitation_in_half_inch_increments(0.0).min.id).to eq(1)
+      expect(Condition.trips_in_precipitation_range(0.0).max).to eq(2)
+    end
 
-  end
-
-  describe 'to find number of rides based on mean wind speed' do
     it 'finds conditions that occur within mean wind speed chunks of 4' do
 
     Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
@@ -79,9 +80,7 @@ describe "Conditon" do
     expect(Condition.wind_speed_in_4_mph_chunks(0)).to eq([2,3])
     expect(Condition.wind_speed_in_4_mph_chunks(4)).to eq([1,4])
     end
-  end
 
-  describe "to find rides that occur with mean visibility in 4 mile chunks" do
     it 'finds conditions ids that have mean wind speed in 4 mile chunks' do
     Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
                      max_temperature_f: 40, min_temperature_f: 20,
@@ -110,6 +109,14 @@ describe "Conditon" do
     expect(Condition.visibility_in_4_mile_chunks(0)).to eq([1,3])
     expect(Condition.visibility_in_4_mile_chunks(4)).to eq([2,4])
     end
+
+  end
+
+  describe 'it finds trips that occured on days with conditions in half inch precipitation increments' do
+    it ''
+  end
+
+  describe "to find rides that occur with mean visibility in 4 mile chunks" do
   end
 
   describe "validations" do

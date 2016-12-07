@@ -82,13 +82,21 @@ describe "Station" do
       Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: "31/12/2015")
       expect(Station.with_fewest_bikes.id). to eq 1
     end
-    it "most recently installed station" do
-      skip
-      Station.create(name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
-      Station.create(name: "Station 2", dock_count: 15, city: "Denver", installation_date: "1/10/2015")
-      Station.create(name: "Station 3", dock_count: 20, city: "Denver", installation_date: "17/8/2016")
-      Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: "31/12/2015")
-      expect(Station.newest_station).to eq Date.parse(8/17/2016)
+    it "oldest station" do
+      Station.create(name: "Station 1", dock_count: 10, city: "Denver", installation_date: Date.strptime("11/5/2016", "%m/%d/%Y"))
+      Station.create(name: "Station 2", dock_count: 15, city: "Denver", installation_date: Date.strptime("1/10/2015", "%m/%d/%Y"))
+      Station.create(name: "Station 3", dock_count: 20, city: "Denver", installation_date: Date.strptime("8/17/2016", "%m/%d/%Y"))
+      Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: Date.strptime("12/31/2015", "%m/%d/%Y"))
+
+      expect(Station.oldest_station.name).to eq "Station 2"
+    end
+    it "newest station" do
+      Station.create(name: "Station 1", dock_count: 10, city: "Denver", installation_date: Date.strptime("11/5/2016", "%m/%d/%Y"))
+      Station.create(name: "Station 2", dock_count: 15, city: "Denver", installation_date: Date.strptime("1/10/2015", "%m/%d/%Y"))
+      Station.create(name: "Station 3", dock_count: 20, city: "Denver", installation_date: Date.strptime("8/17/2016", "%m/%d/%Y"))
+      Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: Date.strptime("12/31/2015", "%m/%d/%Y"))
+
+      expect(Station.newest_station.name).to eq "Station 1"
     end
   end
   describe "calculates(instance_methods)" do
@@ -117,7 +125,6 @@ describe "Station" do
       expect(station.rides_ended).to eq 3
     end
     it "most frequent destination station(started)" do
-      skip
       station = Station.create(id: 1, name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
       Station.create(id: 2, name: "Station 2", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
       Station.create(id: 3, name: "Station 3", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
@@ -130,7 +137,6 @@ describe "Station" do
       expect(station.most_common_destination.name).to eq "Station 2"
     end
     it "most frequent origination station(ended)" do
-      skip
       station = Station.create(id: 1, name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
       Station.create(id: 2, name: "Station 2", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
       Station.create(id: 3, name: "Station 3", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
@@ -144,6 +150,9 @@ describe "Station" do
     end
     it "date with most trips(started)" do
       skip
+      station = Station.create(id: 1, name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
+      Station.create(id: 2, name: "Station 2", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
+      Station.create(id: 3, name: "Station 3", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
       Trip.create(id: 1, duration: 174, start_date: "2013-08-29 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 1, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 2, bike_id: 1, subscription_type: "Subscriber", zip_code: 94114)
       Trip.create(id: 2, duration: 174, start_date: "2013-08-29 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 3, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 1, bike_id: 1, subscription_type: "Subscriber", zip_code: 94114)
       Trip.create(id: 3, duration: 174, start_date: "2013-08-29 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 1, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 2, bike_id: 2, subscription_type: "Subscriber", zip_code: 55555)
@@ -154,6 +163,9 @@ describe "Station" do
     end
     it "most common zip code (started)" do
       skip
+      station = Station.create(id: 1, name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
+      Station.create(id: 2, name: "Station 2", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
+      Station.create(id: 3, name: "Station 3", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
       Trip.create(id: 1, duration: 174, start_date: "2013-08-29 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 1, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 2, bike_id: 1, subscription_type: "Subscriber", zip_code: 94114)
       Trip.create(id: 2, duration: 174, start_date: "2013-08-29 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 3, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 1, bike_id: 1, subscription_type: "Subscriber", zip_code: 94114)
       Trip.create(id: 3, duration: 174, start_date: "2013-08-29 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 1, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 2, bike_id: 2, subscription_type: "Subscriber", zip_code: 55555)
@@ -163,13 +175,14 @@ describe "Station" do
       expect(station.most_common_zip_code).to eq 55555
     end
     it "most common Bike ID (started)" do
-      skip
+      station = Station.create(id: 1, name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
+      Station.create(id: 2, name: "Station 2", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
+      Station.create(id: 3, name: "Station 3", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
       Trip.create(id: 1, duration: 174, start_date: "2013-08-29 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 1, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 2, bike_id: 1, subscription_type: "Subscriber", zip_code: 94114)
       Trip.create(id: 2, duration: 174, start_date: "2013-08-29 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 3, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 1, bike_id: 1, subscription_type: "Subscriber", zip_code: 94114)
       Trip.create(id: 3, duration: 174, start_date: "2013-08-29 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 1, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 2, bike_id: 2, subscription_type: "Subscriber", zip_code: 55555)
       Trip.create(id: 4, duration: 174, start_date: "2013-08-29 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 1, end_date:"2013-08-06 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 1, bike_id: 1, subscription_type: "Subscriber", zip_code: 55555)
       Trip.create(id: 5, duration: 174, start_date: "2013-08-29 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 3, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 1, bike_id: 1, subscription_type: "Subscriber", zip_code: 94114)
-
       expect(station.most_common_bike_id).to eq 1
     end
   end

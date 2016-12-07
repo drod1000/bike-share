@@ -1,5 +1,4 @@
 class BikeShareApp < Sinatra::Base
-  set :method_override, true
 
   get '/' do
     erb :index

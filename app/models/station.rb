@@ -56,7 +56,7 @@ class Station < ActiveRecord::Base
   end
 
   def date_with_most_trips_started
-    start_trips.date_with_the_most_amount_of_trips.date
+    start_trips.date_with_the_most_trips.date
   end
 
   def most_common_zip_code

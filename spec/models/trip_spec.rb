@@ -363,7 +363,7 @@ describe "Trip" do
 
       describe ".date_with_the_most_amount_of_trips" do
         it "returns the date with the most trips" do
-          Trip.create(duration: 63.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "South Van Ness at Market", end_station_id: 66.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 94107.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+          Trip.create(duration: 63.0, start_date: "2014-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "South Van Ness at Market", end_station_id: 66.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 94107.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
 
           Trip.create(duration: 70.0, start_date: "2014-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 94107.0, created_at: "2016-12-05
           19:40:06", updated_at: "2016-12-05 19:40:06")
@@ -383,7 +383,7 @@ describe "Trip" do
           mean_sea_level_pressure_inches: nil, max_visibility_miles: nil, min_visibility_miles: nil, max_gust_speed_mph: nil, max_wind_speed_mph: nil, cloud_cover: nil, wind_dir_degrees: nil, zip_code: 94107, mean_visibility_miles: 10, events: nil, created_at: "2016-12-06 01:01:22", updated_at: "2016-12-06 01:01:22")
 
           expect(Trip.date_with_the_most_trips.date).to eq("2014-08-29 00:00:00 UTC")
-          expect(Trip.date_with_the_most_trips.count).to eq(2)
+          expect(Trip.date_with_the_most_trips.count).to eq(3)
           expect(Trip.date_with_the_most_trips.weather).to be_a(Condition)
         end
       end

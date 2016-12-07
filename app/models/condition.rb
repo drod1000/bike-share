@@ -39,11 +39,11 @@ class Condition < ActiveRecord::Base
     Condition.max_temperature_range(base_temp).find_each do |trip|
       found << Trip.where(start_date: trip.date).count
     end
-    average = found.reduce(:+) / found.count
-    max = found.max
-    min = found.min
-    Struct.new("Temperature", :average, :max, :min)
-    Struct::Temperature.new(average, max, min)
+      average = found.reduce(:+) / found.count
+      max = found.max
+      min = found.min
+      Struct.new("Temperature", :average, :max, :min)
+      Struct::Temperature.new(average, max, min)    
   end
 
   def self.precipitation_in_half_inch_increments(precipitation)

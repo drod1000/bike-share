@@ -43,6 +43,7 @@ class Trip < ActiveRecord::Base
     c = Calendar.new
     c.year_2013 = where('extract(year FROM start_date)= ?', 2013)
     x = c.year_2013.group("date_trunc('month', start_date)").count
+    #can I use name so instead of the date pointing to the count it will be the month?  
     binding.pry
   end
 

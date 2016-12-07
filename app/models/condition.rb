@@ -8,7 +8,7 @@ class Condition < ActiveRecord::Base
             :mean_wind_speed_mph,
             :precipitation_inches,
             presence: true
-  # validates :zip_code, numericality: {equal_to: 94107}
+  validates :zip_code, numericality: {equal_to: 94107}
 
   has_many :trips, primary_key: :date, foreign_key: :start_date
 
@@ -16,6 +16,27 @@ class Condition < ActiveRecord::Base
     where(max_temperature_f: base_temp...(base_temp + 10))
   end
 
+  def self.average_max_temp_trips(base_temp)
+    dates = Condition.max_temperature_range(base_temp).map {|c| c.date}
+    trip_dates = dates.map {|d| Trip.where(start_date: d)}
+    trip_count = trip_dates.map {|c| c.count}
+    avg = (trip_count.reduce(:+) / trip_count.count)
+    avg
+  end
+
+  def self.highest_max_temp_trips(base_temp)
+    dates = Condition.max_temperature_range(base_temp).map {|c| c.date}
+    trip_dates = dates.map {|d| Trip.where(start_date: d)}
+    trip_count = trip_dates.map {|c| c.count}
+    trip_count.max
+  end
+
+  def self.lowest_max_temp_trips(base_temp)
+    dates = Condition.max_temperature_range(base_temp).map {|c| c.date}
+    trip_dates = dates.map {|d| Trip.where(start_date: d)}
+    trip_count = trip_dates.map {|c| c.count}
+    trip_count.min
+  end
   def self.precipitation_in_half_inch_increments(precipitation)
     where(precipitation_inches: precipitation...(precipitation + 0.5)).ids
   end

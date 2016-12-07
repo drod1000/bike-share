@@ -42,6 +42,12 @@
           </button>
         </div>
         </td>
+        <td>
+          <form action="/stations/<%= station.id %>" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Delete"/>
+          </form>
+        </td>
       </tr>
       <% end %>
     </tbody>

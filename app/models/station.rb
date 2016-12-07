@@ -56,12 +56,12 @@ class Station < ActiveRecord::Base
   end
 
   def date_with_most_trips_started
-    start_trips
-    #Utilize class method 10 in trip after this
-    #Single date with highest number of trips
+    start_trips.date_with_the_most_amount_of_trips.date
   end
 
   def most_common_zip_code
+    zip_hash = start_trips.group(:zip_code).order(:zip_code).limit(1).count
+    zip_hash.max[0]
   end
 
   def most_common_bike_id

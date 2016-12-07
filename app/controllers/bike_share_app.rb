@@ -3,12 +3,17 @@ class BikeShareApp < Sinatra::Base
     erb :index
   end
 
+  get '/dashboard' do
+    erb :dashboard
+  end
+
   get '/stations-dashboard' do
     erb :"stations/dashboard"
   end
 
   get '/stations' do
     @stations = Station.all
+    # @stations = Station.order(:id).paginate(:page => params[:page], :per_page => 30)
     erb :"stations/index"
   end
 

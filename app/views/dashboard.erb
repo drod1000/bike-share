@@ -1,0 +1,55 @@
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="20">
+
+  <div class="container">
+    <div class="row">
+      <nav class="col-sm-3" id="myScrollspy">
+        <ul class="nav nav-pills nav-stacked">
+          <li><a href="#stations-dashboard">Station</a></li>
+        </ul>
+        <ul class="nav nav-pills nav-stacked">
+          <li><a href="#trips-dashboard">Trips</a></li>
+        </ul>
+        <ul class="nav nav-pills nav-stacked">
+          <li><a href="#weather-dashboard">Weather</a></li>
+        </ul>
+      </nav>
+      <div class="col-sm-9">
+        <div id="stations-dashboard">
+          <h1>Stations Dashboard</h1>
+          <p>Total number of stations: <%= Station.total_stations %></p>
+          <p>Average bikes per station: <%= Station.average_number_of_bikes%></p>
+          <p>Most bikes available: <%= Station.most_bikes_available%></p>
+          <p>Station with most bikes: <%= Station.with_most_bikes.name%></p>
+          <p>Fewest bikes available: <%= Station.fewest_bikes_available%></p>
+          <p>Station with fewest bikes: <%= Station.with_fewest_bikes.name%></p>
+          <p>Oldest Station: <%= Station.oldest_station.name%></p>
+          <p>Newest Station: <%= Station.newest_station.name%></p>
+        </div>
+        <div id="trips-dashboard">
+          <h1>Trip Dashboard</h1>
+          <p>Total number of stations: <%= Station.total_stations %></p>
+          <p>Average bikes per station: <%= Station.average_number_of_bikes%></p>
+          <p>Most bikes available: <%= Station.most_bikes_available%></p>
+          <p>Station with most bikes: <%= Station.with_most_bikes.name%></p>
+          <p>Fewest bikes available: <%= Station.fewest_bikes_available%></p>
+          <p>Station with fewest bikes: <%= Station.with_fewest_bikes.name%></p>
+          <p>Oldest Station: <%= Station.oldest_station.name%></p>
+          <p>Newest Station: <%= Station.newest_station.name%></p>
+        </div>
+        <div id="weather-dashboard">
+          <h1>Weather Dashboard</h1>
+          <p>Total number of stations: <%= Station.total_stations %></p>
+          <p>Average bikes per station: <%= Station.average_number_of_bikes%></p>
+          <p>Most bikes available: <%= Station.most_bikes_available%></p>
+          <p>Station with most bikes: <%= Station.with_most_bikes.name%></p>
+          <p>Fewest bikes available: <%= Station.fewest_bikes_available%></p>
+          <p>Station with fewest bikes: <%= Station.with_fewest_bikes.name%></p>
+          <p>Oldest Station: <%= Station.oldest_station.name%></p>
+          <p>Newest Station: <%= Station.newest_station.name%></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>

@@ -502,11 +502,12 @@ describe "Conditon" do
             Trip.create(id: 4075, duration: 174, start_date: "2000-03-05 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
             Trip.create(id: 4076, duration: 174, start_date: "2000-03-06 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
 
-            expect(Condition.trips_in_precipitation_range(0.0).min).to eq(1)
-            expect(Condition.trips_in_precipitation_range(0.5).min).to eq(2)
+            expect(Condition.trips_with_visibility_in_4_mile_range(0).min).to eq(2)
+            expect(Condition.trips_with_visibility_in_4_mile_range(4).min).to eq(1)
           end
 
           it 'finds the maximum trips that occur for wind speed range' do
+
             Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
                              max_temperature_f: 40, min_temperature_f: 20,
                              mean_temperature_f: 35, mean_visibility_miles: 3,
@@ -541,8 +542,8 @@ describe "Conditon" do
             Trip.create(id: 4075, duration: 174, start_date: "2000-03-05 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
             Trip.create(id: 4076, duration: 174, start_date: "2000-03-06 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
 
-            expect(Condition.trips_in_precipitation_range(0.0).max).to eq(2)
-            expect(Condition.trips_in_precipitation_range(0.5).max).to eq(3)
+            expect(Condition.trips_with_visibility_in_4_mile_range(0).max).to eq(3)
+            expect(Condition.trips_with_visibility_in_4_mile_range(4).max).to eq(2)
           end
 
           it 'finds the average trips that occur for wind speed range' do
@@ -580,24 +581,11 @@ describe "Conditon" do
             Trip.create(id: 4075, duration: 174, start_date: "2000-03-05 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
             Trip.create(id: 4076, duration: 174, start_date: "2000-03-06 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
 
-            expect(Condition.trips_in_precipitation_range(0.0).average).to eq(1)
-            expect(Condition.trips_in_precipitation_range(0.5).average).to eq(2)
+            expect(Condition.trips_with_visibility_in_4_mile_range(0).average).to eq(2)
+            expect(Condition.trips_with_visibility_in_4_mile_range(4).average).to eq(1)
           end
         end
   end
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   describe "validations" do
     it "validates presence of date" do

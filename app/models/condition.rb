@@ -43,7 +43,7 @@ class Condition < ActiveRecord::Base
       max = found.max
       min = found.min
       Struct.new("Temperature", :average, :max, :min)
-      Struct::Temperature.new(average, max, min)    
+      Struct::Temperature.new(average, max, min)
   end
 
   def self.precipitation_in_half_inch_increments(precipitation)
@@ -80,18 +80,18 @@ class Condition < ActiveRecord::Base
 
   end
 
-  def self.visibility_in_4_mile_range(base_visibility)
-    where(mean_visibility_miles: base_visibility...(base_visibility + 4))
+  def self.visibility_in_4_mile_range(base_range)
+    where(mean_visibility_miles: base_range...(base_range + 4))
   end
 
-  def trips_with_visibility_in_4_mile_range(base_visibility)
+  def self.trips_with_visibility_in_4_mile_range(base_range)
     found = []
-    Condition.precipitation_in_half_inch_increments(base_range).find_each do |trip|
+    Condition.visibility_in_4_mile_range(base_range).find_each do |trip|
         found << Trip.where(start_date: trip.date).count
     end
-    @average_visibility = found.reduce(:+) / found.count
-    @max_visibility = found.max
-    @min_visibility = found.min
+    average = found.reduce(:+) / found.count
+    max = found.max
+    min = found.min
     Struct.new("Visibility", :average, :max, :min)
     Struct::Visibility.new(average, max, min)
   end

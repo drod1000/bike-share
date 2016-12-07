@@ -67,7 +67,7 @@ describe "Trip" do
     it "returns the zip_code of the trip" do
       trip = Trip.create(id: 4069, duration: 174, start_date: "2013-08-29 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114)
 
-      expect(trip.zip_code).to eq(94114)
+      expect(trip.zip_code).to eq("94114")
     end
 
   end
@@ -337,7 +337,7 @@ describe "Trip" do
         end
       end
 
-      describe ".consumers" do
+      describe ".customers" do
         it "returns the consumers breakdown" do
           Trip.create(duration: 63.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "South Van Ness at Market", end_station_id: 66.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 94127.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
 
@@ -355,9 +355,9 @@ describe "Trip" do
 
           Station.create(id: 50, name: "test_station_2", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
 
-          expect(Trip.consumers.total).to eq(5)
-          expect(Trip.consumers.count).to eq(2)
-          expect(Trip.consumers.percent).to eq(40.0)
+          expect(Trip.customers.total).to eq(5)
+          expect(Trip.customers.count).to eq(2)
+          expect(Trip.customers.percent).to eq(40.0)
         end
       end
 

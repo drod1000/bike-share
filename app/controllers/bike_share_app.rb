@@ -3,6 +3,10 @@ class BikeShareApp < Sinatra::Base
     erb :index
   end
 
+  get '/dashboard' do
+    erb :dashboard
+  end
+
   get '/stations-dashboard' do
     erb :"stations/dashboard"
   end
@@ -121,6 +125,6 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/weather-dashboard' do
-    erb :'conditions/weather-dashboard'
+    erb :'conditions/dashboard'
   end
 end

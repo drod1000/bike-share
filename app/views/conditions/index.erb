@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="trips/application.css">
+  <link rel="stylesheet" href="application.css">
   <title>Conditions Index Page <%= @page %></title>
 </head>
 <body>
+  <div class="table-responsive">
   <h1>Conditions</h1>
-<table class="table">
+<table class="table table-inverse table-condensed">
     <thead>
       <tr>
         <!-- <th>ID</th> -->
@@ -27,7 +28,6 @@
       <% count = 0 %>
       <% @conditions.each do |condition| %>
       <tr>
-        <!-- <th scope="row" id=""><%= condition.id %></th> -->
         <td><%= condition.date.to_s.split[0] %></td>
         <td><%= condition.max_temperature_f %></td>
         <td><%= condition.mean_temperature_f %></td>
@@ -37,11 +37,9 @@
         <td><%= condition.mean_wind_speed_mph %></td>
         <td><%= condition.precipitation_inches %></td>
         <td>
-          <div class="btn-group" role="group">
-            <button type="button" class="btn btn-info">
-              <a href="/conditions/<%= condition.id %>/edit">Edit</a>
-            </button>
-          </div>
+          <form action="/conditions/<%= condition.id %>/edit">
+            <input type="submit" value="Edit"/>
+          </form>
         </td>
         <td>
           <form action="/conditions/<%= condition.id %>" method="post">
@@ -53,7 +51,8 @@
       <% end %>
     </tbody>
   </table>
-  <div class="digg_pagination">
+  </div>
+  <div class="will_pagination">
     <div class="page_info">
       <%= page_entries_info @conditions %>
     </div>

@@ -25,7 +25,7 @@ describe "when a user visits '/trips/new'" do
     expect(Trip.first.end_station_id).to eq(100)
     expect(Trip.first.bike_id).to eq(12)
     expect(Trip.first.subscription_type).to eq("Subscriber")
-    expect(Trip.first.zip_code).to eq(80212)
+    expect(Trip.first.zip_code).to eq("80212")
 
     expect(current_path).to eql('/trips')
   end

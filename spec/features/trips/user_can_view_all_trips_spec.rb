@@ -44,8 +44,6 @@ describe "trips" do
 
       end
       visit("/trips")
-      click_link_or_button("Next Page")
-      # expect(page).to have_content("Trip Id: 40")
       expect(Trip.first.start_date).to eq("2001-09-01 00:00:00 UTC")
       thirtieth_trip = Trip.find(30)
       expect(thirtieth_trip.start_date).to eq("2059-09-01 00:00:00 UTC")
@@ -71,8 +69,6 @@ describe "trips" do
 
       end
       visit("/trips?page=2")
-      click_link_or_button("Previous Page")
-      # expect(page).to have_content("Trip Id: 40")
       expect(Trip.first.start_date).to eq("2001-09-01 00:00:00 UTC")
       thirtieth_trip = Trip.find(30)
       expect(thirtieth_trip.start_date).to eq("2059-09-01 00:00:00 UTC")

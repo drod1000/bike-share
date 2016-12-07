@@ -39,12 +39,19 @@ class Trip < ActiveRecord::Base
     Station.find(station_id)
   end
 
-  def self.month_by_month_breakdown
+  def self.month_by_month_breakdown_2013
     c = Calendar.new
-    c.year_2013 = where('extract(year FROM start_date) = ?', 2013)
+    c.year_2013 = where('extract(year FROM start_date)= ?', 2013)
+    c.year_2013.order("date_trunc('month', start_date)")
+    binding.pry
+  end
+
+  def self.month_by_month_breakdown_2014
     c.year_2014 = where('extract(year FROM start_date) = ?', 2014)
+  end
+
+  def self.month_by_month_breakdown_2015
     c.year_2015 = where('extract(year FROM start_date) = ?', 2015)
-    group("DATE_TRUNC('month',start_date)").count
   end
 
   def self.total_bike_uses

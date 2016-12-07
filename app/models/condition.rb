@@ -12,6 +12,7 @@ class Condition < ActiveRecord::Base
   validates :zip_code, numericality: {equal_to: 94107}
 
   has_many :trips, primary_key: :date, foreign_key: :start_date
+
   attr_reader :average_temperature,
               :max_temperature,
               :min_temperature,
@@ -33,14 +34,16 @@ class Condition < ActiveRecord::Base
     where(max_temperature_f: base_temp...(base_temp + 10))
   end
 
-  def self.average_max_temp_trips(base_temp)
+  def self.trips_in_temperature_range(base_temp)
     found = []
     Condition.max_temperature_range(base_temp).find_each do |trip|
       found << Trip.where(start_date: trip.date).count
     end
-    @average_temperature = found.reduce(:+) / found.count
-    @max_temperature = found.max
-    @min_temperature = found.min
+    average = found.reduce(:+) / found.count
+    max = found.max
+    min = found.min
+    Struct.new("Temperature", :average, :max, :min)
+    Struct::Temperature.new(average, max, min)
   end
 
   def self.precipitation_in_half_inch_increments(precipitation)
@@ -52,10 +55,12 @@ class Condition < ActiveRecord::Base
     Condition.precipitation_in_half_inch_increments(base_range).find_each do |trip|
         found << Trip.where(start_date: trip.date).count
     end
-    @average_precipitation = found.reduce(:+) / found.count
-    @max_precipitation = found.max
-    @min_precipitation = found.min
-    binding.pry
+    average = found.reduce(:+) / found.count
+    max = found.max
+    min = found.min
+    Struct.new("Precipitaion", :average, :max, :min)
+    Struct::Precipitaion.new(average, max, min)
+
   end
 
   def self.wind_speed_in_4_mph_chunks(base_speed)
@@ -67,9 +72,12 @@ class Condition < ActiveRecord::Base
     Condition.wind_speed_in_4_mph_chunks(base_speed).find_each do |trip|
         found << Trip.where(start_date: trip.date).count
     end
-    @average_wind = found.reduce(:+) / found.count
-    @max_wind = found.max
-    @min_wind = found.min
+    average = found.reduce(:+) / found.count
+    max = found.max
+    min = found.min
+    Struct.new("Wind", :average, :max, :min)
+    Struct::Wind.new(average, max, min)
+
   end
 
   def self.visibility_in_4_mile_range(base_visibility)
@@ -84,5 +92,7 @@ class Condition < ActiveRecord::Base
     @average_visibility = found.reduce(:+) / found.count
     @max_visibility = found.max
     @min_visibility = found.min
+    Struct.new("Visibility", :average, :max, :min)
+    Struct::Visibility.new(average, max, min)
   end
 end

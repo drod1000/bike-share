@@ -113,18 +113,22 @@ class Trip < ActiveRecord::Base
     group(:start_date).count
   end
 
-  def self.date_with_the_most_amount_of_trips
+  def self.date_with_the_most_trips
     dates_sorted_by_count = date_count
     max_date = dates_sorted_by_count.values.max
-    Struct.new("Date", :date, :count)
-    Struct::Date.new(dates_sorted_by_count.key(max_date).strftime('%m-%d-%Y'), max_date)
+    date = Trip.find_by(start_date: dates_sorted_by_count.key(max_date))
+    conditions = date.condition
+    Struct.new("Date", :date, :count, :weather)
+    Struct::Date.new(dates_sorted_by_count.key(max_date), max_date, conditions)
   end
 
-  def self.date_with_the_least_amount_of_trips
+  def self.date_with_the_least_trips
     dates_sorted_by_count = date_count
     min_date = dates_sorted_by_count.values.min
-    Struct.new("Date", :date, :count)
-    Struct::Date.new(dates_sorted_by_count.key(min_date).strftime('%m-%d-%Y'), min_date)
+    date = Trip.find_by(start_date: dates_sorted_by_count.key(min_date))
+    conditions = date.condition
+    Struct.new("Date", :date, :count, :weather)
+    Struct::Date.new(dates_sorted_by_count.key(min_date), min_date, conditions)
   end
 
 end

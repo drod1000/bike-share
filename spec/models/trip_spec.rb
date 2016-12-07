@@ -363,47 +363,55 @@ describe "Trip" do
 
       describe ".date_with_the_most_amount_of_trips" do
         it "returns the date with the most trips" do
-          Trip.create(duration: 63.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "South Van Ness at Market", end_station_id: 66.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 94127.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+          Trip.create(duration: 63.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "South Van Ness at Market", end_station_id: 66.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 94107.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
 
-          Trip.create(duration: 70.0, start_date: "2014-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05
+          Trip.create(duration: 70.0, start_date: "2014-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 94107.0, created_at: "2016-12-05
           19:40:06", updated_at: "2016-12-05 19:40:06")
 
-          Trip.create(duration: 70.0, start_date: "2014-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05
+          Trip.create(duration: 70.0, start_date: "2014-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 94107.0, created_at: "2016-12-05
           19:40:06", updated_at: "2016-12-05 19:40:06")
 
-          Trip.create(duration: 70.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Consumer", zip_code: 95138.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+          Trip.create(duration: 70.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Consumer", zip_code: 94107.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
 
-          Trip.create(duration: 71.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_2", start_station_id: 50, end_date: "2013-08-29 00:00:00", end_station_name: "Mountain View City Hall", end_station_id: 27.0, bike_id: 48.0, subscription_type: "Consumer", zip_code: 97214.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+          Trip.create(duration: 71.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_2", start_station_id: 50, end_date: "2013-08-29 00:00:00", end_station_name: "Mountain View City Hall", end_station_id: 27.0, bike_id: 48.0, subscription_type: "Consumer", zip_code: 94107.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
 
           Station.create(id: 66, name: "test_station_1", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
 
           Station.create(id: 50, name: "test_station_2", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
 
-          expect(Trip.date_with_the_most_amount_of_trips.date).to eq("10-01-2015")
-          expect(Trip.date_with_the_most_amount_of_trips.count).to eq(2)
+          Condition.create(date: "2014-08-29 00:00:00", max_temperature_f: 74, mean_temperature_f: 68, min_temperature_f: 61, mean_humidity: 75, mean_wind_speed_mph: 11, precipitation_inches: 0, max_dew_point_f: nil, mean_dew_point_f: nil, min_dew_point_f: nil, max_humidity: nil, min_humidity: nil, max_sea_level_pressure_inches: nil, min_sea_level_pressure_inches: nil,
+          mean_sea_level_pressure_inches: nil, max_visibility_miles: nil, min_visibility_miles: nil, max_gust_speed_mph: nil, max_wind_speed_mph: nil, cloud_cover: nil, wind_dir_degrees: nil, zip_code: 94107, mean_visibility_miles: 10, events: nil, created_at: "2016-12-06 01:01:22", updated_at: "2016-12-06 01:01:22")
+
+          expect(Trip.date_with_the_most_trips.date).to eq("2014-08-29 00:00:00 UTC")
+          expect(Trip.date_with_the_most_trips.count).to eq(2)
+          expect(Trip.date_with_the_most_trips.weather).to be_a(Condition)
         end
       end
 
       describe ".date_with_the_least_amount_of_trips" do
         it "returns the date with the least_amount trips" do
-          Trip.create(duration: 63.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "South Van Ness at Market", end_station_id: 66.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 94127.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+          Trip.create(duration: 63.0, start_date: "2013-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "South Van Ness at Market", end_station_id: 66.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 94107.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
 
-          Trip.create(duration: 70.0, start_date: "2014-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05
+          Trip.create(duration: 70.0, start_date: "2014-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 94107.0, created_at: "2016-12-05
           19:40:06", updated_at: "2016-12-05 19:40:06")
 
-          Trip.create(duration: 70.0, start_date: "2014-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 95138.0, created_at: "2016-12-05
+          Trip.create(duration: 70.0, start_date: "2014-08-29 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Subscriber", zip_code: 94107.0, created_at: "2016-12-05
           19:40:06", updated_at: "2016-12-05 19:40:06")
 
-          Trip.create(duration: 70.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Consumer", zip_code: 95138.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+          Trip.create(duration: 70.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_1", start_station_id: 66.0, end_date: "2013-08-29 00:00:00", end_station_name: "San Jose City Hall", end_station_id: 10.0, bike_id: 661.0, subscription_type: "Consumer", zip_code: 94107.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
 
-          Trip.create(duration: 71.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_2", start_station_id: 50, end_date: "2013-08-29 00:00:00", end_station_name: "Mountain View City Hall", end_station_id: 27.0, bike_id: 48.0, subscription_type: "Consumer", zip_code: 97214.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
+          Trip.create(duration: 71.0, start_date: "2015-10-01 00:00:00", start_station_name: "test_station_2", start_station_id: 50, end_date: "2013-08-29 00:00:00", end_station_name: "Mountain View City Hall", end_station_id: 27.0, bike_id: 48.0, subscription_type: "Consumer", zip_code: 94107.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
 
           Station.create(id: 66, name: "test_station_1", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
 
           Station.create(id: 50, name: "test_station_2", lat: nil, long: nil, dock_count: 19, city: "San Francisco", installation_date: "2013-08-23 00:00:00", created_at: "2016-12-06 00:31:54", updated_at: "2016-12-06 00:31:54")
 
-          expect(Trip.date_with_the_least_amount_of_trips.date).to eq("08-29-2013")
-          expect(Trip.date_with_the_least_amount_of_trips.count).to eq(1)
+          Condition.create(date: "2013-08-29 00:00:00", max_temperature_f: 74, mean_temperature_f: 68, min_temperature_f: 61, mean_humidity: 75, mean_wind_speed_mph: 11, precipitation_inches: 0, max_dew_point_f: nil, mean_dew_point_f: nil, min_dew_point_f: nil, max_humidity: nil, min_humidity: nil, max_sea_level_pressure_inches: nil, min_sea_level_pressure_inches: nil,
+          mean_sea_level_pressure_inches: nil, max_visibility_miles: nil, min_visibility_miles: nil, max_gust_speed_mph: nil, max_wind_speed_mph: nil, cloud_cover: nil, wind_dir_degrees: nil, zip_code: 94107, mean_visibility_miles: 10, events: nil, created_at: "2016-12-06 01:01:22", updated_at: "2016-12-06 01:01:22")
+
+          expect(Trip.date_with_the_least_trips.date).to eq("2013-08-29 00:00:00 UTC")
+          expect(Trip.date_with_the_least_trips.count).to eq(1)
+          expect(Trip.date_with_the_least_trips.weather).to be_a(Condition)
         end
       end
     end

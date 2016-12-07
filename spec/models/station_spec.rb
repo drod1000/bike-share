@@ -82,7 +82,6 @@ describe "Station" do
       Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: "31/12/2015")
       expect(Station.with_fewest_bikes.id). to eq 1
     end
-
     it "oldest station" do
       Station.create(name: "Station 1", dock_count: 10, city: "Denver", installation_date: Date.strptime("11/5/2016", "%m/%d/%Y"))
       Station.create(name: "Station 2", dock_count: 15, city: "Denver", installation_date: Date.strptime("1/10/2015", "%m/%d/%Y"))
@@ -98,19 +97,7 @@ describe "Station" do
       Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: Date.strptime("12/31/2015", "%m/%d/%Y"))
 
       expect(Station.newest_station.name).to eq "Station 1"
-
-
-      it "most recently installed station" do
-        skip
-        Station.create(name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")
-        Station.create(name: "Station 2", dock_count: 15, city: "Denver", installation_date: "1/10/2015")
-        Station.create(name: "Station 3", dock_count: 20, city: "Denver", installation_date: "17/8/2016")
-        Station.create(name: "Station 4", dock_count: 25, city: "Denver", installation_date: "31/12/2015")
-        expect(Station.newest_station).to eq Date.parse(8/17/2016)
-      end
-
     end
-
   end
   describe "calculates(instance_methods)" do
     it "number of rides started at this station" do
@@ -195,7 +182,7 @@ describe "Station" do
       Trip.create(id: 4, duration: 174, start_date: "2013-08-29 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 1, end_date:"2013-08-06 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 1, bike_id: 1, subscription_type: "Subscriber", zip_code: 55555)
       Trip.create(id: 5, duration: 174, start_date: "2013-08-29 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 3, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 1, bike_id: 1, subscription_type: "Subscriber", zip_code: 94114)
       expect(station.most_common_bike_id).to eq 1
->>>>>>> master
     end
   end
+
 end

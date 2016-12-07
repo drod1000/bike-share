@@ -67,7 +67,7 @@ describe "Trip" do
     it "returns the zip_code of the trip" do
       trip = Trip.create(id: 4069, duration: 174, start_date: "2013-08-29 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114)
 
-      expect(trip.zip_code).to eq(94114)
+      expect(trip.zip_code).to eq("94114")
     end
 
   end

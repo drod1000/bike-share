@@ -17,7 +17,17 @@
     </thead>
     <tbody>
       <tr>
-
+        <td><a href="/trips/<%= @trip.id %>"><%= @trip.id %></a></td>
+        <td><%= @trip.duration%></td>
+        <td><%= @trip.start_date%></td>
+        <td><%= @trip.start_station_name%></td>
+        <td><%= @trip.start_station_id%></td>
+        <td><%= @trip.end_date%></td>
+        <td><%= @trip.end_station_name%></td>
+        <td><%= @trip.end_station_id%></td>
+        <td><%= @trip.bike_id%></td>
+        <td><%= @trip.subscription_type%></td>
+        <td><%= @trip.zip_code%></td>
         <td>
           <form action="/trips/<%= @trip.id %>/edit">
             <input type="submit" value="Edit"/>
@@ -27,30 +37,3 @@
     </tbody>
   </div>
 </table>
-
-<div id="station_dashboard" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Station Data</h4>
-      </div>
-      <div class="modal-body">
-        <h1>Stations</h1>
-        <p>Total number of stations: <%= Station.total_stations %></p>
-        <p>Average bikes per station: <%= Station.average_number_of_bikes%></p>
-        <p>Most bikes available: <%= Station.most_bikes_available%></p>
-        <p>Station with most bikes: <%= Station.with_most_bikes.name%></p>
-        <p>Fewest bikes available: <%= Station.fewest_bikes_available%></p>
-        <p>Station with fewest bikes: <%= Station.with_fewest_bikes.name%></p>
-        <p>Oldest Station: <%= Station.oldest_station.name%></p>
-        <p>Newest Station: <%= Station.newest_station.name%></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>

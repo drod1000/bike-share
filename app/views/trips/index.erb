@@ -47,20 +47,24 @@
         <td><%= trip.bike_id%></td>
         <td><%= trip.subscription_type%></td>
         <td><%= trip.zip_code%></td>
+        <td>
+          <div class="btn-group" role="group">
+          <button type="button" class="btn btn-info">
+            <a href="/trips/<%= trip.id %>/edit">Edit</a>
+          </button>
+        </div>
+        </td>
       </tr>
       <% end %>
     </tbody>
   </table>
   </div>
-
-  <ul class="pager">
-    <% if @page >= 1 %>
-    <li class="previous"><a href="trips?page=<%= @page - 1 %>">Previous Page</a></li>
-    <li id="forward"class="next" ><a href="trips?page=<%= @page + 1 %>">Next Page</a></li>
-    <% else %>
-    <li class="next"><a type="submit" href="trips?page=1">Next Page</a></li>
-    <% end %>
-  </ul>
+  <div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @trips %>
+    </div>
+    <%= will_paginate @trips, :container => false %>
+  </div>
 </body>
 <!-- Latest compiled and minified JavaScript -->
 <link src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">

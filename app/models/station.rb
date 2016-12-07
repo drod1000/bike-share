@@ -40,31 +40,38 @@ class Station < ActiveRecord::Base
   end
 
   def rides_started
+    return "" if start_trips.empty?
     start_trips.count
   end
 
   def rides_ended
+    return "" if end_trips.empty?
     end_trips.count
   end
 
   def most_common_destination
+    return "" if start_trips.empty?
     start_trips.most_popular_ending_station
   end
 
   def most_common_origination
+    return "" if end_trips.empty?
     end_trips.most_popular_starting_station
   end
 
   def date_with_most_trips_started
+    return "" if start_trips.empty?
     start_trips.date_with_the_most_trips.date
   end
 
   def most_common_zip_code
+    return "" if start_trips.empty?
     zip_hash = start_trips.group(:zip_code).order(:zip_code).count
     zip_hash.invert.max[1]
   end
 
   def most_common_bike_id
+    return "" if start_trips.empty?
     start_trips.most_ridden_bike.id
   end
 end

@@ -36,9 +36,9 @@
         <td><%= condition.mean_wind_speed_mph %></td>
         <td><%= condition.precipitation_inches %></td>
         <td>
-          <form action="/conditions/<%= condition.id %>">
+          <form action="/conditions/<%= condition.id %>/edit">
             <input type="submit" value="Edit"/>
-        </form>
+          </form>
         </td>
         <td>
           <form action="/conditions/<%= condition.id %>" method="post">

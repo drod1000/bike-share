@@ -125,6 +125,6 @@ class BikeShareApp < Sinatra::Base
   end
 
   get '/weather-dashboard' do
-    erb :'conditions/weather-dashboard'
+    erb :'conditions/dashboard'
   end
 end

@@ -13,9 +13,10 @@
           <li><a href="#weather-dashboard">Weather</a></li>
         </ul>
       </nav>
-      <div class="col-sm-9">
-        <div id="stations-dashboard">
-          <h1>Stations Dashboard</h1>
+      <div class="card">
+        <img class = "img-fluid" src="https://ww2.kqed.org/news/wp-content/uploads/sites/10/2013/08/RS6338_photo.jpg" alt="Avatar">
+        <div class="container">
+          <h1>Stations</h1>
           <p>Total number of stations: <%= Station.total_stations %></p>
           <p>Average bikes per station: <%= Station.average_number_of_bikes%></p>
           <p>Most bikes available: <%= Station.most_bikes_available%></p>
@@ -25,16 +26,59 @@
           <p>Oldest Station: <%= Station.oldest_station.name%></p>
           <p>Newest Station: <%= Station.newest_station.name%></p>
         </div>
+      </div>
+      <div class="col-sm-9">
+        <div id="stations-dashboard">
+        </div>
         <div id="trips-dashboard">
           <h1>Trip Dashboard</h1>
-          <p>Total number of stations: <%= Station.total_stations %></p>
-          <p>Average bikes per station: <%= Station.average_number_of_bikes%></p>
-          <p>Most bikes available: <%= Station.most_bikes_available%></p>
-          <p>Station with most bikes: <%= Station.with_most_bikes.name%></p>
-          <p>Fewest bikes available: <%= Station.fewest_bikes_available%></p>
-          <p>Station with fewest bikes: <%= Station.with_fewest_bikes.name%></p>
-          <p>Oldest Station: <%= Station.oldest_station.name%></p>
-          <p>Newest Station: <%= Station.newest_station.name%></p>
+          <p>Average duration of a ride: <%= Trip.average_duration.round(2) %></p>
+          <p>Longest ride: <%= Trip.longest_ride.to_i%></p>
+          <p>Shortest ride: <%= Trip.shortest_ride.to_i%></p>
+          <p>Station with the most rides as a starting place: <%= Trip.most_popular_starting_station.name%></p>
+          <p>Station with the most rides as an ending place: <%= Trip.most_popular_ending_station.name%></p>
+          <p> Month by Month breakdown of number of rides for 2013:
+            <% Trip.month_by_month_breakdown_2013.each_pair do |key,value|%>
+            <p><%= "#{key} : #{value}" %></p>
+          <% end %>
+          </p>
+          <p> Month by Month breakdown of number of rides for 2014:
+            <% Trip.month_by_month_breakdown_2014.each_pair do |key,value| %>
+            <p><%= "#{key} : #{value}" %></p>
+          <% end %>
+          </p>
+          <p> Month by Month breakdown of number of rides for 2015:
+            <% Trip.month_by_month_breakdown_2015.each_pair do |key,value|%>
+              <p><%= "#{key} : #{value}" %></p>
+            <% end %>
+          </p>
+          <p>Most ridden bike with total number of rides for that bike:
+             <br>Bike id: <%= Trip.most_ridden_bike.id.to_i%>
+             <br>Bike id: <%= Trip.most_ridden_bike.count%>
+           </p>
+          <p>Least ridden bike with total number of rides for that bike:
+            <br>Bike id: <%= Trip.least_ridden_bike.id.to_i%>
+            <br>Count: <%= Trip.least_ridden_bike.count%>
+          </p>
+          <p>User subscription type breakout with both count and percentage:
+            <br>Total users: <%= Trip.subscribers.total%>
+            <br><b>User type: Subscriber</b>
+              <br>Count: <%= Trip.subscribers.count%>
+              <br>Percent: <%="%#{Trip.subscribers.percent.round(2)}"%>
+            <br><b>User type: Customers</b>
+              <br>Count: <%= Trip.customers.count%>
+              <br>Percent: <%= "%#{Trip.customers.percent.round(2)}"%>
+            </p>
+          <p>Single date with the highest number of trips with a count of those trips:
+          <br> Date: <%= Trip.date_with_the_most_trips.date.strftime("%m-%d-%Y")%>
+          <br> Count: <%= Trip.date_with_the_most_trips.count%>
+          <br> Weather: <%= Trip.date_with_the_most_trips.weather%>
+          </p>
+          <p>Single date with the lowest number of trips with a count of those trips:
+            <br>Date: <%= Trip.date_with_the_least_trips.date.strftime("%m-%d-%Y")%>
+            <br>Count:<%= Trip.date_with_the_least_trips.count%>
+            <br>Weather: <%= Trip.date_with_the_least_trips.weather%>
+           </p>
         </div>
         <div id="weather-dashboard">
           <h1>Weather Dashboard</h1>

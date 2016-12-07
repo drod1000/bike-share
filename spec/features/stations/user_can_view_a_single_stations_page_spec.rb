@@ -13,5 +13,7 @@ describe "When a user visits '/stations/id_number" do
     expect(page).to have_content("Dock Count: 5")
     expect(page).to have_content("City: Denver")
     expect(page).to have_content("Installation Date: 2016-02-12")
+
+
   end
 end

@@ -1,3 +1,4 @@
+require 'pry'
 class Condition < ActiveRecord::Base
   validates :date,
             :max_temperature_f,
@@ -17,11 +18,16 @@ class Condition < ActiveRecord::Base
   end
 
   def self.average_max_temp_trips(base_temp)
-    dates = Condition.max_temperature_range(base_temp).map {|c| c.date}
-    trip_dates = dates.map {|d| Trip.where(start_date: d)}
-    trip_count = trip_dates.map {|c| c.count}
-    avg = (trip_count.reduce(:+) / trip_count.count)
-    avg
+    # dates = Condition.max_temperature_range(base_temp).map {|c| c.date}
+    # trip_dates = dates.map {|d| Trip.where(start_date: d)}
+    # trip_count = trip_dates.map {|c| c.count}
+    # avg = (trip_count.reduce(:+) / trip_count.count)
+    # avg
+    found = []
+    Condition.max_temperature_range(base_temp).find_each do |trip|
+      found << Trip.where(start_date: trip.date)
+    end
+    found
   end
 
   def self.highest_max_temp_trips(base_temp)

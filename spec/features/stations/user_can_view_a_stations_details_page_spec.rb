@@ -16,8 +16,6 @@ describe "When a user visits '/stations/id_number/details'" do
 
     expect(current_path).to eq('/stations/1/detailed')
 
-    save_and_open_page
-
     expect(page).to have_content("Number of rides started at this station: 3")
     expect(page).to have_content("Number of rides ended at this station: 3")
     expect(page).to have_content("Most common destination station: Station 2")

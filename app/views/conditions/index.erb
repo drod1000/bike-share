@@ -36,23 +36,29 @@
         <td><%= condition.mean_visibility_miles %></td>
         <td><%= condition.mean_wind_speed_mph %></td>
         <td><%= condition.precipitation_inches %></td>
-        <td> <form action="/conditions/<%= condition.id %>" method="post">
-              <input type="hidden" name="_method" value="DELETE">
-              <input type="submit" value="Delete"/>
-            </form>
-          </td>
+        <td>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-info">
+              <a href="/conditions/<%= condition.id %>/edit">Edit</a>
+            </button>
+          </div>
+        </td>
+        <td>
+          <form action="/conditions/<%= condition.id %>" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Delete"/>
+          </form>
+        </td>
       </tr>
       <% end %>
     </tbody>
   </table>
-  <ul class="pagination">
-    <% if @page > 1 %>
-      <li><a href="conditions?page=<%= @page - 1 %>">Previous Page</a></li>
-      <li><a href="conditions?page=<%= @page + 1 %>">Next Page</a></li>
-    <% else %>
-      <li><a type="submit" href="conditions?page=<%= @page + 1 %>">Next Page</a></li>
-    <% end %>
-  </ul>
+  <div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @conditions %>
+    </div>
+    <%= will_paginate @conditions, :container => false %>
+  </div>
   </body>
   <!-- Latest compiled and minified JavaScript -->
   <link src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">

@@ -170,7 +170,7 @@ describe "Station" do
       Trip.create(id: 4, duration: 174, start_date: "2013-08-29 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 1, end_date:"2013-08-06 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 1, bike_id: 1, subscription_type: "Subscriber", zip_code: 55555)
       Trip.create(id: 5, duration: 174, start_date: "2013-08-29 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 3, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 1, bike_id: 1, subscription_type: "Subscriber", zip_code: 94114)
 
-      expect(station.most_common_zip_code).to eq 55555
+      expect(station.most_common_zip_code).to eq "55555"
     end
     it "most common Bike ID (started)" do
       station = Station.create(id: 1, name: "Station 1", dock_count: 10, city: "Denver", installation_date: "11/5/2016")

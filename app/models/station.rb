@@ -60,8 +60,8 @@ class Station < ActiveRecord::Base
   end
 
   def most_common_zip_code
-    zip_hash = start_trips.group(:zip_code).order(:zip_code).limit(1).count
-    zip_hash.max[0]
+    zip_hash = start_trips.group(:zip_code).order(:zip_code).count
+    zip_hash.invert.max[1]
   end
 
   def most_common_bike_id

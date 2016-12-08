@@ -7,12 +7,6 @@
   <title></title>
 </head>
 <body>
-
-  <form action="/trips" method="POST">
-    <input type="hidden" name="_method" value="DELETE">
-    <p>Insert Trip ID to delete</p> <input id="insert_id"type="text" name="id">
-    <input id="delete_trip" type="submit" value="Delete"/>
-  </form>
   <form action="/trips/new" >
     <br><input id="create_trip" type="submit" value="Create a new trip"/></p>
   </form>
@@ -53,6 +47,12 @@
             <input type="submit" value="Edit"/>
           </form>
         </div>
+        </td>
+        <td>
+          <form action="/trips/<%= trip.id %>" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Delete"/>
+          </form>
         </td>
       </tr>
       <% end %>

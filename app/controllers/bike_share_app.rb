@@ -81,7 +81,7 @@ class BikeShareApp < Sinatra::Base
   end
 
   delete '/trips/:id' do
-    trip = Trip.find(params["id"])
+    trip = Trip.find(params[:id])
     trip.destroy
     redirect "/trips"
   end

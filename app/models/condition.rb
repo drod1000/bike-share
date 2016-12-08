@@ -1,4 +1,3 @@
-require 'pry'
 class Condition < ActiveRecord::Base
   validates :date,
             :max_temperature_f,

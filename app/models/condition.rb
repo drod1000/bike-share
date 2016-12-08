@@ -13,18 +13,6 @@ class Condition < ActiveRecord::Base
 
   has_many :trips, primary_key: :date, foreign_key: :start_date
 
-  attr_reader :average_temperature,
-              :max_temperature,
-              :min_temperature,
-              :average_precipitation,
-              :max_precipitation,
-              :min_precipitation,
-              :average_wind,
-              :max_wind,
-              :min_wind,
-              :average_visibility,
-              :max_visibilit,
-              :min_visibility
 
   def self.trips_per_day
     Trip.group(:start_date).count

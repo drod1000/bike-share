@@ -51,12 +51,12 @@ class Station < ActiveRecord::Base
 
   def most_common_destination
     return "" if start_trips.empty?
-    start_trips.most_popular_ending_station
+    start_trips.most_popular_ending_station.name
   end
 
   def most_common_origination
     return "" if end_trips.empty?
-    end_trips.most_popular_starting_station
+    end_trips.most_popular_starting_station.name
   end
 
   def date_with_most_trips_started

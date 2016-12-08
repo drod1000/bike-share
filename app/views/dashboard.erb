@@ -260,6 +260,32 @@
                     <td><%= Condition.trips_in_wind_speed_range(21).min %></td>
                   </tr>
                 </tbody>
+              <table class="table table-condensed">
+                <thead>
+                  <tr>
+                    <th colspan="4"> How Visibility Affects Rides</th>
+                  </tr>
+                  <tr>
+                    <th> Mean Visibility (miles)</th>
+                    <th>Average Number of Rides</th>
+                    <th>Highest Number of Rides</th>
+                    <th>Lowest Number of Rides</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>5-9</td>
+                    <td><%= Condition.trips_with_visibility_in_4_mile_range(5).average %></td>
+                    <td><%= Condition.trips_with_visibility_in_4_mile_range(5).max %></td>
+                    <td><%= Condition.trips_with_visibility_in_4_mile_range(5).min %></td>
+                  </tr>
+                  <tr>
+                    <td>10-13</td>
+                    <td><%= Condition.trips_with_visibility_in_4_mile_range(10).average %></td>
+                    <td><%= Condition.trips_with_visibility_in_4_mile_range(10).max %></td>
+                    <td><%= Condition.trips_with_visibility_in_4_mile_range(10).min %></td>
+                  </tr>
+                </tbody>
             </table>
         </div>
         <div class="modal-footer">

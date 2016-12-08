@@ -1,3 +1,4 @@
+require 'pry'
 class Condition < ActiveRecord::Base
   validates :date,
             :max_temperature_f,
@@ -12,7 +13,6 @@ class Condition < ActiveRecord::Base
 
   has_many :trips, primary_key: :date, foreign_key: :start_date
 
-
   def self.trips_per_day
     Trip.group(:start_date).count
   end
@@ -22,15 +22,13 @@ class Condition < ActiveRecord::Base
   end
 
   def self.trips_in_temperature_range(base_temp)
-    found = []
-    Condition.max_temperature_range(base_temp).find_each do |trip|
-      found << Trip.where(start_date: trip.date).count
-    end
-      average = found.reduce(:+) / found.count
-      max = found.max
-      min = found.min
-      Struct.new("Temperature", :average, :max, :min)
-      Struct::Temperature.new(average, max, min)
+    search_conditions = max_temperature_range(base_temp)
+    find_associated_trips(search_conditions, found = [])
+    average = calculate_average(found)
+    max = found.max
+    min = found.min
+    Struct.new("Temperature", :average, :max, :min)
+    Struct::Temperature.new(average, max, min)
   end
 
   def self.precipitation_in_half_inch_increments(precipitation)
@@ -38,16 +36,13 @@ class Condition < ActiveRecord::Base
   end
 
   def self.trips_in_precipitation_range(base_range)
-    found = []
-    Condition.precipitation_in_half_inch_increments(base_range).find_each do |trip|
-        found << Trip.where(start_date: trip.date).count
-    end
-    average = found.reduce(:+) / found.count
+    search_conditions = precipitation_in_half_inch_increments(base_range)
+    find_associated_trips(search_conditions, found = [])
+    average = calculate_average(found)
     max = found.max
     min = found.min
-    Struct.new("Precipitaion", :average, :max, :min)
-    Struct::Precipitaion.new(average, max, min)
-
+    Struct.new("Precipitation", :average, :max, :min)
+    Struct::Precipitation.new(average, max, min)
   end
 
   def self.wind_speed_in_4_mph_chunks(base_speed)
@@ -55,11 +50,9 @@ class Condition < ActiveRecord::Base
   end
 
   def self.trips_in_wind_speed_range(base_speed)
-    found = []
-    Condition.wind_speed_in_4_mph_chunks(base_speed).find_each do |trip|
-        found << Trip.where(start_date: trip.date).count
-    end
-    average = found.reduce(:+) / found.count
+    search_conditions = wind_speed_in_4_mph_chunks(base_speed)
+    find_associated_trips(search_conditions, found = [])
+    average = calculate_average(found)
     max = found.max
     min = found.min
     Struct.new("Wind", :average, :max, :min)
@@ -67,16 +60,24 @@ class Condition < ActiveRecord::Base
 
   end
 
+  def self.calculate_average(value)
+    value.reduce(:+) / value.count
+  end
+
+  def self.find_associated_trips(search, found)
+    search.find_each do |trip|
+      found << Trip.where(start_date: trip.date).count
+    end
+  end
+
   def self.visibility_in_4_mile_range(base_range)
     where(mean_visibility_miles: base_range...(base_range + 4))
   end
 
   def self.trips_with_visibility_in_4_mile_range(base_range)
-    found = []
-    Condition.visibility_in_4_mile_range(base_range).find_each do |trip|
-        found << Trip.where(start_date: trip.date).count
-    end
-    average = found.reduce(:+) / found.count
+    search_conditions= visibility_in_4_mile_range(base_range)
+    find_associated_trips(search_conditions, found = [])
+    average = calculate_average(found)
     max = found.max
     min = found.min
     Struct.new("Visibility", :average, :max, :min)
@@ -84,11 +85,11 @@ class Condition < ActiveRecord::Base
   end
 
   def self.weather_on_day_with_highest_rides
-    Condition.where(date: trips_per_day.key(trips_per_day.values.max))
+    where(date: trips_per_day.key(trips_per_day.values.max))
   end
 
   def self.weather_on_day_with_least_rides
-    Condition.where(date: trips_per_day.key(trips_per_day.values.min))
+    where(date: trips_per_day.key(trips_per_day.values.min))
   end
 
 end

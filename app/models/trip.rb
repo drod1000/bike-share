@@ -53,7 +53,7 @@ class Trip < ActiveRecord::Base
   end
 
   def self.month_by_month_breakdown_2015
-    year_2015 = Trip.where('extract(year FROM start_date) = ?', 2015)
+    year_2015 = where('extract(year FROM start_date) = ?', 2015)
     sorted_by_month = year_2015.group("date_trunc('month', start_date)").count
     convert_time_date_to_month(sorted_by_month)
   end
@@ -64,7 +64,7 @@ class Trip < ActiveRecord::Base
   end
 
   def self.total_bike_uses
-    Trip.group(:bike_id).count
+    group(:bike_id).count
   end
 
   def self.most_ridden_bike
@@ -114,7 +114,7 @@ class Trip < ActiveRecord::Base
   def self.date_with_the_most_trips
     dates_sorted_by_count = date_count
     max_date = dates_sorted_by_count.values.max
-    date = Trip.find_by(start_date: dates_sorted_by_count.key(max_date))
+    date = find_by(start_date: dates_sorted_by_count.key(max_date))
     conditions = date.condition
     Struct.new("Date", :date, :count, :weather)
     Struct::Date.new(dates_sorted_by_count.key(max_date), max_date, conditions)
@@ -123,7 +123,7 @@ class Trip < ActiveRecord::Base
   def self.date_with_the_least_trips
     dates_sorted_by_count = date_count
     min_date = dates_sorted_by_count.values.min
-    date = Trip.find_by(start_date: dates_sorted_by_count.key(min_date))
+    date = find_by(start_date: dates_sorted_by_count.key(min_date))
     conditions = date.condition
     Struct.new("Date", :date, :count, :weather)
     Struct::Date.new(dates_sorted_by_count.key(min_date), min_date, conditions)

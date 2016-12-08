@@ -48,9 +48,9 @@ describe 'when a user visits /dashboard' do
     expect(page).to have_content("Station Data")
 
     click_on("Open Trip Dashboard")
-    expect(page).to have_content("Station Data")
+    expect(page).to have_content("Trip Data")
 
     click_on("Open Weather Dashboard")
-    expect(page).to have_content("Station Data")
+    expect(page).to have_content("Weather Condition Data")
   end
 end

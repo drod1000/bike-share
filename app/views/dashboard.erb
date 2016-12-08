@@ -125,7 +125,7 @@
           <h4 class="modal-title">Weather Data</h4>
         </div>
         <div class="modal-body">
-          <h1>Weather Conditions</h1>
+          <h1>Weather Condition Data</h1>
             <table class="table table-condensed">
               <thead>
                 <tr>
@@ -303,7 +303,7 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td><%= (Condition.weather_on_day_with_highest_rides[0].date) %></td>
+                        <td><%= (Condition.weather_on_day_with_highest_rides[0].date.to_s.split[0]) %></td>
                         <td><%= (Condition.weather_on_day_with_highest_rides[0].max_temperature_f) %></td>
                         <td><%= (Condition.weather_on_day_with_highest_rides[0].min_temperature_f) %></td>
                         <td><%= (Condition.weather_on_day_with_highest_rides[0].mean_humidity) %></td>
@@ -330,7 +330,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><%= (Condition.weather_on_day_with_least_rides[0].date) %></td>
+                      <td><%= (Condition.weather_on_day_with_least_rides[0].date).to_s.split[0] %></td>
                       <td><%= (Condition.weather_on_day_with_least_rides[0].max_temperature_f) %></td>
                       <td><%= (Condition.weather_on_day_with_least_rides[0].min_temperature_f) %></td>
                       <td><%= (Condition.weather_on_day_with_least_rides[0].mean_humidity) %></td>

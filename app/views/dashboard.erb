@@ -260,6 +260,85 @@
                     <td><%= Condition.trips_in_wind_speed_range(21).min %></td>
                   </tr>
                 </tbody>
+              <table class="table table-condensed">
+                <thead>
+                  <tr>
+                    <th colspan="4"> How Visibility Affects Rides</th>
+                  </tr>
+                  <tr>
+                    <th> Mean Visibility (miles)</th>
+                    <th>Average Number of Rides</th>
+                    <th>Highest Number of Rides</th>
+                    <th>Lowest Number of Rides</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>5-9</td>
+                    <td><%= Condition.trips_with_visibility_in_4_mile_range(5).average %></td>
+                    <td><%= Condition.trips_with_visibility_in_4_mile_range(5).max %></td>
+                    <td><%= Condition.trips_with_visibility_in_4_mile_range(5).min %></td>
+                  </tr>
+                  <tr>
+                    <td>10-13</td>
+                    <td><%= Condition.trips_with_visibility_in_4_mile_range(10).average %></td>
+                    <td><%= Condition.trips_with_visibility_in_4_mile_range(10).max %></td>
+                    <td><%= Condition.trips_with_visibility_in_4_mile_range(10).min %></td>
+                  </tr>
+                  <table class="table table-condensed">
+                    <thead>
+                      <tr>
+                        <th colspan="8"> Weather on the day with the most rides:</th>
+                      </tr>
+                      <tr>
+                        <th> Date</th>
+                        <th>Max Temperature (F)</th>
+                        <th>Mean Temperature (F)</th>
+                        <th>Min Temperature (F)</th>
+                        <th>Mean Humidity</th>
+                        <th>Mean Visibility (miles)</th>
+                        <th>Mean Wind Speed (mph)</th>
+                        <th>Precipitaion (inches)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><%= (Condition.weather_on_day_with_highest_rides[0].date) %></td>
+                        <td><%= (Condition.weather_on_day_with_highest_rides[0].max_temperature_f) %></td>
+                        <td><%= (Condition.weather_on_day_with_highest_rides[0].min_temperature_f) %></td>
+                        <td><%= (Condition.weather_on_day_with_highest_rides[0].mean_humidity) %></td>
+                        <td><%= (Condition.weather_on_day_with_highest_rides[0].mean_visibility_miles) %></td>
+                        <td><%= (Condition.weather_on_day_with_highest_rides[0].mean_wind_speed_mph) %></td>
+                        <td><%= (Condition.weather_on_day_with_highest_rides[0].precipitation_inches) %></td>
+                      </tr>
+                </tbody>
+                <table class="table table-condensed">
+                  <thead>
+                    <tr>
+                      <th colspan="8"> Weather on the day with the least rides:</th>
+                    </tr>
+                    <tr>
+                      <th> Date</th>
+                      <th>Max Temperature (F)</th>
+                      <th>Mean Temperature (F)</th>
+                      <th>Min Temperature (F)</th>
+                      <th>Mean Humidity</th>
+                      <th>Mean Visibility (miles)</th>
+                      <th>Mean Wind Speed (mph)</th>
+                      <th>Precipitaion (inches)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><%= (Condition.weather_on_day_with_least_rides[0].date) %></td>
+                      <td><%= (Condition.weather_on_day_with_least_rides[0].max_temperature_f) %></td>
+                      <td><%= (Condition.weather_on_day_with_least_rides[0].min_temperature_f) %></td>
+                      <td><%= (Condition.weather_on_day_with_least_rides[0].mean_humidity) %></td>
+                      <td><%= (Condition.weather_on_day_with_least_rides[0].mean_visibility_miles) %></td>
+                      <td><%= (Condition.weather_on_day_with_least_rides[0].mean_wind_speed_mph) %></td>
+                      <td><%= (Condition.weather_on_day_with_least_rides[0].precipitation_inches) %></td>
+                    </tr>
+              </tbody>
             </table>
         </div>
         <div class="modal-footer">

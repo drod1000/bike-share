@@ -1,4 +1,4 @@
-<h2> Station</h2>
+<h2>Update Station</h2>
 <form action="/stations/<%= @station.id %>" method="POST">
   <input type="hidden" name="_method" value="PUT">
   <div class="form-group row">
@@ -31,7 +31,6 @@
       End Date<input class="form-control" id="installation_date"type="text" name='station[installation_date]' value="<%= @station.installation_date %>">
     </div>
   </div>
-</div>
 <div class="offset-sm-2 col-sm-10">
   <button type="submit" class="btn btn-primary">Update</button>
 </div>

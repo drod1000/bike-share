@@ -129,6 +129,9 @@
             <table class="table table-condensed">
               <thead>
                 <tr>
+                  <th colspan="4"> How Temperature Affects Rides</th>
+                </tr>
+                <tr>
                   <th>Temperature Range (F)</th>
                   <th>Average Number of Rides</th>
                   <th>Highest Number of Rides</th>
@@ -173,6 +176,90 @@
                   <td><%= Condition.trips_in_temperature_range(90).min %></td>
                 </tr>
               </tbody>
+            </table>
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                  <th colspan="4"> How Precipitaion Affects Rides</th>
+                </tr>
+                <tr>
+                  <th>Precipitation Amount (inches)</th>
+                  <th>Average Number of Rides</th>
+                  <th>Highest Number of Rides</th>
+                  <th>Lowest Number of Rides</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>0-0.4</td>
+                  <td><%= Condition.trips_in_precipitation_range(0).average %></td>
+                  <td><%= Condition.trips_in_precipitation_range(0).max %></td>
+                  <td><%= Condition.trips_in_precipitation_range(0).min %></td>
+                </tr>
+                <tr>
+                  <td>0.5-0.9</td>
+                  <td><%= Condition.trips_in_precipitation_range(0.5).average %></td>
+                  <td><%= Condition.trips_in_precipitation_range(0.5).max %></td>
+                  <td><%= Condition.trips_in_precipitation_range(0.5).min %></td>
+                </tr>
+                <tr>
+                  <td>1.0-1.4</td>
+                  <td><%= Condition.trips_in_precipitation_range(1).average %></td>
+                  <td><%= Condition.trips_in_precipitation_range(1).max %></td>
+                  <td><%= Condition.trips_in_precipitation_range(1).min %></td>
+                </tr>
+              </tbody>
+              </table>
+              <table class="table table-condensed">
+                <thead>
+                  <tr>
+                    <th colspan="4"> How Wind Speed Affects Rides</th>
+                  </tr>
+                  <tr>
+                    <th> Mean Wind Speed (mph)</th>
+                    <th>Average Number of Rides</th>
+                    <th>Highest Number of Rides</th>
+                    <th>Lowest Number of Rides</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>0-3</td>
+                    <td><%= Condition.trips_in_wind_speed_range(0).average %></td>
+                    <td><%= Condition.trips_in_wind_speed_range(0).max %></td>
+                    <td><%= Condition.trips_in_wind_speed_range(0).min %></td>
+                  </tr>
+                  <tr>
+                    <td>4-7</td>
+                    <td><%= Condition.trips_in_wind_speed_range(4).average %></td>
+                    <td><%= Condition.trips_in_wind_speed_range(4).max %></td>
+                    <td><%= Condition.trips_in_wind_speed_range(4).min %></td>
+                  </tr>
+                  <tr>
+                    <td>8-11</td>
+                    <td><%= Condition.trips_in_wind_speed_range(8).average %></td>
+                    <td><%= Condition.trips_in_wind_speed_range(8).max %></td>
+                    <td><%= Condition.trips_in_wind_speed_range(8).min %></td>
+                  </tr>
+                  <tr>
+                    <td>12-15</td>
+                    <td><%= Condition.trips_in_wind_speed_range(12).average %></td>
+                    <td><%= Condition.trips_in_wind_speed_range(12).max %></td>
+                    <td><%= Condition.trips_in_wind_speed_range(12).min %></td>
+                  </tr>
+                  <tr>
+                    <td>16-20</td>
+                    <td><%= Condition.trips_in_wind_speed_range(16).average %></td>
+                    <td><%= Condition.trips_in_wind_speed_range(16).max %></td>
+                    <td><%= Condition.trips_in_wind_speed_range(16).min %></td>
+                  </tr>
+                  <tr>
+                    <td>21-25</td>
+                    <td><%= Condition.trips_in_wind_speed_range(21).average %></td>
+                    <td><%= Condition.trips_in_wind_speed_range(21).max %></td>
+                    <td><%= Condition.trips_in_wind_speed_range(21).min %></td>
+                  </tr>
+                </tbody>
             </table>
         </div>
         <div class="modal-footer">

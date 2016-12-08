@@ -95,4 +95,13 @@ class Condition < ActiveRecord::Base
     Struct.new("Visibility", :average, :max, :min)
     Struct::Visibility.new(average, max, min)
   end
+
+  def self.weather_on_day_with_highest_rides
+    Condition.where(date: trips_per_day.key(trips_per_day.values.max))
+  end
+
+  def self.weather_on_day_with_least_rides
+    Condition.where(date: trips_per_day.key(trips_per_day.values.min))
+  end
+
 end

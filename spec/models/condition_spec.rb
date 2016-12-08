@@ -466,125 +466,204 @@ describe "Conditon" do
         expect(Condition.trips_in_precipitation_range(0.5).average).to eq(2)
       end
     end
-        describe 'it finds trips based on wind speed range' do
-          it 'finds the minimum trips that occur for wind speed range' do
-            Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
-                             max_temperature_f: 40, min_temperature_f: 20,
-                             mean_temperature_f: 35, mean_visibility_miles: 3,
-                             mean_wind_speed_mph: 2, mean_humidity: 20,
-                             zip_code: 94107)
+      describe 'it finds trips based on wind speed range' do
+        it 'finds the minimum trips that occur for wind speed range' do
+          Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
+                           max_temperature_f: 40, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 3,
+                           mean_wind_speed_mph: 2, mean_humidity: 20,
+                           zip_code: 94107)
 
-            Condition.create(date: '2000-03-04', precipitation_inches: 0.9,
-                             max_temperature_f: 44, min_temperature_f: 20,
-                             mean_temperature_f: 35, mean_visibility_miles: 6,
-                             mean_wind_speed_mph: 3, mean_humidity: 20,
-                             zip_code: 94107)
+          Condition.create(date: '2000-03-04', precipitation_inches: 0.9,
+                           max_temperature_f: 44, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 6,
+                           mean_wind_speed_mph: 3, mean_humidity: 20,
+                           zip_code: 94107)
 
-            Condition.create(date: '2000-03-05', precipitation_inches: 0.1,
-                             max_temperature_f: 49, min_temperature_f: 20,
-                             mean_temperature_f: 35, mean_visibility_miles: 2,
-                             mean_wind_speed_mph: 5, mean_humidity: 20,
-                             zip_code: 94107)
+          Condition.create(date: '2000-03-05', precipitation_inches: 0.1,
+                           max_temperature_f: 49, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 2,
+                           mean_wind_speed_mph: 5, mean_humidity: 20,
+                           zip_code: 94107)
 
-            Condition.create(date: '2000-03-06', precipitation_inches: 0.34,
-                             max_temperature_f: 50, min_temperature_f: 20,
-                             mean_temperature_f: 35, mean_visibility_miles: 5,
-                             mean_wind_speed_mph: 6, mean_humidity: 20,
-                             zip_code: 94107)
-
-
-            Trip.create(id: 4069, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4070, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4071, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4072, duration: 174, start_date: "2000-03-04 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4073, duration: 174, start_date: "2000-03-04 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4074, duration: 174, start_date: "2000-03-05 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4075, duration: 174, start_date: "2000-03-05 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4076, duration: 174, start_date: "2000-03-06 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-
-            expect(Condition.trips_with_visibility_in_4_mile_range(0).min).to eq(2)
-            expect(Condition.trips_with_visibility_in_4_mile_range(4).min).to eq(1)
-          end
-
-          it 'finds the maximum trips that occur for wind speed range' do
-
-            Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
-                             max_temperature_f: 40, min_temperature_f: 20,
-                             mean_temperature_f: 35, mean_visibility_miles: 3,
-                             mean_wind_speed_mph: 2, mean_humidity: 20,
-                             zip_code: 94107)
-
-            Condition.create(date: '2000-03-04', precipitation_inches: 0.9,
-                             max_temperature_f: 44, min_temperature_f: 20,
-                             mean_temperature_f: 35, mean_visibility_miles: 6,
-                             mean_wind_speed_mph: 3, mean_humidity: 20,
-                             zip_code: 94107)
-
-            Condition.create(date: '2000-03-05', precipitation_inches: 0.1,
-                             max_temperature_f: 49, min_temperature_f: 20,
-                             mean_temperature_f: 35, mean_visibility_miles: 2,
-                             mean_wind_speed_mph: 5, mean_humidity: 20,
-                             zip_code: 94107)
-
-            Condition.create(date: '2000-03-06', precipitation_inches: 0.34,
-                             max_temperature_f: 50, min_temperature_f: 20,
-                             mean_temperature_f: 35, mean_visibility_miles: 5,
-                             mean_wind_speed_mph: 6, mean_humidity: 20,
-                             zip_code: 94107)
+          Condition.create(date: '2000-03-06', precipitation_inches: 0.34,
+                           max_temperature_f: 50, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 5,
+                           mean_wind_speed_mph: 6, mean_humidity: 20,
+                           zip_code: 94107)
 
 
-            Trip.create(id: 4069, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4070, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4071, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4072, duration: 174, start_date: "2000-03-04 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4073, duration: 174, start_date: "2000-03-04 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4074, duration: 174, start_date: "2000-03-05 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4075, duration: 174, start_date: "2000-03-05 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4076, duration: 174, start_date: "2000-03-06 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4069, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4070, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4071, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4072, duration: 174, start_date: "2000-03-04 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4073, duration: 174, start_date: "2000-03-04 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4074, duration: 174, start_date: "2000-03-05 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4075, duration: 174, start_date: "2000-03-05 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4076, duration: 174, start_date: "2000-03-06 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
 
-            expect(Condition.trips_with_visibility_in_4_mile_range(0).max).to eq(3)
-            expect(Condition.trips_with_visibility_in_4_mile_range(4).max).to eq(2)
-          end
-
-          it 'finds the average trips that occur for wind speed range' do
-            Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
-                             max_temperature_f: 40, min_temperature_f: 20,
-                             mean_temperature_f: 35, mean_visibility_miles: 3,
-                             mean_wind_speed_mph: 2, mean_humidity: 20,
-                             zip_code: 94107)
-
-            Condition.create(date: '2000-03-04', precipitation_inches: 0.9,
-                             max_temperature_f: 44, min_temperature_f: 20,
-                             mean_temperature_f: 35, mean_visibility_miles: 6,
-                             mean_wind_speed_mph: 3, mean_humidity: 20,
-                             zip_code: 94107)
-
-            Condition.create(date: '2000-03-05', precipitation_inches: 0.2,
-                             max_temperature_f: 49, min_temperature_f: 20,
-                             mean_temperature_f: 35, mean_visibility_miles: 2,
-                             mean_wind_speed_mph: 5, mean_humidity: 20,
-                             zip_code: 94107)
-
-            Condition.create(date: '2000-03-06', precipitation_inches: 0.34,
-                             max_temperature_f: 50, min_temperature_f: 20,
-                             mean_temperature_f: 35, mean_visibility_miles: 5,
-                             mean_wind_speed_mph: 6, mean_humidity: 20,
-                             zip_code: 94107)
-
-
-            Trip.create(id: 4069, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4070, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4071, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4072, duration: 174, start_date: "2000-03-04 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4073, duration: 174, start_date: "2000-03-04 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4074, duration: 174, start_date: "2000-03-05 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4075, duration: 174, start_date: "2000-03-05 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-            Trip.create(id: 4076, duration: 174, start_date: "2000-03-06 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
-
-            expect(Condition.trips_with_visibility_in_4_mile_range(0).average).to eq(2)
-            expect(Condition.trips_with_visibility_in_4_mile_range(4).average).to eq(1)
-          end
+          expect(Condition.trips_with_visibility_in_4_mile_range(0).min).to eq(2)
+          expect(Condition.trips_with_visibility_in_4_mile_range(4).min).to eq(1)
         end
+
+        it 'finds the maximum trips that occur for wind speed range' do
+
+          Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
+                           max_temperature_f: 40, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 3,
+                           mean_wind_speed_mph: 2, mean_humidity: 20,
+                           zip_code: 94107)
+
+          Condition.create(date: '2000-03-04', precipitation_inches: 0.9,
+                           max_temperature_f: 44, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 6,
+                           mean_wind_speed_mph: 3, mean_humidity: 20,
+                           zip_code: 94107)
+
+          Condition.create(date: '2000-03-05', precipitation_inches: 0.1,
+                           max_temperature_f: 49, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 2,
+                           mean_wind_speed_mph: 5, mean_humidity: 20,
+                           zip_code: 94107)
+
+          Condition.create(date: '2000-03-06', precipitation_inches: 0.34,
+                           max_temperature_f: 50, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 5,
+                           mean_wind_speed_mph: 6, mean_humidity: 20,
+                           zip_code: 94107)
+
+
+          Trip.create(id: 4069, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4070, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4071, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4072, duration: 174, start_date: "2000-03-04 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4073, duration: 174, start_date: "2000-03-04 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4074, duration: 174, start_date: "2000-03-05 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4075, duration: 174, start_date: "2000-03-05 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4076, duration: 174, start_date: "2000-03-06 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+
+          expect(Condition.trips_with_visibility_in_4_mile_range(0).max).to eq(3)
+          expect(Condition.trips_with_visibility_in_4_mile_range(4).max).to eq(2)
+        end
+
+        it 'finds the average trips that occur for wind speed range' do
+          Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
+                           max_temperature_f: 40, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 3,
+                           mean_wind_speed_mph: 2, mean_humidity: 20,
+                           zip_code: 94107)
+
+          Condition.create(date: '2000-03-04', precipitation_inches: 0.9,
+                           max_temperature_f: 44, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 6,
+                           mean_wind_speed_mph: 3, mean_humidity: 20,
+                           zip_code: 94107)
+
+          Condition.create(date: '2000-03-05', precipitation_inches: 0.2,
+                           max_temperature_f: 49, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 2,
+                           mean_wind_speed_mph: 5, mean_humidity: 20,
+                           zip_code: 94107)
+
+          Condition.create(date: '2000-03-06', precipitation_inches: 0.34,
+                           max_temperature_f: 50, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 5,
+                           mean_wind_speed_mph: 6, mean_humidity: 20,
+                           zip_code: 94107)
+
+
+          Trip.create(id: 4069, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4070, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4071, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4072, duration: 174, start_date: "2000-03-04 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4073, duration: 174, start_date: "2000-03-04 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4074, duration: 174, start_date: "2000-03-05 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4075, duration: 174, start_date: "2000-03-05 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4076, duration: 174, start_date: "2000-03-06 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+
+          expect(Condition.trips_with_visibility_in_4_mile_range(0).average).to eq(2)
+          expect(Condition.trips_with_visibility_in_4_mile_range(4).average).to eq(1)
+        end
+      end
+
+      describe "it finds weather for highest and lowest ride count days" do
+        it 'finds weather conditions for the highest ride day' do
+          Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
+                           max_temperature_f: 40, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 3,
+                           mean_wind_speed_mph: 2, mean_humidity: 20,
+                           zip_code: 94107)
+
+          Condition.create(date: '2000-03-04', precipitation_inches: 0.9,
+                           max_temperature_f: 44, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 6,
+                           mean_wind_speed_mph: 3, mean_humidity: 20,
+                           zip_code: 94107)
+
+          Condition.create(date: '2000-03-05', precipitation_inches: 0.2,
+                           max_temperature_f: 49, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 2,
+                           mean_wind_speed_mph: 5, mean_humidity: 20,
+                           zip_code: 94107)
+
+          Condition.create(date: '2000-03-06', precipitation_inches: 0.34,
+                           max_temperature_f: 50, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 5,
+                           mean_wind_speed_mph: 6, mean_humidity: 20,
+                           zip_code: 94107)
+
+
+          Trip.create(id: 4069, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4070, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4071, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4072, duration: 174, start_date: "2000-03-04 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4073, duration: 174, start_date: "2000-03-04 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4074, duration: 174, start_date: "2000-03-05 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4075, duration: 174, start_date: "2000-03-05 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4076, duration: 174, start_date: "2000-03-06 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+
+          expect((Condition.weather_on_day_with_highest_rides).ids).to eq([1])
+        end
+
+        it 'finds weather conditions for the lowest ride day' do
+
+          Condition.create(date: '2000-03-03', precipitation_inches: 0.8,
+                           max_temperature_f: 40, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 3,
+                           mean_wind_speed_mph: 2, mean_humidity: 20,
+                           zip_code: 94107)
+
+          Condition.create(date: '2000-03-04', precipitation_inches: 0.9,
+                           max_temperature_f: 44, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 6,
+                           mean_wind_speed_mph: 3, mean_humidity: 20,
+                           zip_code: 94107)
+
+          Condition.create(date: '2000-03-05', precipitation_inches: 0.2,
+                           max_temperature_f: 49, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 2,
+                           mean_wind_speed_mph: 5, mean_humidity: 20,
+                           zip_code: 94107)
+
+          Condition.create(date: '2000-03-06', precipitation_inches: 0.34,
+                           max_temperature_f: 50, min_temperature_f: 20,
+                           mean_temperature_f: 35, mean_visibility_miles: 5,
+                           mean_wind_speed_mph: 6, mean_humidity: 20,
+                           zip_code: 94107)
+
+
+          Trip.create(id: 4069, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4070, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4071, duration: 174, start_date: "2000-03-03 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4072, duration: 174, start_date: "2000-03-04 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4073, duration: 174, start_date: "2000-03-04 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4074, duration: 174, start_date: "2000-03-05 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4075, duration: 174, start_date: "2000-03-05 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+          Trip.create(id: 4076, duration: 174, start_date: "2000-03-06 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94107)
+
+          expect((Condition.weather_on_day_with_least_rides).ids).to eq([4])
+        end
+      end
   end
 
   describe "validations" do

@@ -17,7 +17,7 @@ describe "Trip" do
 
     it "returns the start_date of the trip" do
       trip = Trip.create(id: 4069, duration: 174, start_date: "2013-08-29 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date:"2013-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114)
-      # binding.pry
+
       expect(trip.start_date).to eq("2013-08-29 00:00:00 UTC")
     end
 
@@ -142,7 +142,6 @@ describe "Trip" do
 
           Trip.create(duration: 71.0, start_date: "2013-08-29 00:00:00", start_station_name: "Mountain View City Hall", start_station_id: 27.0, end_date: "2013-08-29 00:00:00", end_station_name: "Mountain View City Hall", end_station_id: 27.0, bike_id: 48.0, subscription_type: "Subscriber", zip_code: 97214.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
 
-          # binding.pry
           expect(Trip.average_duration).to eq(68)
         end
       end
@@ -155,7 +154,6 @@ describe "Trip" do
 
           Trip.create(duration: 71.0, start_date: "2013-08-29 00:00:00", start_station_name: "Mountain View City Hall", start_station_id: 27.0, end_date: "2013-08-29 00:00:00", end_station_name: "Mountain View City Hall", end_station_id: 27.0, bike_id: 48.0, subscription_type: "Subscriber", zip_code: 97214.0, created_at: "2016-12-05 19:40:06", updated_at: "2016-12-05 19:40:06")
 
-          # binding.pry
           expect(Trip.longest_ride).to eq(71)
         end
       end

@@ -30,7 +30,7 @@
       <th scope="row" id="total entries"></th>
       <% @stations.each do |station| %>
       <tr>
-        <td><%= station.id %></td>
+        <td><a href="/stations/<%= station.id %>"><%= station.id %></a></td>
         <td><%= station.name %></td>
         <td><%= station.dock_count%></td>
         <td><%= station.city%></td>
@@ -38,7 +38,7 @@
         <td>
           <div class="btn-group" role="group">
             <button>
-            <a href="/stations/<%= station.id %>/detailed">Details</a>
+            <a href="/stations/<%= station.id %>">Details</a>
             </button>
           </div>
         </td>

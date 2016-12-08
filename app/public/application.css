@@ -62,4 +62,10 @@ div.modal-content {
 a {
   color: black;
   font-weight: bold;
+  font-size: 18px;
+}
+
+div.col-xs-10 {
+  color: #44d099;
+  font-weight: bold;
 }

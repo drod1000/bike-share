@@ -39,5 +39,18 @@ describe 'when a user visits /dashboard' do
     zip_code: 94107)
 
     visit('/dashboard')
+
+    expect(page).to have_content("Open Station Dashboard")
+    expect(page).to have_content("Open Trip Dashboard")
+    expect(page).to have_content("Open Weather Dashboard")
+
+    click_on("Open Station Dashboard")
+    expect(page).to have_content("Station Data")
+
+    click_on("Open Trip Dashboard")
+    expect(page).to have_content("Station Data")
+
+    click_on("Open Weather Dashboard")
+    expect(page).to have_content("Station Data")
   end
 end

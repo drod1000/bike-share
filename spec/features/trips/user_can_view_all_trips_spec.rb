@@ -44,8 +44,11 @@ describe "trips" do
 
       end
       visit("/trips")
+
       expect(Trip.first.start_date).to eq("2001-09-01 00:00:00 UTC")
+
       thirtieth_trip = Trip.find(30)
+
       expect(thirtieth_trip.start_date).to eq("2059-09-01 00:00:00 UTC")
     end
 
@@ -55,8 +58,12 @@ describe "trips" do
       Trip.create(duration: 174, start_date: "2001-09-01 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date: "2001-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114, created_at: "2016-12-02 23:59:08", updated_at: "2016-12-02 23:59:08")
 
       visit("/trips")
-      fill_in("insert_id",with: 2)
-      click_on("delete_trip")
+
+      expect(Trip.count).to eql(2)
+
+      click_on("delete_trip", :match => :first)
+
+      expect(Trip.count).to eql(1)
     end
 
     it "if the user clicks on the back button, the user should see the first page of trips" do
@@ -80,8 +87,12 @@ describe "trips" do
       Trip.create(duration: 174, start_date: "2001-09-01 00:00:00 UTC", start_station_name: "2nd at South Park", start_station_id: 64, end_date: "2001-09-01 00:00:00 UTC", end_station_name: "2nd at South Park", end_station_id: 64, bike_id: 288, subscription_type: "Subscriber", zip_code: 94114, created_at: "2016-12-02 23:59:08", updated_at: "2016-12-02 23:59:08")
 
       visit("/trips")
-      fill_in("insert_id",with: 2)
-      click_on("delete_trip")
+
+      expect(Trip.count).to eql(2)
+
+      click_on("delete_trip", :match => :first)
+      
+      expect(Trip.count).to eql(1)
     end
   end
 end

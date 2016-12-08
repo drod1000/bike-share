@@ -97,5 +97,9 @@ describe 'when a user visits /dashboard' do
     expect(page).to have_content("Temperature Range (F)")
     expect(page).to have_content("Precipitation Amount (inches)")
     expect(page).to have_content("Mean Wind Speed (mph)")
+    expect(page).to have_content("Mean Visibility (miles)")
+    expect(page).to have_content("Weather on the day with the most rides:")
+    expect(page).to have_content("Weather on the day with the least rides:")
+
   end
 end

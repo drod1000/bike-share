@@ -1,5 +1,4 @@
 require_relative '../../spec_helper'
-require 'pry'
 
 describe 'When a user visits /conditions/new' do
   it 'they can create a new set of conditions' do

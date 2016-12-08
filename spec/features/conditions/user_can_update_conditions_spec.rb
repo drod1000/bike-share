@@ -10,12 +10,12 @@ describe "Conditions/id/edit" do
                                    zip_code: 94107)
       visit("/conditions/#{condition.id}/edit")
 
-      within("h1") do
-        expect(page).to have_content("Editing Conditions from #{condition.date}")
+      within("h2") do
+        expect(page).to have_content("Update Condition")
       end
 
       fill_in "condition[date]", with: "2000-11-30"
-      click_on "Edit Conditions"
+      click_on("update_condition")
 
       expect(current_path).to eq("/conditions/#{condition.id}")
 
